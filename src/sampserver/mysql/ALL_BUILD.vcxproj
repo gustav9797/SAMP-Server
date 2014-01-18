@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{F7AB926D-D02C-4115-BB4F-0B135729EE57}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:/boost_1_54_0/boost_1_54_0;C:/Program Files (x86)/MySQL/MySQL Server 5.6/include;C:/mysqlbuildtemp;C:/mysqlbuildtemp/cppconn;C:/mysqlbuildtemp/driver/nativeapi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:/boost_1_54_0/boost_1_54_0;C:/Program Files (x86)/MySQL/MySQL Server 5.6/include;C:/mysqlbuildtemp;C:/mysqlbuildtemp/cppconn;C:/mysqlbuildtemp/driver/nativeapi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/mysqlbuildtemp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -HC:/mysqlbuildtemp -BC:/mysqlbuildtemp --check-stamp-file C:\mysqlbuildtemp\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/mysqlbuildtemp/CMakeLists.txt;C:\mysqlbuildtemp\CMakeLists.txt;C:\mysqlbuildtemp\CMakeFiles\2.8.11.2\CMakeSystem.cmake;C:\mysqlbuildtemp\CMakeFiles\2.8.11.2\CMakeCCompiler.cmake;C:\mysqlbuildtemp\CMakeFiles\2.8.11.2\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\mysqlbuildtemp\CMakeFiles\2.8.11.2\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckIncludeFiles.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckFunctionExists.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckTypeSize.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckIncludeFile.cmake;C:\mysqlbuildtemp\FindMySQL.cm;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CPack.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CPackComponent.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Templates\CPackConfig.cmake.in;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Templates\CPackConfig.cmake.in;C:\mysqlbuildtemp\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\mysqlbuildtemp\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/mysqlbuildtemp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -HC:/mysqlbuildtemp -BC:/mysqlbuildtemp --check-stamp-file C:\mysqlbuildtemp\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/mysqlbuildtemp/CMakeLists.txt;C:\mysqlbuildtemp\CMakeLists.txt;C:\mysqlbuildtemp\CMakeFiles\2.8.11.2\CMakeSystem.cmake;C:\mysqlbuildtemp\CMakeFiles\2.8.11.2\CMakeCCompiler.cmake;C:\mysqlbuildtemp\CMakeFiles\2.8.11.2\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\mysqlbuildtemp\CMakeFiles\2.8.11.2\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckIncludeFiles.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckFunctionExists.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckTypeSize.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckIncludeFile.cmake;C:\mysqlbuildtemp\FindMySQL.cm;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CPack.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CPackComponent.cmake;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Templates\CPackConfig.cmake.in;C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Templates\CPackConfig.cmake.in;C:\mysqlbuildtemp\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\mysqlbuildtemp\CMakeFiles\generate.stamp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="CMakeFiles\c04bdc533edb6cb00d34aa9029cab1e5\ALL_BUILD.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Build all projects</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/mysqlbuildtemp/CMakeFiles/c04bdc533edb6cb00d34aa9029cab1e5/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\mysqlbuildtemp\CMakeFiles\ALL_BUILD</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Build all projects</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/mysqlbuildtemp/CMakeFiles/c04bdc533edb6cb00d34aa9029cab1e5/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\mysqlbuildtemp\CMakeFiles\ALL_BUILD</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CMakeFiles\ALL_BUILD" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/CJUnitTestsPort/CJUnitTestsPort.vcxproj">
+      <Project>DE1ABD7C-0984-40EF-9DF8-44F5FA1EEDC1</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/ZERO_CHECK.vcxproj">
+      <Project>21D5CAA9-4DB3-4A1F-85AC-A56256514E26</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/template_bug_group/bug123.vcxproj">
+      <Project>5E6CB62E-BDED-4361-A78C-E684286F6CAE</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/template_bug_group/bug456.vcxproj">
+      <Project>26FF1CEC-4087-461C-9CA1-5DA10BF36157</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/examples/connect.vcxproj">
+      <Project>69A426E1-8A97-4959-A76B-20F3A421D465</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/examples/connection_meta_schemaobj.vcxproj">
+      <Project>0AD75A3C-0DD2-4336-A6C4-EF8EDCB54BC9</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/examples/debug_output.vcxproj">
+      <Project>C7D1B849-84A6-447C-9E0D-181CE572F6DA</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/driver_test.vcxproj">
+      <Project>E1E57951-E677-41EC-8175-CB05A408AFFD</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/examples/dynamic_load.vcxproj">
+      <Project>93B12AC9-D76B-44AD-A2E0-99ED5EDAB504</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/example/example.vcxproj">
+      <Project>43F45D53-7ED1-4D7A-A565-738CAF34B22D</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/examples/exceptions.vcxproj">
+      <Project>6BF26C3C-24FF-4BF5-8B81-BC12754967E8</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/driver/mysqlcppconn.vcxproj">
+      <Project>E5501785-098E-4CF8-BC27-DBE554395ED4</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/driver/mysqlcppconn-static.vcxproj">
+      <Project>F92A0D40-CB35-431C-AC4D-6A09E8091917</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/performance/perf_statement.vcxproj">
+      <Project>FA20F654-6BF1-4F6F-923A-33E08E6D193A</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/examples/prepared_statement.vcxproj">
+      <Project>CD48482F-172D-4E54-87B0-F439F6C54458</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/examples/resultset.vcxproj">
+      <Project>70751908-61F3-42EC-9952-AB051AABD302</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/examples/resultset_binary.vcxproj">
+      <Project>DC996918-6E04-44E5-BEE2-B095EEEDEC3B</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/examples/resultset_meta.vcxproj">
+      <Project>53B75BA2-1AE7-4016-9293-C9A8E6D48342</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/examples/resultset_types.vcxproj">
+      <Project>6AA40E24-2822-4F3E-9D8D-18099C583586</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/examples/statement.vcxproj">
+      <Project>1DF31ADC-649B-4FE2-A979-D378CBBEC4CA</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/static_test.vcxproj">
+      <Project>FC7F8D2B-22CE-4076-AB75-BE913E0AA54E</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/classes/test_art_resultset.vcxproj">
+      <Project>7DC3745F-5EE4-4E0E-A457-CCD93CB7A8F7</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/classes/test_connection.vcxproj">
+      <Project>40E1A1D3-A33B-4D71-88F2-A7292721DEB6</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/classes/test_databasemetadata.vcxproj">
+      <Project>CA33EBF6-97BD-4FAA-9CC4-F2FDAC64D110</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/framework/test_framework.vcxproj">
+      <Project>C0021246-56F5-4224-8C67-D4CF080F3ED0</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/classes/test_parametermetadata.vcxproj">
+      <Project>43200149-04E4-4B9B-AA20-616FDCF61C2E</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/classes/test_preparedstatement.vcxproj">
+      <Project>B86DBAE1-F9F0-415C-BA7B-01E431B079A3</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/classes/test_resultset.vcxproj">
+      <Project>A32918DA-E397-47C5-90F1-1483FE3A8F35</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/classes/test_resultsetmetadata.vcxproj">
+      <Project>8B054548-4CC1-4884-8F6B-070E8955BAF9</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/classes/test_savepoint.vcxproj">
+      <Project>E99C7222-9661-476F-A24C-DF8E0F2B7F9A</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/classes/test_statement.vcxproj">
+      <Project>C39EB931-73F0-418F-9B6D-2E260717AD0C</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/classes/test_uri.vcxproj">
+      <Project>461BFC5D-8380-426B-8B94-9F043C048451</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/mysqlbuildtemp/test/unit/bugs/unsorted_bugs.vcxproj">
+      <Project>E777DAEF-45F7-41D8-8808-A15AA5A53D59</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

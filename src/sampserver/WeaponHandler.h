@@ -1,0 +1,17 @@
+#pragma once
+#include "Handler.h"
+#include <map>
+class Weapon;
+class WeaponHandler : public Handler
+{
+private:
+	std::map<int, Weapon*> *avaliableWeapons;
+public:
+	WeaponHandler(void);
+	~WeaponHandler(void);
+	virtual bool OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
+	virtual void CheckForHacks();
+	virtual void Load();
+	Weapon* getWeapon(int weaponId);
+};
+

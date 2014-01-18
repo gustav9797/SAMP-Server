@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\World">
+      <UniqueIdentifier>{1c476266-7110-4087-8626-7d7b777fa229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\World">
+      <UniqueIdentifier>{30726813-eaa9-46d0-a107-3c012680940e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Item">
+      <UniqueIdentifier>{932180df-84c9-4279-aa90-b55cbc73ee45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Item\ItemContainer">
+      <UniqueIdentifier>{6531cfca-41ea-41f5-b62f-c7e5b71e02db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Item">
+      <UniqueIdentifier>{adc834a6-6e00-4036-a2b9-bc180b294740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Item\ItemContainer">
+      <UniqueIdentifier>{93014eb9-e659-4460-8d53-940a882a6b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Handler">
+      <UniqueIdentifier>{bfa63787-3c94-46c4-a0ff-ce1c72cf8e22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Handler">
+      <UniqueIdentifier>{f98d58a8-bdb4-4e58-ae1a-c3b2ded5d0bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Main.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MySQLFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Interior.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Pickup.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldPositionObject.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="RegisterLogin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyVehicle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="House.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalItem.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Source Files\Item\ItemContainer</Filter>
+    </ClCompile>
+    <ClCompile Include="HouseHandler.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="InteriorHandler.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="PickupHandler.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandler.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="VehicleHandler.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponHandler.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="GameUtility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MySQLFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interior.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Pickup.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldPositionObject.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="RegisterLogin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyVehicle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="House.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalItem.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Header Files\Item\ItemContainer</Filter>
+    </ClInclude>
+    <ClInclude Include="Handler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HouseHandler.h">
+      <Filter>Header Files\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="InteriorHandler.h">
+      <Filter>Header Files\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="PickupHandler.h">
+      <Filter>Header Files\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandler.h">
+      <Filter>Header Files\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="VehicleHandler.h">
+      <Filter>Header Files\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponHandler.h">
+      <Filter>Header Files\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUtility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

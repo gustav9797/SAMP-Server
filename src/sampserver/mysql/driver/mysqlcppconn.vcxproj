@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{E5501785-098E-4CF8-BC27-DBE554395ED4}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>mysqlcppconn</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\mysqlbuildtemp\driver\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">mysqlcppconn.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">mysqlcppconn</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\mysqlbuildtemp\driver\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">mysqlcppconn.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">mysqlcppconn</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:/boost_1_54_0/boost_1_54_0;C:/Program Files (x86)/MySQL/MySQL Server 5.6/include;C:/mysqlbuildtemp;C:/mysqlbuildtemp/cppconn;C:/mysqlbuildtemp/driver/nativeapi;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;CPPCONN_SO_BUILD="";DBUG_OFF;DYNLOAD_MYSQL_LIB="MYSQL_LIB";_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="Debug";mysqlcppconn_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>Debug</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:/mysqlbuildtemp/driver/Debug/mysqlcppconn.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;CPPCONN_SO_BUILD=\"\";DBUG_OFF;DYNLOAD_MYSQL_LIB=\"MYSQL_LIB\";_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\";mysqlcppconn_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:/boost_1_54_0/boost_1_54_0;C:/Program Files (x86)/MySQL/MySQL Server 5.6/include;C:/mysqlbuildtemp;C:/mysqlbuildtemp/cppconn;C:/mysqlbuildtemp/driver/nativeapi;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:/boost_1_54_0/boost_1_54_0;C:/Program Files (x86)/MySQL/MySQL Server 5.6/include;C:/mysqlbuildtemp;C:/mysqlbuildtemp/cppconn;C:/mysqlbuildtemp/driver/nativeapi;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 /debug %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;libmysql.lib;ws2_32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Program Files (x86)/MySQL/MySQL Server 5.6/lib;C:/Program Files (x86)/MySQL/MySQL Server 5.6/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>C:/mysqlbuildtemp/driver/Debug/mysqlcppconn.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/mysqlbuildtemp/driver/Debug/mysqlcppconn.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:/boost_1_54_0/boost_1_54_0;C:/Program Files (x86)/MySQL/MySQL Server 5.6/include;C:/mysqlbuildtemp;C:/mysqlbuildtemp/cppconn;C:/mysqlbuildtemp/driver/nativeapi;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CPPCONN_SO_BUILD="";DBUG_OFF;DYNLOAD_MYSQL_LIB="MYSQL_LIB";_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="Release";mysqlcppconn_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>Release</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:/mysqlbuildtemp/driver/Release/mysqlcppconn.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CPPCONN_SO_BUILD=\"\";DBUG_OFF;DYNLOAD_MYSQL_LIB=\"MYSQL_LIB\";_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\";mysqlcppconn_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:/boost_1_54_0/boost_1_54_0;C:/Program Files (x86)/MySQL/MySQL Server 5.6/include;C:/mysqlbuildtemp;C:/mysqlbuildtemp/cppconn;C:/mysqlbuildtemp/driver/nativeapi;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:/boost_1_54_0/boost_1_54_0;C:/Program Files (x86)/MySQL/MySQL Server 5.6/include;C:/mysqlbuildtemp;C:/mysqlbuildtemp/cppconn;C:/mysqlbuildtemp/driver/nativeapi;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;libmysql.lib;ws2_32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Program Files (x86)/MySQL/MySQL Server 5.6/lib;C:/Program Files (x86)/MySQL/MySQL Server 5.6/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ImportLibrary>C:/mysqlbuildtemp/driver/Release/mysqlcppconn.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/mysqlbuildtemp/driver/Release/mysqlcppconn.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/mysqlbuildtemp/driver/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -HC:/mysqlbuildtemp -BC:/mysqlbuildtemp --check-stamp-file C:\mysqlbuildtemp\driver\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/mysqlbuildtemp/driver/CMakeLists.txt;C:\mysqlbuildtemp\driver\CMakeLists.txt;C:\mysqlbuildtemp\driver\nativeapi\binding_config.h.cm;C:\mysqlbuildtemp\driver\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\mysqlbuildtemp\driver\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/mysqlbuildtemp/driver/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -HC:/mysqlbuildtemp -BC:/mysqlbuildtemp --check-stamp-file C:\mysqlbuildtemp\driver\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/mysqlbuildtemp/driver/CMakeLists.txt;C:\mysqlbuildtemp\driver\CMakeLists.txt;C:\mysqlbuildtemp\driver\nativeapi\binding_config.h.cm;C:\mysqlbuildtemp\driver\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\mysqlbuildtemp\driver\CMakeFiles\generate.stamp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mysql_art_resultset.h" />
+    <ClInclude Include="mysql_art_rset_metadata.h" />
+    <ClInclude Include="mysql_connection.h" />
+    <ClInclude Include="mysql_connection_options.h" />
+    <ClInclude Include="mysql_debug.h" />
+    <ClInclude Include="mysql_driver.h" />
+    <ClInclude Include="mysql_error.h" />
+    <ClInclude Include="mysql_metadata.h" />
+    <ClInclude Include="mysql_parameter_metadata.h" />
+    <ClInclude Include="mysql_prepared_statement.h" />
+    <ClInclude Include="mysql_ps_resultset.h" />
+    <ClInclude Include="mysql_ps_resultset_metadata.h" />
+    <ClInclude Include="mysql_resultbind.h" />
+    <ClInclude Include="mysql_resultset.h" />
+    <ClInclude Include="mysql_resultset_metadata.h" />
+    <ClInclude Include="mysql_statement.h" />
+    <ClInclude Include="mysql_util.h" />
+    <ClInclude Include="mysql_warning.h" />
+    <ClInclude Include="mysql_uri.h" />
+    <ClInclude Include="nativeapi\mysql_client_api.h" />
+    <ClInclude Include="nativeapi\mysql_native_driver_wrapper.h" />
+    <ClInclude Include="nativeapi\native_driver_wrapper.h" />
+    <ClInclude Include="nativeapi\mysql_native_connection_wrapper.h" />
+    <ClInclude Include="nativeapi\native_connection_wrapper.h" />
+    <ClInclude Include="nativeapi\mysql_native_statement_wrapper.h" />
+    <ClInclude Include="nativeapi\native_statement_wrapper.h" />
+    <ClInclude Include="nativeapi\mysql_native_resultset_wrapper.h" />
+    <ClInclude Include="nativeapi\native_resultset_wrapper.h" />
+    <ClInclude Include="..\cppconn\warning.h" />
+    <ClInclude Include="..\cppconn\statement.h" />
+    <ClInclude Include="..\cppconn\sqlstring.h" />
+    <ClInclude Include="..\cppconn\resultset_metadata.h" />
+    <ClInclude Include="..\cppconn\resultset.h" />
+    <ClInclude Include="..\cppconn\prepared_statement.h" />
+    <ClInclude Include="..\cppconn\parameter_metadata.h" />
+    <ClInclude Include="..\cppconn\metadata.h" />
+    <ClInclude Include="..\cppconn\exception.h" />
+    <ClInclude Include="..\cppconn\driver.h" />
+    <ClInclude Include="..\cppconn\datatype.h" />
+    <ClInclude Include="..\cppconn\connection.h" />
+    <ClInclude Include="..\cppconn\config.h" />
+    <ClInclude Include="..\cppconn\build_config.h" />
+    <ClCompile Include="mysql_art_resultset.cpp"  />
+    <ClCompile Include="mysql_art_rset_metadata.cpp"  />
+    <ClCompile Include="mysql_connection.cpp"  />
+    <ClCompile Include="mysql_debug.cpp"  />
+    <ClCompile Include="mysql_driver.cpp"  />
+    <ClCompile Include="mysql_metadata.cpp"  />
+    <ClCompile Include="mysql_parameter_metadata.cpp"  />
+    <ClCompile Include="mysql_prepared_statement.cpp"  />
+    <ClCompile Include="mysql_ps_resultset.cpp"  />
+    <ClCompile Include="mysql_ps_resultset_metadata.cpp"  />
+    <ClCompile Include="mysql_resultbind.cpp"  />
+    <ClCompile Include="mysql_resultset.cpp"  />
+    <ClCompile Include="mysql_resultset_metadata.cpp"  />
+    <ClCompile Include="mysql_statement.cpp"  />
+    <ClCompile Include="mysql_util.cpp"  />
+    <ClCompile Include="mysql_warning.cpp"  />
+    <ClCompile Include="mysql_uri.cpp"  />
+    <ClCompile Include="nativeapi\mysql_client_api.cpp"  />
+    <ClCompile Include="nativeapi\library_loader.cpp"  />
+    <ClCompile Include="nativeapi\mysql_native_driver_wrapper.cpp"  />
+    <ClCompile Include="nativeapi\mysql_native_connection_wrapper.cpp"  />
+    <ClCompile Include="nativeapi\mysql_native_statement_wrapper.cpp"  />
+    <ClCompile Include="nativeapi\mysql_native_resultset_wrapper.cpp"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/mysqlbuildtemp/ZERO_CHECK.vcxproj">
+      <Project>21D5CAA9-4DB3-4A1F-85AC-A56256514E26</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,46 @@
+# CMake generation dependency list for this directory.
+C:/mysqlbuildtemp/cppconn/CMakeLists.txt
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CMakeConfigurableFile.in
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CMakeConfigurableFile.in
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckIncludeFile.c.in
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckIncludeFile.c.in
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_INT8_T.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_UINT8_T.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_INT16_T.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_UINT16_T.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_INT32_T.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_UINT32_T.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_INT64_T.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_UINT64_T.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_MS_INT8.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_MS_UINT8.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_MS_INT16.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_MS_UINT16.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_MS_INT32.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_MS_UINT32.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_MS_INT64.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckTypeSize.c.in
+C:/mysqlbuildtemp/CMakeFiles/CheckTypeSize/HAVE_MS_UINT64.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckFunctionExists.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckFunctionExists.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckFunctionExists.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckFunctionExists.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckFunctionExists.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckFunctionExists.c
+C:/Program Files (x86)/CMake 2.8/share/cmake-2.8/Modules/CheckFunctionExists.c
+C:/mysqlbuildtemp/cppconn/config.h.cm

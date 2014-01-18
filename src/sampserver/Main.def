@@ -1,0 +1,15 @@
+LIBRARY Main
+EXPORTS
+	Supports
+	Load
+	Unload
+	ProcessTick
+	OnGameModeInit
+	OnPlayerConnect
+	OnPlayerDisconnect
+	OnPlayerRequestClass
+	OnPlayerCommandText
+	OnPlayerPickUpPickup
+	OnDialogResponse
+	OnPlayerTakeDamage
+	OnPlayerKeyStateChange

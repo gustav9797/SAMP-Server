@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{91D3C9D9-5F7D-4128-94E3-329F5BA87858}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>sampserver</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)\sampgdk\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\sampgdk\lib;$(ProjectDir)\mysql\driver\Debug;$(LibraryPath)</LibraryPath>
+    <OutDir>$(ProjectDir)\plugins\</OutDir>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SAMPSERVER_EXPORTS;HAVE_INT8_T=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\boost_1_54_0;$(ProjectDir)\mysql\driver;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sampgdk3.lib;mysqlcppconn.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>Main.def</ModuleDefinitionFile>
+      <AdditionalLibraryDirectories>$(ProjectDir)\sampgdk\lib</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SAMPSERVER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ModuleDefinitionFile>Main.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="GameUtility.cpp" />
+    <ClCompile Include="House.cpp" />
+    <ClCompile Include="HouseHandler.cpp" />
+    <ClCompile Include="Interior.cpp" />
+    <ClCompile Include="InteriorHandler.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MySQLFunctions.cpp" />
+    <ClCompile Include="NormalItem.cpp" />
+    <ClCompile Include="Pickup.cpp" />
+    <ClCompile Include="PickupHandler.cpp" />
+    <ClCompile Include="MyPlayer.cpp" />
+    <ClCompile Include="PlayerHandler.cpp" />
+    <ClCompile Include="RegisterLogin.cpp" />
+    <ClCompile Include="MyVehicle.cpp" />
+    <ClCompile Include="VehicleHandler.cpp" />
+    <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WeaponHandler.cpp" />
+    <ClCompile Include="WorldPositionObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Main.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameUtility.h" />
+    <ClInclude Include="Handler.h" />
+    <ClInclude Include="House.h" />
+    <ClInclude Include="HouseHandler.h" />
+    <ClInclude Include="Interior.h" />
+    <ClInclude Include="InteriorHandler.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="MySQLFunctions.h" />
+    <ClInclude Include="NormalItem.h" />
+    <ClInclude Include="Pickup.h" />
+    <ClInclude Include="PickupHandler.h" />
+    <ClInclude Include="MyPlayer.h" />
+    <ClInclude Include="PlayerHandler.h" />
+    <ClInclude Include="RegisterLogin.h" />
+    <ClInclude Include="MyVehicle.h" />
+    <ClInclude Include="VehicleHandler.h" />
+    <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponHandler.h" />
+    <ClInclude Include="WorldPositionObject.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

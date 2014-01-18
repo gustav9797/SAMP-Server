@@ -1,0 +1,50 @@
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[14:30:42] 
+[14:30:42] Server Plugins
+[14:30:42] --------------
+[14:30:42]  Loading plugin: sampserver
+[14:30:42]   Failed.
+[14:30:42]  Loaded 0 plugins.
+
+[14:30:42] 
+[14:30:42] Filterscripts
+[14:30:42] ---------------
+[14:30:42]   Loaded 0 filterscripts.
+
+[14:30:42] Number of vehicle models: 6
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[14:39:03] 
+[14:39:03] Server Plugins
+[14:39:03] --------------
+[14:39:03]  Loading plugin: sampserver
+[14:39:03]   Loaded.
+[14:39:03]  Loaded 1 plugins.
+
+[14:39:03] 
+[14:39:03] Filterscripts
+[14:39:03] ---------------
+[14:39:03]   Loaded 0 filterscripts.
+
+[14:39:03] ------------------------------------------
+
+[14:39:03]       ":D" gamemode got loaded.     
+
+[14:39:03] ------------------------------------------
+
+[14:39:03] Number of vehicle models: 9
