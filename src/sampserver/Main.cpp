@@ -17,6 +17,7 @@
 #include "InteriorHandler.h"
 #include "PickupHandler.h"
 #include "VehicleHandler.h"
+#include "ObjectHandler.h"
 #include "WorldPositionObject.h"
 #include "MySQLFunctions.h"
 #include "RegisterLogin.h"
@@ -32,6 +33,7 @@ namespace main
 	HouseHandler *houseHandler = new HouseHandler();
 	WeaponHandler *weaponHandler = new WeaponHandler();
 	VehicleHandler *vehicleHandler = new VehicleHandler();
+	ObjectHandler *objectHandler =  new ObjectHandler();
 	GameUtility *gameUtility = new GameUtility();
 
 	std::vector<Handler*> *handlers = new std::vector<Handler*>();
@@ -85,17 +87,7 @@ namespace main
 
 	PLUGIN_EXPORT bool PLUGIN_CALL OnGameModeInit() {
 		srand(time(0));
-		SetGameModeText("Hello, World!");
-		DisableInteriorEnterExits();
-		EnableStuntBonusForAll(false);
-
-		AddPlayerClass(0, 1958.3783f, 1343.1572f, 15.3746f, 269.1425f, 0, 0, 0, 0, 0, 0);
-
-		ServerLog::Printf("------------------------------------------\n");
-		ServerLog::Printf("      \":D\" gamemode got loaded.     \n");
-		ServerLog::Printf("------------------------------------------\n");
-
-		SetTimer(2000, true, CheckForHacks, 0);
+		std::cout << "Game is initializing..";
 		MySQLFunctions::Initialize();
 		handlers->push_back(playerHandler);
 		handlers->push_back(interiorHandler);
@@ -103,17 +95,25 @@ namespace main
 		handlers->push_back(houseHandler);
 		handlers->push_back(vehicleHandler);
 		handlers->push_back(weaponHandler);
-		std::cout << "Handlers initialized" << std::endl;
+		handlers->push_back(objectHandler);
 		gameUtility->houseHandler = houseHandler;
 		gameUtility->interiorHandler = interiorHandler;
 		gameUtility->pickupHandler = pickupHandler;
 		gameUtility->playerHandler = playerHandler;
 		gameUtility->vehicleHandler = vehicleHandler;
 		gameUtility->weaponHandler = weaponHandler;
-		std::cout << "GameUtility loaded" << std::endl;
+		gameUtility->objectHandler = objectHandler;
+		std::cout << "  Initialized" << std::endl;
+		std::cout << "MySQL data is loading...";
 		Load();
-		std::cout << "Handlers loaded" << std::endl;
-		std::cout << "Done" << std::endl;
+		std::cout << "  Loaded" << std::endl;
+		SetGameModeText("sampserver v1.0");
+		DisableInteriorEnterExits();
+		EnableStuntBonusForAll(false);
+		SetTimer(2000, true, CheckForHacks, 0);
+		ServerLog::Printf("--------------------------------------------------\n");
+		ServerLog::Printf("   The most softcoded gamemode ever was loaded!    \n");
+		ServerLog::Printf("--------------------------------------------------\n");
 		return true;
 	}
 
@@ -132,9 +132,10 @@ namespace main
 	}
 
 	PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerRequestClass(int playerid, int classid) {
-		SetPlayerPos(playerid, 1958.3783f, 1343.1572f, 15.3746f);
-		SetPlayerCameraPos(playerid, 1958.3783f, 1343.1572f, 15.3746f);
-		SetPlayerCameraLookAt(playerid, 1958.3783f, 1343.1572f, 15.3746f, CAMERA_CUT);
+		SetSpawnInfo(playerid, NO_TEAM, 0, -72.4094f, -1123.83f, 1.07812f, 269.1425f, 0, 0, 0, 0, 0, 0);
+		//SetPlayerPos(playerid, 1958.3783f, 1343.1572f, 15.3746f);
+		//SetPlayerCameraPos(playerid, 1958.3783f, 1343.1572f, 15.3746f);
+		//SetPlayerCameraLookAt(playerid, 1958.3783f, 1343.1572f, 15.3746f, CAMERA_CUT);
 		return true;
 	}
 
@@ -149,11 +150,9 @@ namespace main
 	}
 
 	PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerCommandText(int playerid, const char *cmdtext) {
-		//std::cout << cmdtext << std::endl;
 		MyPlayer *player = playerHandler->players->at(playerid);
 		std::string cmd = GetCommand(cmdtext);
 		cmd.erase(0, 1);
-		//std::cout << "\"" << cmd << "\"" << std::endl;
 		vector<string> args = GetParams(cmdtext);
 		for(auto i : *handlers)
 		{
@@ -170,8 +169,6 @@ namespace main
 		if(oldPickup != nullptr && old != pickupid)
 			oldPickup->OnExit();
 		SetPVarInt(playerid, "currentPickup", pickupid);
-		//std::string blalbla = "changed pickupid: " + ToString(pickupid);
-		//SendClientMessage(playerid, 0, blalbla.c_str());
 		Pickup *pickup = pickupHandler->GetPickup(pickupid);
 		if(pickup != nullptr)
 		{

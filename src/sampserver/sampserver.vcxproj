@@ -95,8 +95,10 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MyObject.cpp" />
     <ClCompile Include="MySQLFunctions.cpp" />
     <ClCompile Include="NormalItem.cpp" />
+    <ClCompile Include="ObjectHandler.cpp" />
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="PickupHandler.cpp" />
     <ClCompile Include="MyPlayer.cpp" />
@@ -120,8 +122,10 @@
     <ClInclude Include="InteriorHandler.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="MyObject.h" />
     <ClInclude Include="MySQLFunctions.h" />
     <ClInclude Include="NormalItem.h" />
+    <ClInclude Include="ObjectHandler.h" />
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="PickupHandler.h" />
     <ClInclude Include="MyPlayer.h" />

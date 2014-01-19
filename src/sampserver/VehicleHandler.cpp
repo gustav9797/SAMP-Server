@@ -264,7 +264,9 @@ std::string VehicleHandler::randomizeLicensePlate(int length)
 	std::stringstream output;
 	for(int i = 0; i < 8; i++)
 	{
-		int j = rand() % sizeof(licensePlateChars) - 1;
+		//int j = -1;
+		//while(j < 0 || j > (sizeof(licensePlateChars) - 1))
+			int j = rand() % (sizeof(licensePlateChars) - 1);
 		output << licensePlateChars[j];
 	}
 	std::cout << output.str() << std::endl;

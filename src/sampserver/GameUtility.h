@@ -5,6 +5,7 @@ class PickupHandler;
 class HouseHandler;
 class WeaponHandler;
 class VehicleHandler;
+class ObjectHandler;
 class GameUtility
 {
 public:
@@ -16,5 +17,6 @@ public:
 	HouseHandler *houseHandler;
 	WeaponHandler *weaponHandler;
 	VehicleHandler *vehicleHandler;
+	ObjectHandler *objectHandler;
 };
 

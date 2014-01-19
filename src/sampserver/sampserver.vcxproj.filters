@@ -101,7 +101,13 @@
     <ClCompile Include="WeaponHandler.cpp">
       <Filter>Source Files\Handler</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectHandler.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
     <ClCompile Include="GameUtility.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="MyObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -163,7 +169,13 @@
     <ClInclude Include="WeaponHandler.h">
       <Filter>Header Files\Handler</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectHandler.h">
+      <Filter>Header Files\Handler</Filter>
+    </ClInclude>
     <ClInclude Include="GameUtility.h">
+      <Filter>Header Files\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="MyObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

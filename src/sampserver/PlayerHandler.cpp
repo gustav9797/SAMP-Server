@@ -27,16 +27,14 @@ bool PlayerHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 		float *x = new float(), *y = new float(), *z = new float(), *angle = new float();
 		GetPlayerPos(player->GetId(), x, y, z);
 		std::stringstream pos;
-		pos << "Pos: X" << *x << " Y" << *y << " Z" << *z;
+		pos << "Pos: X" << *x << " Y" << *y << " Z" << *z << "\nInterior: " << player->GetInterior() << " VirtualWorld: " << player->GetVirtualWorld();
 		SendClientMessage(player->GetId(), 0xFFFFFFFF, pos.str().c_str());
 		delete x, y, z;
 		return true;
 	}
 	else if (cmd == "spawn")
 	{
-		SetPlayerVirtualWorld(player->GetId(), 0);
-		SetPlayerInterior(player->GetId(), 0);
-		SetPlayerPos(player->GetId(), 1958.3783f, 1343.1572f, 15.3746f);
+		TeleportPlayer(player->GetId(), WorldPositionObject(1958.3783f, 1343.1572f, 15.3746f, 0, 0, 0));
 		return true;
 	}
 	return false;
