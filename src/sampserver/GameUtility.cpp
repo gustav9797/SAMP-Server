@@ -18,9 +18,9 @@ GameUtility::~GameUtility(void)
 void GameUtility::Load()
 {
 	interiorHandler->Load(this);
-	objectHandler->Load(this);
 	houseHandler->Load(this);
 	weaponHandler->Load(this);
 	vehicleHandler->Load(this);
 	playerHandler->Load(this);
+	objectHandler->Load(this);
 }

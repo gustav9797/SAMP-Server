@@ -16,7 +16,6 @@ MyObject::MyObject(int id, int model, Interior *interior, float x, float y, floa
 	drawDistance_(drawDistance)
 {
 	playerObjectsOwned = new std::map<int, int>();
-	Save();
 }
 
 MyObject::~MyObject(void)
@@ -37,7 +36,7 @@ void MyObject::UpdatePosition(bool offset, float xo, float yo, float zo, float r
 	Save();
 }
 
-bool MyObject::hasObject(int objectId)
+bool MyObject::HasObject(int objectId)
 {
 	for(auto it = playerObjectsOwned->begin(); it != playerObjectsOwned->end(); it++)
 	{
@@ -47,12 +46,12 @@ bool MyObject::hasObject(int objectId)
 	return false;
 }
 
-bool MyObject::hasPlayerObject(int player)
+bool MyObject::HasPlayerObject(int player)
 {
 	return playerObjectsOwned->find(player) != playerObjectsOwned->end();
 }
 
-void MyObject::addPlayerObject(int player, int objectId)
+void MyObject::AddPlayerObject(int player, int objectId)
 {
 	if(playerObjectsOwned->find(player) == playerObjectsOwned->end())
 	{
@@ -60,7 +59,7 @@ void MyObject::addPlayerObject(int player, int objectId)
 	}
 }
 
-void MyObject::removePlayerObject(int player)
+void MyObject::RemovePlayerObject(int player)
 {
 	if(playerObjectsOwned->find(player) != playerObjectsOwned->end())
 	{
@@ -69,16 +68,28 @@ void MyObject::removePlayerObject(int player)
 	}
 }
 
+void MyObject::RemoveAll()
+{
+	for(auto it = playerObjectsOwned->begin(); it != playerObjectsOwned->end(); it++)
+	{
+		DestroyPlayerObject(it->first, it->second);
+		playerObjectsOwned->erase(it->first);
+	}
+}
+
 void MyObject::Save()
 {
-	/*sql::PreparedStatement *s = MySQLFunctions::con->prepareStatement("UPDATE `samp`.`objects` SET `x`=?, `y`=?, `z`=?, `rotation`=?, `color1`=?, `color2`=? WHERE `licenseplate`=?");
-	s->setDouble(1, *x);
-	s->setDouble(2, *y);
-	s->setDouble(3, *z);
-	s->setDouble(4, *rotation);
-	s->setInt(5, vehicle->color1_);
-	s->setInt(6, vehicle->color2_);
-	s->setString(7, vehicle->licensePlate_);
-	MySQLFunctions::ExecutePreparedQuery(s);*/
+	sql::PreparedStatement *s = MySQLFunctions::con->prepareStatement("UPDATE `samp`.`objects` SET `interior`=?, `model`=?, `x`=?, `y`=?, `z`=?, `rx`=?, `ry`=?, `rz`=?, `drawdistance`=? WHERE `id`=?");
+	s->setInt(1, interior_->interiorId_);
+	s->setInt(2, model_);
+	s->setDouble(3, x_);
+	s->setDouble(4, y_);
+	s->setDouble(5, z_);
+	s->setDouble(6, rx_);
+	s->setDouble(7, ry_);
+	s->setDouble(8, rz_);
+	s->setDouble(9, drawDistance_);
+	s->setInt(10, id_);
+	MySQLFunctions::ExecutePreparedQuery(s);
 }
 

@@ -7,12 +7,11 @@
 #include "GameUtility.h"
 #include "MyPlayer.h"
 #include "PlayerHandler.h"
+#include "MySQLFunctions.h"
 
 ObjectHandler::ObjectHandler(void)
 {
 	objects = new std::map<int, MyObject*>();
-	//streamedObjects = new std::map<int, PlayerObject>();
-	//sampObjectIdToId = new std::map<int, int>();
 }
 
 
@@ -31,7 +30,7 @@ bool ObjectHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 			int model = atoi(args[0].c_str());
 			MyObject *object = CreateObject(model, player, gameUtility->interiorHandler->getInterior(GetPVarInt(player->GetId(), "currentinterior")), *x, *y, *z, 0, 0, 0, 10);
 			std::stringstream s;
-			s << "Created object with ID " << object->getId();// << " and sampID " << object->getSampId();
+			s << "Created object with ID " << object->getId();
 			SendClientMessage(player->GetId(), 0xFFFFFFFF, s.str().c_str());
 			delete x, y, z;
 		}
@@ -45,16 +44,11 @@ bool ObjectHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 	}
 	else if(cmd == "editobject")
 	{
-		//if(args.size() >= 1)
-		//{
 		int selectedObject = GetPVarInt(player->GetId(), "selectedobject");
 		if(selectedObject != -1)
 			EditPlayerObject(player->GetId(), selectedObject);
 		else
 			SendClientMessage(player->GetId(), 0xFFFFFFFF, "You do not have any object selected.");
-		//}
-		//else
-		//	SendClientMessage(player->GetId(), 0xFFFFFFFF, "Usage: /editobject <objectID>");
 	}
 	return false;
 }
@@ -65,28 +59,44 @@ void ObjectHandler::CheckForHacks()
 
 void ObjectHandler::Load(GameUtility* gameUtility)
 {
+	sql::ResultSet *res = MySQLFunctions::ExecuteQuery("SELECT * FROM objects");
+	while (res->next())
+	{
+		int objectId = res->getInt("id");
+		MyObject *object = new MyObject(
+			res->getInt("id"),
+			res->getInt("model"), 
+			gameUtility->interiorHandler->getInterior(res->getInt("interior")), 
+			res->getDouble("x"), 
+			res->getDouble("y"), 
+			res->getDouble("z"), 
+			res->getDouble("rx"), 
+			res->getDouble("ry"), 
+			res->getDouble("rz"),
+			res->getDouble("drawdistance"));
+		objects->emplace(object->getId(), object);
+	}
+	delete res;
 }
 
 MyObject *ObjectHandler::CreateObject(int model, MyPlayer* player, Interior *interior, float x, float y, float z, float rx, float ry, float rz, float drawDistance)
 {
 	int objectId = getFreeObjectId();
-	//PlayerObject temp = PlayerObject::Create(player->GetId(), model, x, y, z, rx, ry, rz, drawDistance);
-	MyObject *object = new MyObject(getFreeObjectId(), model, interior, x, y, z, rx, ry, rz, drawDistance);
+	MyObject *object = new MyObject(objectId, model, interior, x, y, z, rx, ry, rz, drawDistance);
 	objects->emplace(object->getId(), object);
-	//sampObjectIdToId->emplace(object->getSampId(), object->getId());
+	sql::PreparedStatement *statement = MySQLFunctions::con->prepareStatement("INSERT INTO objects(id, interior, model, x, y, z, rx, ry, rz, drawdistance) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+	statement->setInt(1, objectId);
+	statement->setInt(2, interior->interiorId_);
+	statement->setInt(3, model);
+	statement->setDouble(4, x);
+	statement->setDouble(5, y);
+	statement->setDouble(6, z);
+	statement->setDouble(7, rx);
+	statement->setDouble(8, ry);
+	statement->setDouble(9, rz);
+	statement->setDouble(10, drawDistance);
+	MySQLFunctions::ExecutePreparedQuery(statement);
 	return object;
-	//MyObj
-	/*sql::PreparedStatement *statement = MySQLFunctions::con->prepareStatement("INSERT INTO objects(licenseplate, owner, virtualworld, interior, model, x, y, z, rotation, color1, color2, respawndelay) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-	statement->setInt(1, virtualWorld);
-	statement->setDouble(2, x);
-	statement->setDouble(3, y);
-	statement->setDouble(4, z);
-	statement->setDouble(5, x);
-	statement->setDouble(6, y);
-	statement->setDouble(7, z);
-	statement->setDouble(8, rotation);
-	MySQLFunctions::ExecutePreparedQuery(statement);*/
-	//return nullptr;
 }
 
 void ObjectHandler::RemoveObject(int id)
@@ -130,7 +140,7 @@ void ObjectHandler::Update(GameUtility *gameUtility)
 		for(auto i = objects->begin(); i != objects->end(); i++)
 		{
 			MyObject *object = i->second;
-			if(!object->hasPlayerObject(player->GetId()) && player->GetVirtualWorld() == object->getInterior()->virtualWorld_)
+			if(!object->HasPlayerObject(player->GetId()) && player->GetVirtualWorld() == object->getInterior()->virtualWorld_)
 			{
 				if(GetPVarInt(player->GetId(), "currentinterior") == object->getInterior()->interiorId_)
 				{
@@ -138,14 +148,14 @@ void ObjectHandler::Update(GameUtility *gameUtility)
 					{
 						PlayerObject temp = PlayerObject::Create(player->GetId(), object->getModel(), object->getX(), object->getY(), object->getZ(), object->getRotX(), object->getRotY(), object->getRotZ(), object->getDrawDistance());
 						//streamedObjects->emplace(temp.GetObjectId(), temp);
-						object->addPlayerObject(player->GetId(), temp.GetObjectId());
+						object->AddPlayerObject(player->GetId(), temp.GetObjectId());
 						std::stringstream s;
 						s << "Object " << object->getId() << " was streamed in";
 						SendClientMessage(player->GetId(), 0xFFFFFFFF, s.str().c_str());
 					}
 				}
 			}
-			else if(object->hasPlayerObject(player->GetId()) && !IsPlayerObjectMoving(player->GetId(), GetPVarInt(player->GetId(), "selectedobject")))
+			else if(object->HasPlayerObject(player->GetId()) && !IsPlayerObjectMoving(player->GetId(), GetPVarInt(player->GetId(), "selectedobject")))
 			{
 				if(GetPVarInt(player->GetId(), "currentinterior") != object->getInterior()->interiorId_ || 
 					!IsPlayerInRangeOfPoint(player->GetId(), object->getDrawDistance(), object->getX(), object->getY(), object->getZ())
@@ -155,7 +165,7 @@ void ObjectHandler::Update(GameUtility *gameUtility)
 					std::stringstream s;
 					s << "Object " << object->getId() << " was streamed out";
 					SendClientMessage(player->GetId(), 0xFFFFFFFF, s.str().c_str());
-					object->removePlayerObject(player->GetId());
+					object->RemovePlayerObject(player->GetId());
 				}
 			}
 		}
@@ -180,7 +190,7 @@ bool ObjectHandler::OnPlayerEditObject(MyPlayer *player, int playerobject, int o
 	{
 		for(auto it = objects->begin(); it != objects->end(); it++)
 		{
-			if(it->second->hasObject(objectSampId))
+			if(it->second->HasObject(objectSampId))
 			{
 				if(response = EDIT_RESPONSE_FINAL)
 				{
