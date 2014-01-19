@@ -6,7 +6,7 @@
 
 WeaponHandler::WeaponHandler(void)
 {
-
+	avaliableWeapons = new std::map<int, Weapon*>();
 }
 
 WeaponHandler::~WeaponHandler(void)
@@ -16,7 +16,6 @@ WeaponHandler::~WeaponHandler(void)
 
 void WeaponHandler::Load(GameUtility* gameUtility)
 {
-	avaliableWeapons = new std::map<int, Weapon*>();
 	//slot 0, fist weapons
 	avaliableWeapons->emplace(0, new Weapon(0, 0, -1, -1, 25, "Fist"));
 	avaliableWeapons->emplace(1, new Weapon(1, 0, -1, 331, 25, "Brass Knuckles"));

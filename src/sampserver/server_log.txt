@@ -1267,3 +1267,137 @@ v0.3x-R2, (C)2005-2013 SA-MP Team
 [15:24:49] --------------------------------------------------
 
 [15:24:49] Number of vehicle models: 26
+[15:25:55] Incoming connection: 127.0.0.1:58308
+[15:25:56] [join] gustav9797 has joined the server (0:127.0.0.1)
+[15:26:06] Tried to get pickup which did not exist.
+[15:26:08] Tried to get pickup which did not exist.
+[15:26:08] Tried to get pickup which did not exist.
+[15:26:10] Tried to get pickup which did not exist.
+[15:26:10] Tried to get pickup which did not exist.
+[15:26:11] Tried to get pickup which did not exist.
+[15:26:12] Tried to get pickup which did not exist.
+[15:26:12] Tried to get pickup which did not exist.
+[15:26:13] Tried to get pickup which did not exist.
+[15:26:14] Tried to get pickup which did not exist.
+[15:26:14] Tried to get pickup which did not exist.
+[15:26:15] Tried to get pickup which did not exist.
+[15:26:15] Tried to get pickup which did not exist.
+[15:26:16] Tried to get pickup which did not exist.
+[15:26:17] Tried to get pickup which did not exist.
+[15:26:17] Tried to get pickup which did not exist.
+[15:26:18] Tried to get pickup which did not exist.
+[15:26:19] Tried to get pickup which did not exist.
+[15:26:19] Tried to get pickup which did not exist.
+[15:26:19] Tried to get pickup which did not exist.
+[15:26:21] Tried to get pickup which did not exist.
+[15:26:21] Tried to get pickup which did not exist.
+[15:26:23] Tried to get pickup which did not exist.
+[15:26:23] Tried to get pickup which did not exist.
+[15:26:25] Tried to get pickup which did not exist.
+[15:26:25] Tried to get pickup which did not exist.
+[15:26:27] Tried to get pickup which did not exist.
+[15:26:27] Tried to get pickup which did not exist.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[15:28:43] 
+[15:28:43] Server Plugins
+[15:28:43] --------------
+[15:28:43]  Loading plugin: sampserver
+[15:28:43]   Loaded.
+[15:28:43]  Loaded 1 plugins.
+
+[15:28:43] 
+[15:28:43] Filterscripts
+[15:28:43] ---------------
+[15:28:43]   Loaded 0 filterscripts.
+
+[15:28:43] --------------------------------------------------
+
+[15:28:43]    The most softcoded gamemode ever was loaded!    
+
+[15:28:43] --------------------------------------------------
+
+[15:28:43] Number of vehicle models: 26
+[15:29:02] Incoming connection: 127.0.0.1:59955
+[15:29:02] [join] gustav9797 has joined the server (0:127.0.0.1)
+[15:29:21] Tried to get pickup which did not exist.
+[15:29:23] Tried to get pickup which did not exist.
+[15:29:23] Tried to get pickup which did not exist.
+[15:29:23] Tried to get pickup which did not exist.
+[15:29:25] Tried to get pickup which did not exist.
+[15:29:25] Tried to get pickup which did not exist.
+[15:29:25] Tried to get pickup which did not exist.
+[15:29:28] Tried to get pickup which did not exist.
+[15:29:28] Tried to get pickup which did not exist.
+[15:29:28] Tried to get pickup which did not exist.
+[15:29:28] Tried to get pickup which did not exist.
+[15:29:30] Tried to get pickup which did not exist.
+[15:29:30] Tried to get pickup which did not exist.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[15:30:42] 
+[15:30:42] Server Plugins
+[15:30:42] --------------
+[15:30:42]  Loading plugin: sampserver
+[15:30:42]   Loaded.
+[15:30:42]  Loaded 1 plugins.
+
+[15:30:42] 
+[15:30:42] Filterscripts
+[15:30:42] ---------------
+[15:30:42]   Loaded 0 filterscripts.
+
+[15:30:42] --------------------------------------------------
+
+[15:30:42]    The most softcoded gamemode ever was loaded!    
+
+[15:30:42] --------------------------------------------------
+
+[15:30:42] Number of vehicle models: 26
+[15:31:00] Incoming connection: 127.0.0.1:58158
+[15:31:00] [join] gustav9797 has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[15:33:49] 
+[15:33:49] Server Plugins
+[15:33:49] --------------
+[15:33:49]  Loading plugin: sampserver
+[15:33:50]   Loaded.
+[15:33:50]  Loaded 1 plugins.
+
+[15:33:50] 
+[15:33:50] Filterscripts
+[15:33:50] ---------------
+[15:33:50]   Loaded 0 filterscripts.
+
+[15:33:50] --------------------------------------------------
+
+[15:33:50]    The most softcoded gamemode ever was loaded!    
+
+[15:33:50] --------------------------------------------------
+
+[15:33:50] Number of vehicle models: 26
+[15:34:06] Incoming connection: 127.0.0.1:56490
+[15:34:06] [join] gustav9797 has joined the server (0:127.0.0.1)
+[15:35:16] Tried to get pickup which did not exist.
