@@ -21,7 +21,7 @@ void ObjectHandler::CheckForHacks()
 {
 }
 
-void ObjectHandler::Load()
+void ObjectHandler::Load(GameUtility* gameUtility)
 {
 }
 

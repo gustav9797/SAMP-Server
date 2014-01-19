@@ -89,9 +89,6 @@
     <ClCompile Include="InteriorHandler.cpp">
       <Filter>Source Files\Handler</Filter>
     </ClCompile>
-    <ClCompile Include="PickupHandler.cpp">
-      <Filter>Source Files\Handler</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerHandler.cpp">
       <Filter>Source Files\Handler</Filter>
     </ClCompile>
@@ -157,9 +154,6 @@
     <ClInclude Include="InteriorHandler.h">
       <Filter>Header Files\Handler</Filter>
     </ClInclude>
-    <ClInclude Include="PickupHandler.h">
-      <Filter>Header Files\Handler</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerHandler.h">
       <Filter>Header Files\Handler</Filter>
     </ClInclude>
@@ -177,6 +171,9 @@
     </ClInclude>
     <ClInclude Include="MyObject.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PositionObject.h">
+      <Filter>Header Files\World</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

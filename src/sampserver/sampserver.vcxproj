@@ -100,7 +100,6 @@
     <ClCompile Include="NormalItem.cpp" />
     <ClCompile Include="ObjectHandler.cpp" />
     <ClCompile Include="Pickup.cpp" />
-    <ClCompile Include="PickupHandler.cpp" />
     <ClCompile Include="MyPlayer.cpp" />
     <ClCompile Include="PlayerHandler.cpp" />
     <ClCompile Include="RegisterLogin.cpp" />
@@ -127,9 +126,9 @@
     <ClInclude Include="NormalItem.h" />
     <ClInclude Include="ObjectHandler.h" />
     <ClInclude Include="Pickup.h" />
-    <ClInclude Include="PickupHandler.h" />
     <ClInclude Include="MyPlayer.h" />
     <ClInclude Include="PlayerHandler.h" />
+    <ClInclude Include="PositionObject.h" />
     <ClInclude Include="RegisterLogin.h" />
     <ClInclude Include="MyVehicle.h" />
     <ClInclude Include="VehicleHandler.h" />

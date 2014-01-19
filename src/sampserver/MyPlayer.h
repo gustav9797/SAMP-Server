@@ -1,10 +1,10 @@
 #pragma once
 #include <iostream>
 #include <map>
+#include <sampgdk/a_players.h>
 class WeaponHandler;
 class Weapon;
 class MyVehicle;
-#include <sampgdk/a_players.h>
 class MyPlayer : public Player
 {
 private:

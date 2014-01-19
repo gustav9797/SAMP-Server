@@ -1,5 +1,6 @@
 #include "HouseHandler.h"
 #include "Interior.h"
+#include "MyPlayer.h"
 
 HouseHandler::HouseHandler(void)
 {
@@ -20,7 +21,7 @@ bool HouseHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std:
 			int destinationId = atoi(args[0].c_str());
 			float *x = new float(), *y = new float(), *z = new float();
 			GetPlayerPos(player->GetId(), x, y, z);
-			CreateHouse(destinationId, *x, *y, *z, GetPVarInt(player->GetId(), "currentinterior"), GetPlayerInterior(player->GetId()), GetPlayerVirtualWorld(player->GetId()), gameUtility->interiorHandler, gameUtility->pickupHandler);
+			CreateHouse(destinationId, *x, *y, *z, gameUtility->interiorHandler->getInterior(GetPVarInt(player->GetId(), "currentinterior")), gameUtility->interiorHandler);
 			delete x, y, z;			
 		}
 		return true;
@@ -32,14 +33,14 @@ void HouseHandler::CheckForHacks()
 {
 }
 
-void HouseHandler::Load()
+void HouseHandler::Load(GameUtility* gameUtility)
 {
 }
 
-bool HouseHandler::CreateHouse(int destinationId, float x, float y, float z, int interior, int sampinterior, int virtualworld, InteriorHandler* interiorHandler, PickupHandler *pickupHandler)
+bool HouseHandler::CreateHouse(int destinationId, float x, float y, float z, Interior *interior, InteriorHandler* interiorHandler)
 {
 	int destinationId_ = interiorHandler->AddInterior(new Interior(*interiorHandler->getDefaultInterior(destinationId)));
-	int pickup = pickupHandler->HandlerCreatePickup(1273, 1, x, y, z, "House", interior, sampinterior, virtualworld, destinationId_);
+	int pickup = interiorHandler->HandlerCreatePickup(1273, 1, x, y, z, "House", interior, destinationId_);
 	House *house = new House();
 	house->interiors->emplace(destinationId_, destinationId_);
 	house->pickups->emplace(pickup, pickup);

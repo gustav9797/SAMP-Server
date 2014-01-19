@@ -1,13 +1,9 @@
 #include "Interior.h"
+#include "WorldPositionObject.h"
 
-
-Interior::Interior(std::string name, std::string description, float x, float y, float z, float facingangle, int interiorid, int sampinteriorid, int virtualworld)
-	: WorldPositionObject(x, y, z, interiorid, sampinteriorid, virtualworld)
+Interior::Interior(int interiorId, std::string name, std::string description, float x, float y, float z, float facingAngle, int sampInteriorId, int virtualWorld)
+	: name_(name), description_(description), WorldPositionObject(x, y, z, interiorId, sampInteriorId, virtualWorld, facingAngle)
 {
-	name_ = name;
-	description_ = description;
-	facingangle_ = facingangle;
-	//exitLocations = new std::map<WorldPositionObject, WorldPositionObject>();
 }
 
 

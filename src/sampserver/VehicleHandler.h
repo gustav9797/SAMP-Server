@@ -15,7 +15,7 @@ public:
 	~VehicleHandler(void);
 	virtual bool OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
 	virtual void CheckForHacks();
-	virtual void Load();
+	virtual void Load(GameUtility* gameUtility);
 	void RemoveVehicle(int vehicleId);
 	void RemoveCurrentVehicle(MyPlayer *player);
 	MyVehicle *CreateVehicle(int model, int virtualWorld, int interior, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, std::string licensePlate, MyPlayer *owner);

@@ -14,7 +14,7 @@ WeaponHandler::~WeaponHandler(void)
 }
 
 
-void WeaponHandler::Load()
+void WeaponHandler::Load(GameUtility* gameUtility)
 {
 	avaliableWeapons = new std::map<int, Weapon*>();
 	//slot 0, fist weapons

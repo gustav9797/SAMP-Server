@@ -8,7 +8,8 @@ class Pickup : public WorldPositionObject
 private:
 	int textlabelId;
 public:
-	Pickup(int model, int type, float x, float y, float z, std::string text, int interiorid, int sampinteriorid, int virtualworld);
+	//Pickup(int model, int type, float x, float y, float z, std::string text, int interiorid, int sampinteriorid, int virtualworld);
+	Pickup(int model, int type, float x, float y, float z, std::string text, Interior *interior);
 	~Pickup();
 	int destinationInterior;
 	int destinationPickup;

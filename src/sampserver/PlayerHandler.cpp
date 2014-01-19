@@ -1,8 +1,9 @@
 #include "PlayerHandler.h"
+#include <sstream>
 #include <sampgdk\a_samp.h>
 #include <sampgdk\a_vehicles.h>
 #include "WorldPositionObject.h"
-#include <sstream>
+#include "InteriorHandler.h"
 
 PlayerHandler::PlayerHandler()
 {
@@ -34,7 +35,7 @@ bool PlayerHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 	}
 	else if (cmd == "spawn")
 	{
-		TeleportPlayer(player->GetId(), WorldPositionObject(1958.3783f, 1343.1572f, 15.3746f, 0, 0, 0));
+		TeleportPlayer(player->GetId(), WorldPositionObject(1958.3783f, 1343.1572f, 15.3746f, gameUtility->interiorHandler->getInterior(-1)));
 		return true;
 	}
 	return false;
@@ -53,7 +54,7 @@ void PlayerHandler::CheckForHacks()
 	}
 }
 
-void PlayerHandler::Load()
+void PlayerHandler::Load(GameUtility* gameUtility)
 {
 }
 
@@ -64,18 +65,18 @@ void SAMPGDK_CALL PlayerHandler::KickDelayed(int, void * playerId)
 
 void PlayerHandler::TeleportPlayer(int playerid, WorldPositionObject pos)
 {
-	SetPlayerVirtualWorld(playerid, pos.virtualworld_);
-	SetPlayerInterior(playerid, pos.sampinteriorid_);
+	SetPlayerVirtualWorld(playerid, pos.virtualWorld_);
+	SetPlayerInterior(playerid, pos.sampInteriorId_);
 	SetPlayerPos(playerid, pos.x_, pos.y_, pos.z_);
 	if (GetPlayerState(playerid) == 2)
 	{
 		int vehicleId = GetPlayerVehicleID(playerid);
-		LinkVehicleToInterior(vehicleId, pos.sampinteriorid_);
-		SetVehicleVirtualWorld(vehicleId, pos.virtualworld_);
+		LinkVehicleToInterior(vehicleId, pos.sampInteriorId_);
+		SetVehicleVirtualWorld(vehicleId, pos.virtualWorld_);
 		SetVehiclePos(vehicleId, pos.x_, pos.y_, pos.z_);
 		PutPlayerInVehicle(playerid, vehicleId, 0);
 	}
 	SetPVarInt(playerid, "oldinterior", GetPVarInt(playerid, "currentinterior"));
-	SetPVarInt(playerid, "currentinterior", pos.interiorid_);
+	SetPVarInt(playerid, "currentinterior", pos.interiorId_);
 }
 

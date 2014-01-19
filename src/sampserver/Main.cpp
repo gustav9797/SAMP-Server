@@ -15,7 +15,6 @@
 #include "PlayerHandler.h"
 #include "WeaponHandler.h"
 #include "InteriorHandler.h"
-#include "PickupHandler.h"
 #include "VehicleHandler.h"
 #include "ObjectHandler.h"
 #include "WorldPositionObject.h"
@@ -23,13 +22,13 @@
 #include "RegisterLogin.h"
 #include "Weapon.h"
 #include "GameUtility.h"
+#include "Pickup.h"
 
 namespace main
 {
 	static ThisPlugin samptest;
 	PlayerHandler *playerHandler = new PlayerHandler();
 	InteriorHandler *interiorHandler = new InteriorHandler();
-	PickupHandler *pickupHandler = new PickupHandler();
 	HouseHandler *houseHandler = new HouseHandler();
 	WeaponHandler *weaponHandler = new WeaponHandler();
 	VehicleHandler *vehicleHandler = new VehicleHandler();
@@ -38,14 +37,6 @@ namespace main
 
 	std::vector<Handler*> *handlers = new std::vector<Handler*>();
 	using namespace std;
-
-	static void Load()
-	{
-		for(auto i : *handlers)
-		{
-			i->Load();
-		}
-	}
 
 	static string ToString(int number)
 	{
@@ -91,21 +82,19 @@ namespace main
 		MySQLFunctions::Initialize();
 		handlers->push_back(playerHandler);
 		handlers->push_back(interiorHandler);
-		handlers->push_back(pickupHandler);
 		handlers->push_back(houseHandler);
 		handlers->push_back(vehicleHandler);
 		handlers->push_back(weaponHandler);
 		handlers->push_back(objectHandler);
 		gameUtility->houseHandler = houseHandler;
 		gameUtility->interiorHandler = interiorHandler;
-		gameUtility->pickupHandler = pickupHandler;
 		gameUtility->playerHandler = playerHandler;
 		gameUtility->vehicleHandler = vehicleHandler;
 		gameUtility->weaponHandler = weaponHandler;
 		gameUtility->objectHandler = objectHandler;
 		std::cout << "  Initialized" << std::endl;
 		std::cout << "MySQL data is loading...";
-		Load();
+		gameUtility->Load();
 		std::cout << "  Loaded" << std::endl;
 		SetGameModeText("sampserver v1.0");
 		DisableInteriorEnterExits();
@@ -165,11 +154,14 @@ namespace main
 	PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerPickUpPickup(int playerid, int pickupid)
 	{
 		int old = GetPVarInt(playerid, "currentPickup");
-		Pickup *oldPickup = pickupHandler->GetPickup(old);
+		Pickup *oldPickup = interiorHandler->getPickup(old);
 		if(oldPickup != nullptr && old != pickupid)
 			oldPickup->OnExit();
 		SetPVarInt(playerid, "currentPickup", pickupid);
-		Pickup *pickup = pickupHandler->GetPickup(pickupid);
+		std::stringstream s;
+		s << "CurrentPickup: " << pickupid;
+		SendClientMessage(playerid, 0xFFFFFFFF, s.str().c_str());
+		Pickup *pickup = interiorHandler->getPickup(pickupid);
 		if(pickup != nullptr)
 		{
 			if(old != pickupid)

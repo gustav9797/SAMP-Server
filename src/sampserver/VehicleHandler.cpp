@@ -56,7 +56,7 @@ void VehicleHandler::CheckForHacks()
 {
 }
 
-void VehicleHandler::Load()
+void VehicleHandler::Load(GameUtility* gameUtility)
 {
 	sql::ResultSet *res = MySQLFunctions::ExecuteQuery("SELECT * FROM vehicles");
 	while (res->next())

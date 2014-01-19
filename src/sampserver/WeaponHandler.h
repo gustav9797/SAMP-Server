@@ -11,7 +11,7 @@ public:
 	~WeaponHandler(void);
 	virtual bool OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
 	virtual void CheckForHacks();
-	virtual void Load();
+	virtual void Load(GameUtility* gameUtility);
 	Weapon* getWeapon(int weaponId);
 };
 

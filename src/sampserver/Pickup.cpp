@@ -1,8 +1,8 @@
 #include "Pickup.h"
 
 
-Pickup::Pickup(int model, int type, float x, float y, float z, std::string text, int interiorid, int sampinteriorid, int virtualworld)
-	: WorldPositionObject(x, y, z, interiorid, sampinteriorid, virtualworld)
+Pickup::Pickup(int model, int type, float x, float y, float z, std::string text, Interior *interior)
+	: WorldPositionObject(x, y, z, interior)
 {
 	destinationInterior = -1;
 	destinationPickup = -1;
@@ -13,7 +13,7 @@ Pickup::Pickup(int model, int type, float x, float y, float z, std::string text,
 
 	if(!text.empty())
 	{
-		textlabelId = Create3DTextLabel(text.c_str(), 0x008080FF, x, y, z, 3, virtualworld, 1);
+		textlabelId = Create3DTextLabel(text.c_str(), 0x008080FF, x, y, z, 3, virtualWorld_, 1);
 	}
 }
 
