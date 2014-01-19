@@ -1,6 +1,6 @@
 #include "Weapon.h"
 
-Weapon::Weapon(int id, int slot, int ammo, int model, int damage, std::string name)
+Weapon::Weapon(int id, int slot, int ammo, int model, int damage, std::string name, int cost)
 	: NormalItem(name)
 {
 	id_ = id;
@@ -9,6 +9,7 @@ Weapon::Weapon(int id, int slot, int ammo, int model, int damage, std::string na
 	model_ = model;
 	damage_ = damage;
 	name_ = name;
+	cost_ = cost;
 }
 
 

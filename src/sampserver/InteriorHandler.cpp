@@ -76,10 +76,10 @@ bool InteriorHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<s
 			int destinationId = atoi(args[1].c_str());
 
 			std::string text = std::string();
-			for (int i = 3; i < args.size(); i++)
+			for (int i = 2; i < args.size(); i++)
 				text += args[i] + " ";
 
-			HandlerCreatePickup(model, 1, *x, *y, *z, text, getInterior(GetPVarInt(player->GetId(), "currentinterior")));
+			HandlerCreatePickup(model, 1, *x, *y, *z, text, getInterior(GetPVarInt(player->GetId(), "currentinterior")), -1, destinationId);
 			delete x, y, z;
 		}
 		else

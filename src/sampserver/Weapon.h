@@ -3,7 +3,7 @@
 class Weapon : NormalItem
 {
 public:
-	Weapon(int id, int slot, int ammo, int model, int damage, std::string name);
+	Weapon(int id, int slot, int ammo, int model, int damage, std::string name, int cost);
 	~Weapon();
 	int id_;
 	int slot_;
@@ -11,5 +11,6 @@ public:
 	int model_;
 	int damage_;
 	std::string name_;
+	int cost_;
 };
 
