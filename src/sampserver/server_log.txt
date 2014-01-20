@@ -2760,3 +2760,360 @@ v0.3x-R2, (C)2005-2013 SA-MP Team
 [21:51:33] Incoming connection: 127.0.0.1:55235
 [21:51:33] [join] gustav9797 has joined the server (0:127.0.0.1)
 [21:54:09] [part] gustav9797 has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[15:04:08] 
+[15:04:08] Server Plugins
+[15:04:08] --------------
+[15:04:08]  Loading plugin: sampserver
+[15:04:09]   Loaded.
+[15:04:09]  Loaded 1 plugins.
+
+[15:04:09] 
+[15:04:09] Filterscripts
+[15:04:09] ---------------
+[15:04:09]   Loaded 0 filterscripts.
+
+[15:04:09] --------------------------------------------------
+
+[15:04:09]    The most softcoded gamemode ever was loaded!    
+
+[15:04:09] --------------------------------------------------
+
+[15:04:09] Number of vehicle models: 29
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[16:16:54] 
+[16:16:54] Server Plugins
+[16:16:54] --------------
+[16:16:54]  Loading plugin: sampserver
+[16:16:55]   Loaded.
+[16:16:55]  Loaded 1 plugins.
+
+[16:16:55] 
+[16:16:55] Filterscripts
+[16:16:55] ---------------
+[16:16:55]   Loaded 0 filterscripts.
+
+[16:16:55] --------------------------------------------------
+
+[16:16:55]    The most softcoded gamemode ever was loaded!    
+
+[16:16:55] --------------------------------------------------
+
+[16:16:55] Number of vehicle models: 29
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[16:40:24] 
+[16:40:24] Server Plugins
+[16:40:24] --------------
+[16:40:24]  Loading plugin: sampserver
+[16:40:24]   Loaded.
+[16:40:24]  Loaded 1 plugins.
+
+[16:40:24] 
+[16:40:24] Filterscripts
+[16:40:24] ---------------
+[16:40:24]   Loaded 0 filterscripts.
+
+[16:40:24] --------------------------------------------------
+
+[16:40:24]    The most softcoded gamemode ever was loaded!    
+
+[16:40:24] --------------------------------------------------
+
+[16:40:24] Number of vehicle models: 29
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[16:41:45] 
+[16:41:45] Server Plugins
+[16:41:45] --------------
+[16:41:45]  Loading plugin: sampserver
+[16:41:45]   Loaded.
+[16:41:45]  Loaded 1 plugins.
+
+[16:41:45] 
+[16:41:45] Filterscripts
+[16:41:45] ---------------
+[16:41:45]   Loaded 0 filterscripts.
+
+[16:41:46] --------------------------------------------------
+
+[16:41:46]    The most softcoded gamemode ever was loaded!    
+
+[16:41:46] --------------------------------------------------
+
+[16:41:46] Number of vehicle models: 29
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[16:58:32] 
+[16:58:32] Server Plugins
+[16:58:32] --------------
+[16:58:32]  Loading plugin: sampserver
+[16:58:32]   Loaded.
+[16:58:32]  Loaded 1 plugins.
+
+[16:58:32] 
+[16:58:32] Filterscripts
+[16:58:32] ---------------
+[16:58:32]   Loaded 0 filterscripts.
+
+[16:58:32] --------------------------------------------------
+
+[16:58:32]    The most softcoded gamemode ever was loaded!    
+
+[16:58:32] --------------------------------------------------
+
+[16:58:32] Number of vehicle models: 29
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[17:00:10] 
+[17:00:10] Server Plugins
+[17:00:10] --------------
+[17:00:10]  Loading plugin: sampserver
+[17:00:10]   Loaded.
+[17:00:10]  Loaded 1 plugins.
+
+[17:00:10] 
+[17:00:10] Filterscripts
+[17:00:10] ---------------
+[17:00:10]   Loaded 0 filterscripts.
+
+[17:00:10] --------------------------------------------------
+
+[17:00:10]    The most softcoded gamemode ever was loaded!    
+
+[17:00:10] --------------------------------------------------
+
+[17:00:10] Number of vehicle models: 29
+[17:00:45] Incoming connection: 127.0.0.1:50559
+[17:00:45] [join] gustav9797 has joined the server (0:127.0.0.1)
+[17:01:19] [part] gustav9797 has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[17:01:36] 
+[17:01:36] Server Plugins
+[17:01:36] --------------
+[17:01:36]  Loading plugin: sampserver
+[17:01:36]   Loaded.
+[17:01:36]  Loaded 1 plugins.
+
+[17:01:36] 
+[17:01:36] Filterscripts
+[17:01:36] ---------------
+[17:01:36]   Loaded 0 filterscripts.
+
+[17:01:36] --------------------------------------------------
+
+[17:01:36]    The most softcoded gamemode ever was loaded!    
+
+[17:01:36] --------------------------------------------------
+
+[17:01:36] Number of vehicle models: 29
+[17:01:53] Incoming connection: 127.0.0.1:61927
+[17:01:53] [join] gustav9797 has joined the server (0:127.0.0.1)
+[17:06:00] [part] gustav9797 has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[17:14:38] 
+[17:14:38] Server Plugins
+[17:14:38] --------------
+[17:14:38]  Loading plugin: sampserver
+[17:14:39]   Loaded.
+[17:14:39]  Loaded 1 plugins.
+
+[17:14:39] 
+[17:14:39] Filterscripts
+[17:14:39] ---------------
+[17:14:39]   Loaded 0 filterscripts.
+
+[17:14:39] --------------------------------------------------
+
+[17:14:39]    The most softcoded gamemode ever was loaded!    
+
+[17:14:39] --------------------------------------------------
+
+[17:14:39] Number of vehicle models: 29
+[17:14:55] Incoming connection: 127.0.0.1:58546
+[17:14:55] [join] gustav9797 has joined the server (0:127.0.0.1)
+[17:15:46] [part] gustav9797 has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[17:20:13] 
+[17:20:13] Server Plugins
+[17:20:13] --------------
+[17:20:13]  Loading plugin: sampserver
+[17:20:13]   Loaded.
+[17:20:13]  Loaded 1 plugins.
+
+[17:20:13] 
+[17:20:13] Filterscripts
+[17:20:13] ---------------
+[17:20:13]   Loaded 0 filterscripts.
+
+[17:20:13] --------------------------------------------------
+
+[17:20:13]    The most softcoded gamemode ever was loaded!    
+
+[17:20:13] --------------------------------------------------
+
+[17:20:13] Number of vehicle models: 29
+[17:20:29] Incoming connection: 127.0.0.1:53006
+[17:20:29] [join] gustav9797 has joined the server (0:127.0.0.1)
+[17:24:52] [part] gustav9797 has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[17:26:03] 
+[17:26:03] Server Plugins
+[17:26:03] --------------
+[17:26:03]  Loading plugin: sampserver
+[17:26:03]   Loaded.
+[17:26:03]  Loaded 1 plugins.
+
+[17:26:03] 
+[17:26:03] Filterscripts
+[17:26:03] ---------------
+[17:26:03]   Loaded 0 filterscripts.
+
+[17:26:03] --------------------------------------------------
+
+[17:26:03]    The most softcoded gamemode ever was loaded!    
+
+[17:26:03] --------------------------------------------------
+
+[17:26:03] Number of vehicle models: 29
+[17:27:48] Incoming connection: 127.0.0.1:49866
+[17:27:48] [join] gustav9797 has joined the server (0:127.0.0.1)
+[17:29:48] [part] gustav9797 has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[17:35:59] 
+[17:35:59] Server Plugins
+[17:35:59] --------------
+[17:35:59]  Loading plugin: sampserver
+[17:36:00]   Loaded.
+[17:36:00]  Loaded 1 plugins.
+
+[17:36:00] 
+[17:36:00] Filterscripts
+[17:36:00] ---------------
+[17:36:00]   Loaded 0 filterscripts.
+
+[17:36:00] --------------------------------------------------
+
+[17:36:00]    The most softcoded gamemode ever was loaded!    
+
+[17:36:00] --------------------------------------------------
+
+[17:36:00] Number of vehicle models: 6
+[17:36:17] Incoming connection: 127.0.0.1:63517
+[17:36:17] [join] gustav9797 has joined the server (0:127.0.0.1)
+[17:38:01] [part] gustav9797 has left the server (0:1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3x-R2, (C)2005-2013 SA-MP Team
+
+[17:38:10] 
+[17:38:10] Server Plugins
+[17:38:10] --------------
+[17:38:10]  Loading plugin: sampserver
+[17:38:10]   Loaded.
+[17:38:10]  Loaded 1 plugins.
+
+[17:38:10] 
+[17:38:10] Filterscripts
+[17:38:10] ---------------
+[17:38:10]   Loaded 0 filterscripts.
+
+[17:38:10] --------------------------------------------------
+
+[17:38:10]    The most softcoded gamemode ever was loaded!    
+
+[17:38:10] --------------------------------------------------
+
+[17:38:10] Number of vehicle models: 9
+[17:38:39] Incoming connection: 127.0.0.1:56558
+[17:38:39] [join] gustav9797 has joined the server (0:127.0.0.1)
+[17:39:00] [part] gustav9797 has left the server (0:1)

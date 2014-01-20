@@ -37,6 +37,12 @@
     <Filter Include="Header Files\Handler">
       <UniqueIdentifier>{f98d58a8-bdb4-4e58-ae1a-c3b2ded5d0bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Vehicle">
+      <UniqueIdentifier>{238fd188-8f1b-4061-aca5-a7e2d3a72198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vehicle">
+      <UniqueIdentifier>{1e1425ea-cb62-48bd-8d68-71d26f2b0cee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Main.def">
@@ -66,9 +72,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MyPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MyVehicle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="House.cpp">
@@ -107,6 +110,18 @@
     <ClCompile Include="MyObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MyVehicle.cpp">
+      <Filter>Source Files\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="VehicleDamageStatus.cpp">
+      <Filter>Source Files\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorStatus.cpp">
+      <Filter>Source Files\Vehicle</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelStatus.cpp">
+      <Filter>Source Files\Vehicle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MySQLFunctions.h">
@@ -128,9 +143,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MyPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MyVehicle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="House.h">
@@ -174,6 +186,18 @@
     </ClInclude>
     <ClInclude Include="PositionObject.h">
       <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="VehicleDamageStatus.h">
+      <Filter>Header Files\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="MyVehicle.h">
+      <Filter>Header Files\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorStatus.h">
+      <Filter>Header Files\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelStatus.h">
+      <Filter>Header Files\Vehicle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

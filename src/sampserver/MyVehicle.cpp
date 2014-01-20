@@ -1,5 +1,5 @@
 #include "MyVehicle.h"
-
+#include "VehicleDamageStatus.h"
 
 MyVehicle::MyVehicle(int id, int model, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, std::string licensePlate) : Vehicle(id)
 {
@@ -13,6 +13,7 @@ MyVehicle::MyVehicle(int id, int model, float x, float y, float z, float rotatio
 	color2_ = color2;
 	respawnDelay_ = respawnDelay;
 	licensePlate_ = licensePlate;
+	damageStatus_ = new VehicleDamageStatus(1000, 0, 0, 0, 0);
 }
 
 
@@ -33,9 +34,22 @@ MyVehicle::MyVehicle(Vehicle vehicle, int color1, int color2, int respawnDelay, 
 	color1_ = color1;
 	color2_ = color2;
 	respawnDelay_ = respawnDelay;
+	damageStatus_ = new VehicleDamageStatus(1000, 0, 0, 0, 0);
 }
 
 
 MyVehicle::~MyVehicle()
 {
+}
+
+void MyVehicle::setDamage(float health, int panels, int doors, int lights, int tires)
+{
+	damageStatus_->UpdateStatus(health, panels, doors, lights, tires);
+	UpdateDamageStatus(panels, doors, lights, tires);
+	SetHealth(health);
+}
+
+void MyVehicle::setHealth(float health)
+{
+	setDamage(health, damageStatus_->getPanelsRaw(), damageStatus_->getDoorsRaw(), damageStatus_->getLightsRaw(), damageStatus_->getTiresRaw());
 }

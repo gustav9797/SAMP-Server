@@ -16,3 +16,4 @@ EXPORTS
 	OnPlayerSelectObject
 	OnPlayerEditObject
 	OnPlayerObjectMoved
+	OnVehicleDamageStatusUpdate

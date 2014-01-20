@@ -26,5 +26,6 @@ public:
 	int getFreeVehicleUniqueId();
 	std::string randomizeLicensePlate(int length=8);
 	bool isLicensePlateUsed(std::string);
+	bool UpdateVehicleDamageStatus(int vehicleId, int playerId);
 };
 

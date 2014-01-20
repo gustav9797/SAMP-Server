@@ -1,5 +1,6 @@
 #pragma once
 #include <sampgdk/a_vehicles.h>
+class VehicleDamageStatus;
 class MyVehicle : public Vehicle
 {
 public:
@@ -17,5 +18,9 @@ public:
 	int respawnDelay_;
 	int getId() { return id_; };
 	std::string licensePlate_;
+
+	void setDamage(float health, int panels, int doors, int lights, int tires);
+	void setHealth(float health);
+	VehicleDamageStatus *damageStatus_;
 };
 

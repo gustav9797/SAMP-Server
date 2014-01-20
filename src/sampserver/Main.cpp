@@ -269,6 +269,11 @@ namespace main
 		return objectHandler->OnPlayerObjectMoved(playerHandler->players->at(playerid), objectSampId);
 	}
 
+	PLUGIN_EXPORT bool PLUGIN_CALL OnVehicleDamageStatusUpdate(int vehicleid, int playerid)
+	{
+		return vehicleHandler->UpdateVehicleDamageStatus(vehicleid, playerid);
+	}
+
 	PLUGIN_EXPORT unsigned int PLUGIN_CALL Supports() {
 		return SUPPORTS_VERSION | SUPPORTS_PROCESS_TICK;
 	}

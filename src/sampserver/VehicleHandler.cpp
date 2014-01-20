@@ -2,6 +2,7 @@
 #include "VehicleHandler.h"
 #include "MySQLFunctions.h"
 #include "PlayerHandler.h"
+#include "VehicleDamageStatus.h"
 
 VehicleHandler::VehicleHandler(void)
 {
@@ -54,6 +55,7 @@ bool VehicleHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<st
 
 void VehicleHandler::CheckForHacks()
 {
+
 }
 
 void VehicleHandler::Load(GameUtility* gameUtility)
@@ -72,6 +74,7 @@ void VehicleHandler::Load(GameUtility* gameUtility)
 			res->getInt("respawndelay"));
 		std::string licensePlate = res->getString("licenseplate");
 		MyVehicle *vehicle = new MyVehicle(temp, res->getInt("color1"), res->getInt("color2"), res->getInt("respawndelay"), licensePlate);
+		vehicle->UpdateDamageStatus(res->getInt("healthpanels"), res->getInt("healthdoors"), res->getInt("healthlights"), res->getInt("healthtires"));
 		vehicle->SetVirtualWorld(res->getInt("virtualworld"));
 		int interior = res->getInt("interior");
 		if(interior != -1)
@@ -266,9 +269,40 @@ std::string VehicleHandler::randomizeLicensePlate(int length)
 	{
 		//int j = -1;
 		//while(j < 0 || j > (sizeof(licensePlateChars) - 1))
-			int j = rand() % (sizeof(licensePlateChars) - 1);
+		int j = rand() % (sizeof(licensePlateChars) - 1);
 		output << licensePlateChars[j];
 	}
 	std::cout << output.str() << std::endl;
 	return output.str();
+}
+
+bool VehicleHandler::UpdateVehicleDamageStatus(int vehicleId, int playerId)
+{
+	if(vehicles->find(vehicleId) != vehicles->end())
+	{
+		MyVehicle *vehicle = vehicles->at(vehicleId);
+		int *panels = new int();
+		int *doors = new int();
+		int *lights = new int();
+		int *tires = new int();
+		float *health = new float();
+		GetVehicleHealth(vehicleId, health);
+		GetVehicleDamageStatus(vehicleId, panels, doors, lights, tires);
+		std::stringstream s;
+		s << "SAMP Panels:" << *panels << " Doors:" << *doors << " Lights:" << *lights << " Tires:" << *tires;// << " Health:" << *health;
+		SendClientMessage(playerId, 0xFFFFFFFF, s.str().c_str());
+		vehicles->at(vehicleId)->setDamage(*health, *panels, *doors, *lights, *tires);
+
+		sql::PreparedStatement *st = MySQLFunctions::con->prepareStatement("UPDATE `samp`.`vehicles` SET `health`=?, `healthpanels`=?, `healthdoors`=?, `healthlights`=?, `healthtires`=? WHERE `licenseplate`=?");
+		st->setDouble(1, *health);
+		st->setInt(2, *panels);
+		st->setInt(3, *doors);
+		st->setInt(4, *lights);
+		st->setInt(5, *tires);
+		st->setString(6, vehicle->licensePlate_);
+		MySQLFunctions::ExecutePreparedQuery(st);
+
+		delete panels, doors, lights, tires, health;
+	}
+	return true;
 }

@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DoorStatus.cpp" />
     <ClCompile Include="GameUtility.cpp" />
     <ClCompile Include="House.cpp" />
     <ClCompile Include="HouseHandler.cpp" />
@@ -99,11 +100,13 @@
     <ClCompile Include="MySQLFunctions.cpp" />
     <ClCompile Include="NormalItem.cpp" />
     <ClCompile Include="ObjectHandler.cpp" />
+    <ClCompile Include="PanelStatus.cpp" />
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="MyPlayer.cpp" />
     <ClCompile Include="PlayerHandler.cpp" />
     <ClCompile Include="RegisterLogin.cpp" />
     <ClCompile Include="MyVehicle.cpp" />
+    <ClCompile Include="VehicleDamageStatus.cpp" />
     <ClCompile Include="VehicleHandler.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponHandler.cpp" />
@@ -113,6 +116,7 @@
     <None Include="Main.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DoorStatus.h" />
     <ClInclude Include="GameUtility.h" />
     <ClInclude Include="Handler.h" />
     <ClInclude Include="House.h" />
@@ -125,12 +129,14 @@
     <ClInclude Include="MySQLFunctions.h" />
     <ClInclude Include="NormalItem.h" />
     <ClInclude Include="ObjectHandler.h" />
+    <ClInclude Include="PanelStatus.h" />
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="MyPlayer.h" />
     <ClInclude Include="PlayerHandler.h" />
     <ClInclude Include="PositionObject.h" />
     <ClInclude Include="RegisterLogin.h" />
     <ClInclude Include="MyVehicle.h" />
+    <ClInclude Include="VehicleDamageStatus.h" />
     <ClInclude Include="VehicleHandler.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponHandler.h" />
