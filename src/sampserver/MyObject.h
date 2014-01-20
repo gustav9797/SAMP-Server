@@ -38,5 +38,6 @@ public:
 	void RemoveAll();
 	void UpdatePosition(bool offset, float xo, float yo, float zo, float rx, float ry, float rz);
 	void Save();
+	void Destroy();
 };
 

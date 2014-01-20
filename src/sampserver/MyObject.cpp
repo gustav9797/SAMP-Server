@@ -20,6 +20,7 @@ MyObject::MyObject(int id, int model, Interior *interior, float x, float y, floa
 
 MyObject::~MyObject(void)
 {
+	delete  playerObjectsOwned;
 }
 
 void MyObject::UpdatePosition(bool offset, float xo, float yo, float zo, float rx, float ry, float rz)
@@ -91,5 +92,13 @@ void MyObject::Save()
 	s->setDouble(9, drawDistance_);
 	s->setInt(10, id_);
 	MySQLFunctions::ExecutePreparedQuery(s);
+}
+
+void MyObject::Destroy()
+{
+	for(auto it = playerObjectsOwned->begin(); it != playerObjectsOwned->end(); it++)
+	{
+		DestroyPlayerObject(it->first, it->second);
+	}
 }
 
