@@ -57,11 +57,13 @@ bool ObjectHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 		int selectedObject = GetPVarInt(player->GetId(), "selectedobject");
 		if(selectedObject != -1)
 		{
+			MyObject *object = nullptr;
 			for(auto it = objects->begin(); it != objects->end(); it++)
 			{
 				if(it->second->HasObject(selectedObject))
-					RemoveObject(it->second->getId());
+					object = it->second;
 			}
+			RemoveObject(object->getId());
 		}
 		else
 			SendClientMessage(player->GetId(), 0xFFFFFFFF, "You do not have any object selected.");

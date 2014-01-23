@@ -3,6 +3,8 @@
 #include "MySQLFunctions.h"
 #include "PlayerHandler.h"
 #include "VehicleDamageStatus.h"
+#include "InteriorHandler.h"
+#include "Interior.h"
 
 VehicleHandler::VehicleHandler(void)
 {
@@ -27,7 +29,7 @@ bool VehicleHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<st
 			GetPlayerPos(player->GetId(), x, y, z);
 			GetPlayerFacingAngle(player->GetId(), angle);
 			//MyVehicle* veh = CreateVehicle(vehicleId, *x, *y, *z, *angle, 0, 0, 60, );*/
-			MyVehicle *vehicle = CreateVehicleForPlayer(model, 0, 0, 60, player, "", nullptr);
+			MyVehicle *vehicle = CreateVehicleForPlayer(model, 0, 0, 60, player, "", nullptr, gameUtility);
 			/*delete x;
 			delete y;
 			delete z;
@@ -128,7 +130,7 @@ void VehicleHandler::RemoveCurrentVehicle(MyPlayer *player)
 }
 
 //Creates a vehicle at specified position (owner is nullptr for server)
-MyVehicle *VehicleHandler::CreateVehicle(int model, int virtualWorld, int interior, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, std::string licensePlate, MyPlayer *owner)
+MyVehicle *VehicleHandler::CreateVehicle(int model, int interior, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, std::string licensePlate, MyPlayer *owner, GameUtility *gameUtility)
 {
 	while(isLicensePlateUsed(licensePlate))
 		licensePlate = randomizeLicensePlate();
@@ -143,49 +145,51 @@ MyVehicle *VehicleHandler::CreateVehicle(int model, int virtualWorld, int interi
 	else
 		ownerName = owner->GetName();
 
-	sql::PreparedStatement *statement = MySQLFunctions::con->prepareStatement("INSERT INTO vehicles(licenseplate, owner, virtualworld, interior, model, x, y, z, rotation, color1, color2, respawndelay) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-	statement->setString(1, licensePlate);
-	statement->setString(2, ownerName);
-	statement->setInt(3, virtualWorld);
-	statement->setInt(4, interior);
-	statement->setInt(5, model);
-	statement->setDouble(6, x);
-	statement->setDouble(7, y);
-	statement->setDouble(8, z);
-	statement->setDouble(9, rotation);
-	statement->setInt(10, color1);
-	statement->setInt(11, color2);
-	statement->setInt(12, respawnDelay);
-	MySQLFunctions::ExecutePreparedQuery(statement);
-
 	Vehicle temp = Vehicle::Create(model, x, y, z, rotation, color1, color2, respawnDelay);
 	MyVehicle *vehicle = new MyVehicle(temp, color1, color2, respawnDelay, licensePlate);
+	Interior *interior_ = gameUtility->interiorHandler->getInterior(interior);
 
-	vehicle->SetVirtualWorld(virtualWorld);
-	if(interior != -1)
-		vehicle->LinkToInterior(interior);
-	vehicle->SetNumberPlate(licensePlate.c_str());
-	idToLicensePlate->emplace(vehicle->GetId(), licensePlate);
-	vehicles->emplace(vehicle->GetId(), vehicle);
-	if(owner != nullptr)
+	if(interior_ != nullptr)
 	{
-		if(playerVehicles->find(owner->GetName()) == playerVehicles->end())
-			playerVehicles->emplace(owner->GetName(), new std::map<int, MyVehicle*>());
-		std::map<int, MyVehicle*> *playerOwnedVehicles = playerVehicles->at(owner->GetName());
-		if(playerOwnedVehicles == nullptr)
-			playerOwnedVehicles = new std::map<int, MyVehicle*>();
-		playerOwnedVehicles->emplace(vehicle->GetId(), vehicle);
+		vehicle->SetVirtualWorld(interior_->virtualWorld_);
+		vehicle->LinkToInterior(interior_->sampInteriorId_);
+		vehicle->SetNumberPlate(licensePlate.c_str());
+		idToLicensePlate->emplace(vehicle->GetId(), licensePlate);
+		vehicles->emplace(vehicle->GetId(), vehicle);
+		if(owner != nullptr)
+		{
+			if(playerVehicles->find(owner->GetName()) == playerVehicles->end())
+				playerVehicles->emplace(owner->GetName(), new std::map<int, MyVehicle*>());
+			std::map<int, MyVehicle*> *playerOwnedVehicles = playerVehicles->at(owner->GetName());
+			if(playerOwnedVehicles == nullptr)
+				playerOwnedVehicles = new std::map<int, MyVehicle*>();
+			playerOwnedVehicles->emplace(vehicle->GetId(), vehicle);
+
+			sql::PreparedStatement *statement = MySQLFunctions::con->prepareStatement("INSERT INTO vehicles(licenseplate, owner, interior, model, x, y, z, rotation, color1, color2, respawndelay) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			statement->setString(1, licensePlate);
+			statement->setString(2, ownerName);
+			statement->setInt(3, interior);
+			statement->setInt(4, model);
+			statement->setDouble(5, x);
+			statement->setDouble(6, y);
+			statement->setDouble(7, z);
+			statement->setDouble(8, rotation);
+			statement->setInt(9, color1);
+			statement->setInt(10, color2);
+			statement->setInt(11, respawnDelay);
+			MySQLFunctions::ExecutePreparedQuery(statement);
+		}
 	}
 	return vehicle;
 }
 
 //Creates a vehicle at players position, puts player inside it (owner is nullptr for server)
-MyVehicle *VehicleHandler::CreateVehicleForPlayer(int model, int color1, int color2, int respawnDelay, MyPlayer *player, std::string licensePlate, MyPlayer *owner)
+MyVehicle *VehicleHandler::CreateVehicleForPlayer(int model, int color1, int color2, int respawnDelay, MyPlayer *player, std::string licensePlate, MyPlayer *owner, GameUtility *gameUtility)
 {
 	float *x = new float(), *y = new float(), *z = new float(), *rotation = new float();
 	player->GetPos(x, y, z);
 	player->GetFacingAngle(rotation);
-	MyVehicle *vehicle = CreateVehicle(model, player->GetVirtualWorld(), GetPVarInt(player->GetId(), "currentinterior"), *x, *y, *z, *rotation, color1, color2, respawnDelay, licensePlate, owner);//Vehicle::Create(model, *x, *y, *z, *rotation, color1, color2, respawnDelay);
+	MyVehicle *vehicle = CreateVehicle(model, GetPVarInt(player->GetId(), "currentinterior"), *x, *y, *z, *rotation, color1, color2, respawnDelay, licensePlate, owner, gameUtility);//Vehicle::Create(model, *x, *y, *z, *rotation, color1, color2, respawnDelay);
 	delete x, y, z, rotation;
 	if(vehicle == nullptr)
 		return nullptr;
