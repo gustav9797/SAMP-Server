@@ -209,14 +209,8 @@ namespace main
 					{
 						victim->SetHealth(victim->GetHealth() - weapon->damage_);
 					}
-					else
-						throw new exception("OnPlayerTakeDamage: weapon does not exist");
 				}
-				else
-					throw new exception("OnPlayerTakeDamage: victim is null");
 			}
-			else
-				throw new exception("OnPlayerTakeDamage: Issuer is null");
 		}
 		return 1;
 	}

@@ -40,8 +40,29 @@ bool ObjectHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 	}
 	else if(cmd == "selectobject")
 	{
-		SelectObject(player->GetId());
+		if(args.size() == 0)
+			SelectObject(player->GetId());
+		else
+		{
+			int id = atoi(args[0].c_str());
+			SetPVarInt(player->GetId(), "selectedobject", id);
+			std::stringstream s;
+			s << "Selected object " << id;
+			SendClientMessage(player->GetId(), 0xFFFFFFFF, s.str().c_str());
+		}
 		return true;
+	}
+	else if(cmd == "getcloseobjects")
+	{
+		for(auto it = objects->begin(); it != objects->end(); it++)
+		{
+			if(IsPlayerInRangeOfPoint(player->GetId(), 5, it->second->getX(), it->second->getY(), it->second->getZ()))
+			{
+				std::stringstream s;
+				s << "Object " << it->first << ": Model:" << it->second->getModel() << " DrawDistance:" << it->second->getDrawDistance();
+				SendClientMessage(player->GetId(), 0xFFFFFFFF, s.str().c_str());
+			}
+		}
 	}
 	else if(cmd == "editobject")
 	{
@@ -57,11 +78,19 @@ bool ObjectHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 		int selectedObject = GetPVarInt(player->GetId(), "selectedobject");
 		if(selectedObject != -1)
 		{
+			MyObject *object = nullptr;
 			for(auto it = objects->begin(); it != objects->end(); it++)
 			{
 				if(it->second->HasObject(selectedObject))
-					RemoveObject(it->second->getId());
+					object = it->second;
 			}
+			if(object != nullptr)
+			{
+				RemoveObject(object->getId());
+				SendClientMessage(player->GetId(), 0xFFFFFFFF, "Object removed");
+			}
+			else
+				SendClientMessage(player->GetId(), 0xFFFFFFFF, "Could not remove object. Selected object not found?");
 		}
 		else
 			SendClientMessage(player->GetId(), 0xFFFFFFFF, "You do not have any object selected.");
