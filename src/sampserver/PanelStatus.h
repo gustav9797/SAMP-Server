@@ -1,17 +1,18 @@
 #pragma once
 #include <iostream>
+#include <bitset>
 #include "DamageStatus.h"
 
 class PanelStatus : public DamageStatus
 {
 private:
-	char frontLeft_;
-	char frontRight_;
-	char rearLeft_;
-	char rearRight_;
-	char windShield_;
-	char frontBumper_;
-	char rearBumper_;
+	std::bitset<4> frontLeft_;
+	std::bitset<4> frontRight_;
+	std::bitset<4> rearLeft_;
+	std::bitset<4> rearRight_;
+	std::bitset<4> windShield_;
+	std::bitset<4> frontBumper_;
+	std::bitset<4> rearBumper_;
 	virtual bool getBit(int panel, int bit);
 	virtual void setBit(int panel, int bit, bool value);
 public:
