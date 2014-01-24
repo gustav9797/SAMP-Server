@@ -83,6 +83,7 @@ bool ObjectHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 			{
 				if(it->second->HasObject(selectedObject))
 					object = it->second;
+<<<<<<< HEAD
 			}
 			if(object != nullptr)
 			{
@@ -91,6 +92,10 @@ bool ObjectHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 			}
 			else
 				SendClientMessage(player->GetId(), 0xFFFFFFFF, "Could not remove object. Selected object not found?");
+=======
+			}
+			RemoveObject(object->getId());
+>>>>>>> 80ceac4c12f5f60b0ff0a1c63105e4fcf8cc6d8b
 		}
 		else
 			SendClientMessage(player->GetId(), 0xFFFFFFFF, "You do not have any object selected.");
