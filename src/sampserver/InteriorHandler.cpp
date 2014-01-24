@@ -45,11 +45,7 @@ bool InteriorHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<s
 				interior = getDefaultInterior(interiorId);
 			}
 			if (interior != nullptr)
-			{
-				SetPlayerInterior(player->GetId(), interior->sampInteriorId_);
-				SetPlayerVirtualWorld(player->GetId(), interior->virtualWorld_);
-				SetPlayerPos(player->GetId(), interior->x_, interior->y_, interior->z_);
-			}
+				gameUtility->playerHandler->TeleportPlayer(player->GetId(), *interior);
 			else
 				SendClientMessage(player->GetId(), 0xFFFFFFFF, "Error: Interior does not exist.");
 		}
