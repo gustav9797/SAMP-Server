@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
-class PanelStatus
+#include "DamageStatus.h"
+
+class PanelStatus : public DamageStatus
 {
 private:
 	char frontLeft_;
@@ -10,16 +12,17 @@ private:
 	char windShield_;
 	char frontBumper_;
 	char rearBumper_;
-	bool getBit(int panel, int bit);
+	virtual bool getBit(int panel, int bit);
+	virtual void setBit(int panel, int bit, bool value);
 public:
 	PanelStatus(int panels);
 	~PanelStatus(void);
-	int getRaw() { return Encode(); };
 	bool getPanelDamaged(int panel);
+	void setPanelDamaged(int panel, bool value);
 	bool getPanelRemoved(int panel);
-	int Encode();
-	void Decode(int panels);
-	std::string ToString();
+	void setPanelRemoved(int panel, bool value);
+	virtual int Encode();
+	virtual void Decode(int panels);
 };
 
 enum Panels

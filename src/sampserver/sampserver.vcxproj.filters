@@ -43,6 +43,12 @@
     <Filter Include="Header Files\Vehicle">
       <UniqueIdentifier>{1e1425ea-cb62-48bd-8d68-71d26f2b0cee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Vehicle\Damage">
+      <UniqueIdentifier>{8b5087f0-1a15-49e0-bde9-98c80eb27200}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vehicle\Damage">
+      <UniqueIdentifier>{3579d297-0fcd-4bb4-bb33-756d49917f5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Main.def">
@@ -113,14 +119,20 @@
     <ClCompile Include="MyVehicle.cpp">
       <Filter>Source Files\Vehicle</Filter>
     </ClCompile>
-    <ClCompile Include="VehicleDamageStatus.cpp">
-      <Filter>Source Files\Vehicle</Filter>
-    </ClCompile>
     <ClCompile Include="DoorStatus.cpp">
-      <Filter>Source Files\Vehicle</Filter>
+      <Filter>Source Files\Vehicle\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="LightStatus.cpp">
+      <Filter>Source Files\Vehicle\Damage</Filter>
     </ClCompile>
     <ClCompile Include="PanelStatus.cpp">
-      <Filter>Source Files\Vehicle</Filter>
+      <Filter>Source Files\Vehicle\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="TireStatus.cpp">
+      <Filter>Source Files\Vehicle\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="VehicleDamageStatus.cpp">
+      <Filter>Source Files\Vehicle\Damage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,17 +199,26 @@
     <ClInclude Include="PositionObject.h">
       <Filter>Header Files\World</Filter>
     </ClInclude>
-    <ClInclude Include="VehicleDamageStatus.h">
-      <Filter>Header Files\Vehicle</Filter>
-    </ClInclude>
     <ClInclude Include="MyVehicle.h">
       <Filter>Header Files\Vehicle</Filter>
     </ClInclude>
+    <ClInclude Include="DamageStatus.h">
+      <Filter>Header Files\Vehicle\Damage</Filter>
+    </ClInclude>
     <ClInclude Include="DoorStatus.h">
-      <Filter>Header Files\Vehicle</Filter>
+      <Filter>Header Files\Vehicle\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="LightStatus.h">
+      <Filter>Header Files\Vehicle\Damage</Filter>
     </ClInclude>
     <ClInclude Include="PanelStatus.h">
-      <Filter>Header Files\Vehicle</Filter>
+      <Filter>Header Files\Vehicle\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="TireStatus.h">
+      <Filter>Header Files\Vehicle\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="VehicleDamageStatus.h">
+      <Filter>Header Files\Vehicle\Damage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

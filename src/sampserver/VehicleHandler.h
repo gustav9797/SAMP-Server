@@ -9,7 +9,6 @@ class VehicleHandler : public Handler
 private:
 	std::map<int, MyVehicle*> *vehicles;
 	std::map<std::string, std::map<int, MyVehicle*>*> *playerVehicles;
-	std::map<int, std::string> *idToLicensePlate;
 public:
 	VehicleHandler(void);
 	~VehicleHandler(void);

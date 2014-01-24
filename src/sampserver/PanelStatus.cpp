@@ -56,9 +56,72 @@ bool PanelStatus::getBit(int panel, int bit)
 	return 0;
 }
 
+void PanelStatus::setBit(int panel, int bit, bool value)
+{
+	if(value)
+	{
+		switch (panel)
+		{
+		case Panels::FrontLeft:
+			frontLeft_ |= (1 << bit-1);
+			break;
+		case Panels::FrontRight:
+			frontRight_ |= (1 << bit-1);
+			break;
+		case Panels::RearLeft:
+			rearLeft_ |= (1 << bit-1);
+			break;
+		case Panels::RearRight:
+			rearRight_ |= (1 << bit-1);
+			break;
+		case Panels::WindShield:
+			windShield_ |= (1 << bit-1);
+			break;
+		case Panels::FrontBumper:
+			frontBumper_ |= (1 << bit-1);
+			break;
+		case Panels::RearBumper:
+			rearBumper_ |= (1 << bit-1);
+			break;
+		}
+	}
+	else
+	{
+		switch (panel)
+		{
+		case Panels::FrontLeft:
+			frontLeft_ &= ~(1 << bit-1);
+			break;
+		case Panels::FrontRight:
+			frontRight_ &= ~(1 << bit-1);
+			break;
+		case Panels::RearLeft:
+			rearLeft_ &= ~(1 << bit-1);
+			break;
+		case Panels::RearRight:
+			rearRight_ &= ~(1 << bit-1);
+			break;
+		case Panels::WindShield:
+			windShield_ &= ~(1 << bit-1);
+			break;
+		case Panels::FrontBumper:
+			frontBumper_ &= ~(1 << bit-1);
+			break;
+		case Panels::RearBumper:
+			rearBumper_ &= ~(1 << bit-1);
+			break;
+		}
+	}
+}
+
 bool PanelStatus::getPanelDamaged(int panel)
 {
 	return getBit(panel, 1);
+}
+
+void PanelStatus::setPanelDamaged(int panel, bool value)
+{
+	setBit(panel, 1, value);
 }
 
 bool PanelStatus::getPanelRemoved(int panel)
@@ -66,11 +129,7 @@ bool PanelStatus::getPanelRemoved(int panel)
 	return getBit(panel, 2);
 }
 
-std::string PanelStatus::ToString()
+void PanelStatus::setPanelRemoved(int panel, bool value)
 {
-	std::stringstream s;
-	s << "DAMAGED: " << "frontbumper:" << getPanelDamaged(Panels::FrontBumper) << " rearbumper:" << getPanelDamaged(Panels::RearBumper);
-	s << "\r\n" << "REMOVED: " << "frontbumper:" << getPanelRemoved(Panels::FrontBumper) << " rearbumper:" << getPanelRemoved(Panels::RearBumper);
-	return s.str();
+	setBit(panel, 2, value);
 }
-
