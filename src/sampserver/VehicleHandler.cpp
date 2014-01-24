@@ -156,6 +156,7 @@ MyVehicle *VehicleHandler::CreateVehicle(int model, int interior, float x, float
 		vehicle->SetNumberPlate(licensePlate.c_str());
 		idToLicensePlate->emplace(vehicle->GetId(), licensePlate);
 		vehicles->emplace(vehicle->GetId(), vehicle);
+
 		if(owner != nullptr)
 		{
 			if(playerVehicles->find(owner->GetName()) == playerVehicles->end())
@@ -164,21 +165,21 @@ MyVehicle *VehicleHandler::CreateVehicle(int model, int interior, float x, float
 			if(playerOwnedVehicles == nullptr)
 				playerOwnedVehicles = new std::map<int, MyVehicle*>();
 			playerOwnedVehicles->emplace(vehicle->GetId(), vehicle);
-
-			sql::PreparedStatement *statement = MySQLFunctions::con->prepareStatement("INSERT INTO vehicles(licenseplate, owner, interior, model, x, y, z, rotation, color1, color2, respawndelay) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			statement->setString(1, licensePlate);
-			statement->setString(2, ownerName);
-			statement->setInt(3, interior);
-			statement->setInt(4, model);
-			statement->setDouble(5, x);
-			statement->setDouble(6, y);
-			statement->setDouble(7, z);
-			statement->setDouble(8, rotation);
-			statement->setInt(9, color1);
-			statement->setInt(10, color2);
-			statement->setInt(11, respawnDelay);
-			MySQLFunctions::ExecutePreparedQuery(statement);
 		}
+
+		sql::PreparedStatement *statement = MySQLFunctions::con->prepareStatement("INSERT INTO vehicles(licenseplate, owner, interior, model, x, y, z, rotation, color1, color2, respawndelay) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		statement->setString(1, licensePlate);
+		statement->setString(2, ownerName);
+		statement->setInt(3, interior);
+		statement->setInt(4, model);
+		statement->setDouble(5, x);
+		statement->setDouble(6, y);
+		statement->setDouble(7, z);
+		statement->setDouble(8, rotation);
+		statement->setInt(9, color1);
+		statement->setInt(10, color2);
+		statement->setInt(11, respawnDelay);
+		MySQLFunctions::ExecutePreparedQuery(statement);
 	}
 	return vehicle;
 }
