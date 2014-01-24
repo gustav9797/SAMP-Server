@@ -1,13 +1,14 @@
 #pragma once
 #include "DamageStatus.h"
+#include <bitset>
 
 class LightStatus : public DamageStatus
 {
 private:
-	char frontLeft_;
-	char rearLeft_;
-	char frontRight_;
-	char rearRight_;
+	std::bitset<1> frontLeft_;
+	std::bitset<1> rearLeft_;
+	std::bitset<1> frontRight_;
+	std::bitset<1> rearRight_;
 	virtual bool getBit(int light, int bit);
 	virtual void setBit(int light, int bit, bool value);
 public:

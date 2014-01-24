@@ -1,6 +1,5 @@
 #include "LightStatus.h"
 
-
 LightStatus::LightStatus(int lights)
 {
 	Decode(lights);
@@ -13,14 +12,14 @@ LightStatus::~LightStatus(void)
 
 int LightStatus::Encode()
 {
-	return frontLeft_ | (rearLeft_ << 1) | (frontRight_ << 2) |  (rearRight_ << 3);
+	return frontLeft_.to_ulong() | (rearLeft_.to_ulong() << 1) | (frontRight_.to_ulong() << 2) |  (rearRight_.to_ulong() << 3);
 }
 
 void LightStatus::Decode(int raw)
 {
 	rearRight_ = raw >> 3;
-	rearLeft_ = raw >> 2;
-	frontRight_ = raw >> 1;
+	frontRight_ = raw >> 2;
+	rearLeft_ = raw >> 1;
 	frontLeft_ = raw;
 }
 
@@ -29,16 +28,16 @@ bool LightStatus::getBit(int light, int bit)
 	switch (light)
 	{
 	case Lights::FrontLeftLight:
-		return (frontLeft_ & (1 << bit-1)) != 0;
+		return frontLeft_.at(bit);
 		break;
 	case Lights::RearLeftLight:
-		return (rearLeft_ & (1 << bit-1)) != 0;
+		return rearLeft_.at(bit);
 		break;
 	case Lights::FrontRightLight:
-		return (frontRight_ & (1 << bit-1)) != 0;
+		return frontRight_.at(bit);
 		break;
 	case Lights::RearRightLight:
-		return (rearRight_ & (1 << bit-1)) != 0;
+		return rearRight_.at(bit);
 		break;
 	}
 	return 0;
@@ -46,50 +45,29 @@ bool LightStatus::getBit(int light, int bit)
 
 void LightStatus::setBit(int light, int bit, bool value)
 {
-	if(value)
+	switch (light)
 	{
-		switch (light)
-		{
-		case Lights::FrontLeftLight:
-			frontLeft_ |= (1 << bit-1);
-			break;
-		case Lights::RearLeftLight:
-			rearLeft_ |= (1 << bit-1);
-			break;
-		case Lights::FrontRightLight:
-			frontRight_ |= (1 << bit-1);
-			break;
-		case Lights::RearRightLight:
-			rearRight_ |= (1 << bit-1);
-			break;
-		}
-	}
-	else
-	{
-		switch (light)
-		{
-		case Lights::FrontLeftLight:
-			frontLeft_ &= ~(1 << bit-1);
-			break;
-		case Lights::RearLeftLight:
-			rearLeft_ &= ~(1 << bit-1);
-			break;
-		case Lights::FrontRightLight:
-			frontRight_ &= ~(1 << bit-1);
-			break;
-		case Lights::RearRightLight:
-			rearRight_ &= ~(1 << bit-1);
-			break;
-		}
+	case Lights::FrontLeftLight:
+		frontLeft_.set(bit, value);
+		break;
+	case Lights::RearLeftLight:
+		rearLeft_.set(bit, value);
+		break;
+	case Lights::FrontRightLight:
+		frontRight_.set(bit, value);
+		break;
+	case Lights::RearRightLight:
+		rearRight_.set(bit, value);
+		break;
 	}
 }
 
 bool LightStatus::getLightDamaged(int light)
 {
-	return getBit(light, 1);
+	return getBit(light, 0);
 }
 
 void LightStatus::setLightDamaged(int light, bool value)
 {
-	setBit(light, 1, value);
+	setBit(light, 0, value);
 }

@@ -12,7 +12,7 @@ TireStatus::~TireStatus(void)
 
 int TireStatus::Encode()
 {
-	return frontLeft_ | (rearLeft_ << 1) | (frontRight_ << 2) |  (rearRight_ << 3);
+	return frontLeft_.to_ulong() | (rearLeft_.to_ulong() << 1) | (frontRight_.to_ulong() << 2) |  (rearRight_.to_ulong() << 3);
 }
 
 void TireStatus::Decode(int raw)
@@ -28,16 +28,16 @@ bool TireStatus::getBit(int tire, int bit)
 	switch (tire)
 	{
 	case Tires::FrontLeftTire:
-		return (frontLeft_ & (1 << bit-1)) != 0;
+		return frontLeft_.at(bit);
 		break;
 	case Tires::RearLeftTire:
-		return (rearLeft_ & (1 << bit-1)) != 0;
+		return rearLeft_.at(bit);
 		break;
 	case Tires::FrontRightTire:
-		return (frontRight_ & (1 << bit-1)) != 0;
+		return frontRight_.at(bit);
 		break;
 	case Tires::RearRightTire:
-		return (rearRight_ & (1 << bit-1)) != 0;
+		return rearRight_.at(bit);
 		break;
 	}
 	return 0;
@@ -45,50 +45,29 @@ bool TireStatus::getBit(int tire, int bit)
 
 void TireStatus::setBit(int tire, int bit, bool value)
 {
-	if(value)
+	switch (tire)
 	{
-		switch (tire)
-		{
-		case Tires::FrontLeftTire:
-			frontLeft_ |= (1 << bit-1);
-			break;
-		case Tires::RearLeftTire:
-			rearLeft_ |= (1 << bit-1);
-			break;
-		case Tires::FrontRightTire:
-			frontRight_ |= (1 << bit-1);
-			break;
-		case Tires::RearRightTire:
-			rearRight_ |= (1 << bit-1);
-			break;
-		}
-	}
-	else
-	{
-		switch (tire)
-		{
-		case Tires::FrontLeftTire:
-			frontLeft_ &= ~(1 << bit-1);
-			break;
-		case Tires::RearLeftTire:
-			rearLeft_ &= ~(1 << bit-1);
-			break;
-		case Tires::FrontRightTire:
-			frontRight_ &= ~(1 << bit-1);
-			break;
-		case Tires::RearRightTire:
-			rearRight_ &= ~(1 << bit-1);
-			break;
-		}
+	case Tires::FrontLeftTire:
+		frontLeft_.set(bit, value);
+		break;
+	case Tires::RearLeftTire:
+		rearLeft_.set(bit, value);
+		break;
+	case Tires::FrontRightTire:
+		frontRight_.set(bit, value);
+		break;
+	case Tires::RearRightTire:
+		rearRight_.set(bit, value);
+		break;
 	}
 }
 
 bool TireStatus::getTireDamaged(int tire)
 {
-	return getBit(tire, 1);
+	return getBit(tire, 0);
 }
 
 void TireStatus::setTireDamaged(int tire, bool value)
 {
-	setBit(tire, 1, value);
+	setBit(tire, 0, value);
 }

@@ -43,6 +43,128 @@ bool VehicleHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<st
 			SaveVehicleData(vehicleId);
 		return true;
 	}
+	else if(cmd == "mv")
+	{
+		if(args.size() == 3)
+		{
+			MyVehicle *currentVehicle = vehicles->at(GetPlayerVehicleID(player->GetId()));
+			if(currentVehicle != nullptr)
+			{
+				VehicleDamageStatus *dmg = currentVehicle->damageStatus_;
+				if(args[0] == "door")
+				{
+#pragma region door functions
+					if(args[1] == "damage")
+					{
+						if(args[2] == "frontleft")
+							dmg->getDoors()->setDoorDamaged(Doors::DriversDoor, !dmg->getDoors()->getDoorDamaged(Doors::DriversDoor));
+						else if(args[2] == "frontright")
+							dmg->getDoors()->setDoorDamaged(Doors::CoDriversDoor, !dmg->getDoors()->getDoorDamaged(Doors::CoDriversDoor));
+						else if(args[2] == "hood")
+							dmg->getDoors()->setDoorDamaged(Doors::Hood, !dmg->getDoors()->getDoorDamaged(Doors::Hood));
+						else if(args[2] == "trunk")
+							dmg->getDoors()->setDoorDamaged(Doors::Trunk, !dmg->getDoors()->getDoorDamaged(Doors::Trunk));
+					}
+					if(args[1] == "remove")
+					{
+						if(args[2] == "frontleft")
+							dmg->getDoors()->setDoorRemoved(Doors::DriversDoor, !dmg->getDoors()->getDoorRemoved(Doors::DriversDoor));
+						else if(args[2] == "frontright")
+							dmg->getDoors()->setDoorRemoved(Doors::CoDriversDoor, !dmg->getDoors()->getDoorRemoved(Doors::CoDriversDoor));
+						else if(args[2] == "hood")
+							dmg->getDoors()->setDoorRemoved(Doors::Hood, !dmg->getDoors()->getDoorRemoved(Doors::Hood));
+						else if(args[2] == "trunk")
+							dmg->getDoors()->setDoorRemoved(Doors::Trunk, !dmg->getDoors()->getDoorRemoved(Doors::Trunk));
+					}
+					else if(args[1] == "open")
+					{
+						if(args[2] == "frontleft")
+							dmg->getDoors()->setDoorOpened(Doors::DriversDoor, !dmg->getDoors()->getDoorOpened(Doors::DriversDoor));
+						else if(args[2] == "frontright")
+							dmg->getDoors()->setDoorOpened(Doors::CoDriversDoor, !dmg->getDoors()->getDoorOpened(Doors::CoDriversDoor));
+						else if(args[2] == "hood")
+							dmg->getDoors()->setDoorOpened(Doors::Hood, !dmg->getDoors()->getDoorOpened(Doors::Hood));
+						else if(args[2] == "trunk")
+							dmg->getDoors()->setDoorOpened(Doors::Trunk, !dmg->getDoors()->getDoorOpened(Doors::Trunk));
+					}
+#pragma endregion
+				}
+				else if(args[0] == "panel")
+				{
+#pragma region panel functions
+					if(args[1] == "damage")
+					{
+						if(args[2] == "frontleft")
+							dmg->getPanels()->setPanelDamaged(Panels::FrontLeft, !dmg->getPanels()->getPanelDamaged(Panels::FrontLeft));
+						else if(args[2] == "frontright")
+							dmg->getPanels()->setPanelDamaged(Panels::FrontRight, !dmg->getPanels()->getPanelDamaged(Panels::FrontRight));
+						else if(args[2] == "rearleft")
+							dmg->getPanels()->setPanelDamaged(Panels::RearLeft, !dmg->getPanels()->getPanelDamaged(Panels::RearLeft));
+						else if(args[2] == "rearright")
+							dmg->getPanels()->setPanelDamaged(Panels::RearRight, !dmg->getPanels()->getPanelDamaged(Panels::RearRight));
+						else if(args[2] == "windshield")
+							dmg->getPanels()->setPanelDamaged(Panels::WindShield, !dmg->getPanels()->getPanelDamaged(Panels::WindShield));
+						else if(args[2] == "frontbumper")
+							dmg->getPanels()->setPanelDamaged(Panels::FrontBumper, !dmg->getPanels()->getPanelDamaged(Panels::FrontBumper));
+						else if(args[2] == "rearbumper")
+							dmg->getPanels()->setPanelDamaged(Panels::RearBumper, !dmg->getPanels()->getPanelDamaged(Panels::RearBumper));
+					}
+					else if(args[2] == "remove")
+					{
+						if(args[2] == "frontleft")
+							dmg->getPanels()->setPanelRemoved(Panels::FrontLeft, !dmg->getPanels()->getPanelRemoved(Panels::FrontLeft));
+						else if(args[2] == "frontright")
+							dmg->getPanels()->setPanelRemoved(Panels::FrontRight, !dmg->getPanels()->getPanelRemoved(Panels::FrontRight));
+						else if(args[2] == "rearleft")
+							dmg->getPanels()->setPanelRemoved(Panels::RearLeft, !dmg->getPanels()->getPanelRemoved(Panels::RearLeft));
+						else if(args[2] == "rearright")
+							dmg->getPanels()->setPanelRemoved(Panels::RearRight, !dmg->getPanels()->getPanelRemoved(Panels::RearRight));
+						else if(args[2] == "windshield")
+							dmg->getPanels()->setPanelRemoved(Panels::WindShield, !dmg->getPanels()->getPanelRemoved(Panels::WindShield));
+						else if(args[2] == "frontbumper")
+							dmg->getPanels()->setPanelRemoved(Panels::FrontBumper, !dmg->getPanels()->getPanelRemoved(Panels::FrontBumper));
+						else if(args[2] == "rearbumper")
+							dmg->getPanels()->setPanelRemoved(Panels::RearBumper, !dmg->getPanels()->getPanelRemoved(Panels::RearBumper));
+					}
+#pragma endregion
+				}
+				else if(args[0] == "light")
+				{
+#pragma region light functions
+					if(args[1] == "damage")
+					{
+						if(args[2] == "frontleft")
+							dmg->getLights()->setLightDamaged(Lights::FrontLeftLight, !dmg->getLights()->getLightDamaged(Lights::FrontLeftLight));
+						else if(args[2] == "frontright")
+							dmg->getLights()->setLightDamaged(Lights::FrontRightLight, !dmg->getLights()->getLightDamaged(Lights::FrontRightLight));
+						else if(args[2] == "rearleft")
+							dmg->getLights()->setLightDamaged(Lights::RearLeftLight, !dmg->getLights()->getLightDamaged(Lights::RearLeftLight));
+						else if(args[2] == "rearright")
+							dmg->getLights()->setLightDamaged(Lights::RearRightLight, !dmg->getLights()->getLightDamaged(Lights::RearRightLight));
+					}
+#pragma endregion
+				}
+				else if(args[0] == "tire")
+				{
+#pragma region tire functions
+					if(args[1] == "damage")
+					{
+						if(args[2] == "frontleft")
+							dmg->getTires()->setTireDamaged(Lights::FrontLeftLight, !dmg->getLights()->getLightDamaged(Lights::FrontLeftLight));
+						else if(args[2] == "frontright")
+							dmg->getTires()->setTireDamaged(Lights::FrontRightLight, !dmg->getLights()->getLightDamaged(Lights::FrontRightLight));
+						else if(args[2] == "rearleft")
+							dmg->getTires()->setTireDamaged(Lights::RearLeftLight, !dmg->getLights()->getLightDamaged(Lights::RearLeftLight));
+						else if(args[2] == "rearright")
+							dmg->getTires()->setTireDamaged(Lights::RearRightLight, !dmg->getLights()->getLightDamaged(Lights::RearRightLight));
+					}
+#pragma endregion
+				}
+				currentVehicle->setDamage(dmg->getHealth(), dmg->getPanelsRaw(), dmg->getDoorsRaw(), dmg->getLightsRaw(), dmg->getTiresRaw());
+			}
+		}
+		return true;
+	}
 	return false;
 }
 
@@ -67,7 +189,7 @@ void VehicleHandler::Load(GameUtility* gameUtility)
 			res->getInt("respawndelay"));
 		std::string licensePlate = res->getString("licenseplate");
 		MyVehicle *vehicle = new MyVehicle(temp, res->getInt("color1"), res->getInt("color2"), res->getInt("respawndelay"), licensePlate);
-		vehicle->UpdateDamageStatus(res->getInt("healthpanels"), res->getInt("healthdoors"), res->getInt("healthlights"), res->getInt("healthtires"));
+		vehicle->setDamage(res->getInt("healthpanels"), res->getInt("healthpanels"), res->getInt("healthdoors"), res->getInt("healthlights"), res->getInt("healthtires"));
 
 		Interior *interior = gameUtility->interiorHandler->getInterior(res->getInt("interior"));
 		if(interior != nullptr)
@@ -148,6 +270,7 @@ MyVehicle *VehicleHandler::CreateVehicle(int model, int interior, float x, float
 		vehicle->SetVirtualWorld(interior_->virtualWorld_);
 		vehicle->LinkToInterior(interior_->sampInteriorId_);
 		vehicle->SetNumberPlate(licensePlate.c_str());
+		SetVehicleParamsEx(vehicle->GetId(), true, true, false, false, false, false, false);
 		vehicles->emplace(vehicle->GetId(), vehicle);
 
 		if(owner != nullptr)
@@ -160,7 +283,7 @@ MyVehicle *VehicleHandler::CreateVehicle(int model, int interior, float x, float
 			playerOwnedVehicles->emplace(vehicle->GetId(), vehicle);
 		}
 
-		sql::PreparedStatement *statement = MySQLFunctions::con->prepareStatement("INSERT INTO vehicles(licenseplate, owner, interior, model, x, y, z, rotation, color1, color2, respawndelay) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		sql::PreparedStatement *statement = MySQLFunctions::con->prepareStatement("INSERT INTO vehicles(licenseplate, owner, interior, model, x, y, z, rotation, color1, color2, respawndelay) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		statement->setString(1, licensePlate);
 		statement->setString(2, ownerName);
 		statement->setInt(3, interior);

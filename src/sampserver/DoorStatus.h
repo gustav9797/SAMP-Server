@@ -1,13 +1,14 @@
 #pragma once
 #include "DamageStatus.h"
+#include <bitset>
 
 class DoorStatus : public DamageStatus
 {
 private:
-	char hood_;
-	char trunk_;
-	char drivers_door_;
-	char co_drivers_door_;
+	std::bitset<8> hood_;
+	std::bitset<8> trunk_;
+	std::bitset<8> drivers_door_;
+	std::bitset<8> co_drivers_door_;
 	virtual bool getBit(int door, int bit);
 	virtual void setBit(int door, int bit, bool value);
 public:
