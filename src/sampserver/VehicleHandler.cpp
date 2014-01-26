@@ -189,7 +189,7 @@ void VehicleHandler::Load(GameUtility* gameUtility)
 			res->getInt("respawndelay"));
 		std::string licensePlate = res->getString("licenseplate");
 		MyVehicle *vehicle = new MyVehicle(temp, res->getInt("color1"), res->getInt("color2"), res->getInt("respawndelay"), licensePlate);
-		vehicle->setDamage(res->getInt("healthpanels"), res->getInt("healthpanels"), res->getInt("healthdoors"), res->getInt("healthlights"), res->getInt("healthtires"));
+		vehicle->setDamage(res->getInt("health"), res->getInt("healthpanels"), res->getInt("healthdoors"), res->getInt("healthlights"), res->getInt("healthtires"));
 
 		Interior *interior = gameUtility->interiorHandler->getInterior(res->getInt("interior"));
 		if(interior != nullptr)

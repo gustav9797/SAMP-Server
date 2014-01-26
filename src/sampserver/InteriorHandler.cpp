@@ -115,7 +115,7 @@ bool InteriorHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<s
 	{
 		int currentPickup = GetPVarInt(player->GetId(), "currentpickup");
 		Pickup *pickup = getPickup(currentPickup);
-		if(pickup != nullptr && IsPlayerInRangeOfPoint(player->GetId(), 1, pickup->x_, pickup->y_, pickup->z_))
+		if(pickup != nullptr && GameUtility::IsPlayerClose(player, *pickup, 1))
 		{
 			DestroyPickup(currentPickup);
 			HandlerDestroyPickup(currentPickup);
@@ -164,7 +164,7 @@ bool InteriorHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<s
 		int currentPickup = GetPVarInt(player->GetId(), "currentpickup");
 		Pickup *temp = getPickup(currentPickup);
 		int state = GetPlayerState(player->GetId());
-		if (temp != nullptr && currentPickup != -1 && (state != 2 && IsPlayerInRangeOfPoint(player->GetId(), 1, temp->x_, temp->y_, temp->z_)) || (state == 2 && IsPlayerInRangeOfPoint(player->GetId(), 7, temp->x_, temp->y_, temp->z_)))
+		if (temp != nullptr && currentPickup != -1 && (state != 2 && GameUtility::IsPlayerClose(player, *temp, 1)) || (state == 2 && GameUtility::IsPlayerClose(player, *temp, 7)))
 		{
 			int destinationInterior = temp->destinationInterior;
 			int destinationPickup = temp->destinationPickup;

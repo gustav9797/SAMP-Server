@@ -56,7 +56,7 @@ bool ObjectHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 	{
 		for(auto it = objects->begin(); it != objects->end(); it++)
 		{
-			if(IsPlayerInRangeOfPoint(player->GetId(), 5, it->second->getX(), it->second->getY(), it->second->getZ()))
+			if(GameUtility::IsPlayerClose(player, it->second->getX(), it->second->getY(), it->second->getZ(), it->second->getInterior(), 5))
 			{
 				std::stringstream s;
 				s << "Object " << it->first << ": Model:" << it->second->getModel() << " DrawDistance:" << it->second->getDrawDistance();
@@ -189,36 +189,31 @@ void ObjectHandler::Update(GameUtility *gameUtility)
 	std::map<int, MyPlayer*> *players = gameUtility->playerHandler->players;
 	for(auto it = players->begin(); it != players->end(); it++)
 	{
-		Player *player = it->second;
+		MyPlayer *player = it->second;
 		for(auto i = objects->begin(); i != objects->end(); i++)
 		{
 			MyObject *object = i->second;
-			if(!object->HasPlayerObject(player->GetId()) && player->GetVirtualWorld() == object->getInterior()->virtualWorld_)
+			if(!object->HasPlayerObject(player->GetId()))
 			{
-				if(GetPVarInt(player->GetId(), "currentinterior") == object->getInterior()->interiorId_)
+				if(GameUtility::IsPlayerClose(player, object->getX(), object->getY(), object->getZ(), object->getInterior(), object->getDrawDistance()))
 				{
-					if(IsPlayerInRangeOfPoint(player->GetId(), object->getDrawDistance(), object->getX(), object->getY(), object->getZ()))
-					{
-						PlayerObject temp = PlayerObject::Create(player->GetId(), object->getModel(), object->getX(), object->getY(), object->getZ(), object->getRotX(), object->getRotY(), object->getRotZ(), object->getDrawDistance());
-						//streamedObjects->emplace(temp.GetObjectId(), temp);
-						object->AddPlayerObject(player->GetId(), temp.GetObjectId());
-						std::stringstream s;
-						s << "Object " << object->getId() << " was streamed in";
-						SendClientMessage(player->GetId(), 0xFFFFFFFF, s.str().c_str());
-					}
+					PlayerObject temp = PlayerObject::Create(player->GetId(), object->getModel(), object->getX(), object->getY(), object->getZ(), object->getRotX(), object->getRotY(), object->getRotZ(), object->getDrawDistance());
+					object->AddPlayerObject(player->GetId(), temp.GetObjectId());
+
+					std::stringstream s;
+					s << "Object " << object->getId() << " was streamed in";
+					SendClientMessage(player->GetId(), 0xFFFFFFFF, s.str().c_str());
 				}
 			}
-			else if(object->HasPlayerObject(player->GetId()) && !IsPlayerObjectMoving(player->GetId(), GetPVarInt(player->GetId(), "selectedobject")))
+			else if(!IsPlayerObjectMoving(player->GetId(), GetPVarInt(player->GetId(), "selectedobject")))
 			{
-				if(GetPVarInt(player->GetId(), "currentinterior") != object->getInterior()->interiorId_ || 
-					!IsPlayerInRangeOfPoint(player->GetId(), object->getDrawDistance(), object->getX(), object->getY(), object->getZ())
-					|| player->GetVirtualWorld() != object->getInterior()->virtualWorld_)
+				if(!GameUtility::IsPlayerClose(player, object->getX(), object->getY(), object->getZ(), object->getInterior(), object->getDrawDistance()))
 				{
+					object->RemovePlayerObject(player->GetId());
 
 					std::stringstream s;
 					s << "Object " << object->getId() << " was streamed out";
 					SendClientMessage(player->GetId(), 0xFFFFFFFF, s.str().c_str());
-					object->RemovePlayerObject(player->GetId());
 				}
 			}
 		}

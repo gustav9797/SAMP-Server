@@ -6,6 +6,10 @@
 #include "VehicleHandler.h"
 #include "ObjectHandler.h"
 
+#include "WorldPositionObject.h"
+#include "Interior.h"
+#include "MyPlayer.h"
+
 GameUtility::GameUtility(void)
 {
 }
@@ -23,4 +27,22 @@ void GameUtility::Load()
 	vehicleHandler->Load(this);
 	playerHandler->Load(this);
 	objectHandler->Load(this);
+}
+
+bool GameUtility::IsPlayerClose(MyPlayer *player, WorldPositionObject object, float range)
+{
+	int playerInterior = GetPVarInt(player->GetId(), "currentinterior");
+	if(playerInterior == object.interiorId_)
+	{
+		return IsPlayerInRangeOfPoint(player->GetId(), range, object.x_, object.y_, object.z_);
+	}
+}
+
+bool GameUtility::IsPlayerClose(MyPlayer *player, float x, float y, float z, Interior *interior, float range)
+{
+	int playerInterior = GetPVarInt(player->GetId(), "currentinterior");
+	if(playerInterior == interior->interiorId_)
+	{
+		return IsPlayerInRangeOfPoint(player->GetId(), range, x, y, z);
+	}
 }
