@@ -17,15 +17,17 @@
 #include "InteriorHandler.h"
 #include "VehicleHandler.h"
 #include "ObjectHandler.h"
+#include "RegisterLoginHandler.h"
+
 #include "WorldPositionObject.h"
 #include "MySQLFunctions.h"
-#include "RegisterLogin.h"
 #include "Weapon.h"
 #include "GameUtility.h"
 #include "Pickup.h"
 
 namespace main
 {
+	using namespace std;
 	static ThisPlugin samptest;
 	PlayerHandler *playerHandler = new PlayerHandler();
 	InteriorHandler *interiorHandler = new InteriorHandler();
@@ -33,10 +35,8 @@ namespace main
 	WeaponHandler *weaponHandler = new WeaponHandler();
 	VehicleHandler *vehicleHandler = new VehicleHandler();
 	ObjectHandler *objectHandler =  new ObjectHandler();
+	RegisterLoginHandler *registerLoginHandler = new RegisterLoginHandler();
 	GameUtility *gameUtility = new GameUtility();
-
-	std::vector<Handler*> *handlers = new std::vector<Handler*>();
-	using namespace std;
 
 	static string ToString(int number)
 	{
@@ -64,16 +64,9 @@ namespace main
 		return tokens.at(0);
 	}
 
-	static void SAMPGDK_CALL KickPublic(int, void * playerid)
+	static void SAMPGDK_CALL CheckForHacks(int, void *) 
 	{
-		Kick((int)playerid);
-	}
-
-	static void SAMPGDK_CALL CheckForHacks(int, void *) {
-		for(auto i : *handlers)
-		{
-			i->CheckForHacks();
-		}
+		gameUtility->CheckForHacks();
 	}
 
 	static void SAMPGDK_CALL Update(int, void *) 
@@ -81,33 +74,38 @@ namespace main
 		objectHandler->Update(gameUtility);
 	}
 
-	PLUGIN_EXPORT bool PLUGIN_CALL OnGameModeInit() {
-		srand(time(0));
+	PLUGIN_EXPORT bool PLUGIN_CALL OnGameModeInit() 
+	{
 		std::cout << "Game is initializing..";
+		srand(time(0));
 		MySQLFunctions::Initialize();
-		handlers->push_back(playerHandler);
-		handlers->push_back(interiorHandler);
-		handlers->push_back(houseHandler);
-		handlers->push_back(vehicleHandler);
-		handlers->push_back(weaponHandler);
-		handlers->push_back(objectHandler);
+		gameUtility->AddHandler(playerHandler);
+		gameUtility->AddHandler(interiorHandler);
+		gameUtility->AddHandler(houseHandler);
+		gameUtility->AddHandler(vehicleHandler);
+		gameUtility->AddHandler(weaponHandler);
+		gameUtility->AddHandler(objectHandler);
+		gameUtility->AddHandler(registerLoginHandler);
 		gameUtility->houseHandler = houseHandler;
 		gameUtility->interiorHandler = interiorHandler;
 		gameUtility->playerHandler = playerHandler;
 		gameUtility->vehicleHandler = vehicleHandler;
 		gameUtility->weaponHandler = weaponHandler;
 		gameUtility->objectHandler = objectHandler;
+		gameUtility->registerLoginHandler = registerLoginHandler;
 		std::cout << "  Initialized" << std::endl;
+
 		std::cout << "MySQL data is loading...";
-		gameUtility->Load();
+		gameUtility->Load(gameUtility);
 		std::cout << "  Loaded" << std::endl;
+
 		SetGameModeText("sampserver v1.0");
 		DisableInteriorEnterExits();
 		EnableStuntBonusForAll(false);
 		SetTimer(2000, true, CheckForHacks, 0);
 		SetTimer(500, true, Update, 0);
 		//SetWorldTime(24);
-		//ServerLog::Printf("--------------------------------------------------\n"); //stopped working?>.<
+		//ServerLog::Printf("--------------------------------------------------\n");
 		//ServerLog::Printf("   The most softcoded gamemode ever was loaded!    \n");
 		//ServerLog::Printf("--------------------------------------------------\n");
 		return true;
@@ -119,7 +117,7 @@ namespace main
 		SetPVarInt(playerid, "currentinterior", -1);
 		SetPVarInt(playerid, "selectedobject", -1);
 		playerHandler->players->emplace(playerid, new MyPlayer(playerid));
-		return registerlogin::OnPlayerConnect(playerid);
+		return registerLoginHandler->OnPlayerConnect(playerid);
 	}
 
 	PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerDisconnect(int playerid, int reason)
@@ -155,12 +153,7 @@ namespace main
 		std::string cmd = GetCommand(cmdtext);
 		cmd.erase(0, 1);
 		vector<string> args = GetParams(cmdtext);
-		for(auto i : *handlers)
-		{
-			if(i->OnCommand(player, cmd, args, gameUtility))
-				return true;
-		}
-		return false;
+		return gameUtility->OnCommand(player, cmd, args, gameUtility);
 	}
 
 	PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerPickUpPickup(int playerid, int pickupid)
@@ -191,7 +184,7 @@ namespace main
 	PLUGIN_EXPORT bool PLUGIN_CALL OnDialogResponse(int playerid, int dialogid, int response, int listitem, char* inputtext)
 	{
 		if (dialogid == DIALOG_LOGIN || dialogid == DIALOG_REGISTER)
-			return registerlogin::OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+			return registerLoginHandler->OnDialogResponse(playerid, dialogid, response, listitem, inputtext, gameUtility);
 		return false;
 	}
 

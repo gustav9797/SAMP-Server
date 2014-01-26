@@ -71,9 +71,6 @@
     <ClCompile Include="WorldPositionObject.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
-    <ClCompile Include="RegisterLogin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -137,6 +134,9 @@
     <ClCompile Include="md5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RegisterLoginHandler.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MySQLFunctions.h">
@@ -150,9 +150,6 @@
     </ClInclude>
     <ClInclude Include="WorldPositionObject.h">
       <Filter>Header Files\World</Filter>
-    </ClInclude>
-    <ClInclude Include="RegisterLogin.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>Header Files</Filter>
@@ -225,6 +222,9 @@
     </ClInclude>
     <ClInclude Include="md5.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RegisterLoginHandler.h">
+      <Filter>Header Files\Handler</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

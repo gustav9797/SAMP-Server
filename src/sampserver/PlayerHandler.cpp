@@ -58,9 +58,18 @@ void PlayerHandler::Load(GameUtility* gameUtility)
 {
 }
 
+bool PlayerHandler::KickPlayer(int playerid, std::string message, GameUtility* gameUtility)
+{
+	std::stringstream s;
+	s << "Kicked from server: " << message;
+	SendClientMessage(playerid, 0xFF0000, s.str().c_str());
+	SetTimer(1, false, KickDelayed, (void*)playerid);
+	return true;
+}
+
 void SAMPGDK_CALL PlayerHandler::KickDelayed(int, void * playerId)
 {
-	Kick((int)playerId); //Fixa kick-fuKTION
+	Kick((int)playerId);
 }
 
 void PlayerHandler::TeleportPlayer(int playerid, WorldPositionObject pos)

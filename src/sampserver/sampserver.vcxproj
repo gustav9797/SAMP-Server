@@ -106,8 +106,8 @@
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="MyPlayer.cpp" />
     <ClCompile Include="PlayerHandler.cpp" />
-    <ClCompile Include="RegisterLogin.cpp" />
     <ClCompile Include="MyVehicle.cpp" />
+    <ClCompile Include="RegisterLoginHandler.cpp" />
     <ClCompile Include="TireStatus.cpp" />
     <ClCompile Include="VehicleDamageStatus.cpp" />
     <ClCompile Include="VehicleHandler.cpp" />
@@ -140,8 +140,8 @@
     <ClInclude Include="MyPlayer.h" />
     <ClInclude Include="PlayerHandler.h" />
     <ClInclude Include="PositionObject.h" />
-    <ClInclude Include="RegisterLogin.h" />
     <ClInclude Include="MyVehicle.h" />
+    <ClInclude Include="RegisterLoginHandler.h" />
     <ClInclude Include="TireStatus.h" />
     <ClInclude Include="VehicleDamageStatus.h" />
     <ClInclude Include="VehicleHandler.h" />

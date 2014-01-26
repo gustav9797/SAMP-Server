@@ -1,4 +1,6 @@
 #include "GameUtility.h"
+
+#include "Handler.h"
 #include "PlayerHandler.h"
 #include "InteriorHandler.h"
 #include "HouseHandler.h"
@@ -12,6 +14,7 @@
 
 GameUtility::GameUtility(void)
 {
+	handlers = new std::vector<Handler*>();
 }
 
 
@@ -19,14 +22,36 @@ GameUtility::~GameUtility(void)
 {
 }
 
-void GameUtility::Load()
+bool GameUtility::OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
 {
-	interiorHandler->Load(this);
-	houseHandler->Load(this);
-	weaponHandler->Load(this);
-	vehicleHandler->Load(this);
-	playerHandler->Load(this);
-	objectHandler->Load(this);
+	bool temp = false;
+	for(auto i : *handlers)
+	{
+		if(i->OnCommand(player, cmd, args, gameUtility))
+			temp = true;
+	}
+	return temp;
+}
+
+void GameUtility::CheckForHacks()
+{
+	for(auto i : *handlers)
+	{
+		i->CheckForHacks();
+	}
+}
+
+void GameUtility::Load(GameUtility* gameUtility)
+{
+	for(auto i : *handlers)
+	{
+		i->Load(gameUtility);
+	}
+}
+
+void GameUtility::AddHandler(Handler *handler)
+{
+	handlers->push_back(handler);
 }
 
 bool GameUtility::IsPlayerClose(MyPlayer *player, WorldPositionObject object, float range)
