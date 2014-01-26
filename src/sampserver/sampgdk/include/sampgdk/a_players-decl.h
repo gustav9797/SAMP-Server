@@ -41,7 +41,7 @@ SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_GetPlayerIp(int playerid,
 SAMPGDK_NATIVE_EXPORT int SAMPGDK_NATIVE_CALL sampgdk_GetPlayerPing(int playerid);
 SAMPGDK_NATIVE_EXPORT int SAMPGDK_NATIVE_CALL sampgdk_GetPlayerWeapon(int playerid);
 SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_GetPlayerKeys(int playerid, int * keys, int * updown, int * leftright);
-SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_GetPlayerName(int playerid, char * name, int size);
+SAMPGDK_NATIVE_EXPORT int SAMPGDK_NATIVE_CALL sampgdk_GetPlayerName(int playerid, char * name, int size);
 SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_SetPlayerTime(int playerid, int hour, int minute);
 SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_GetPlayerTime(int playerid, int * hour, int * minute);
 SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_TogglePlayerClock(int playerid, bool toggle);
@@ -687,7 +687,7 @@ static inline int GetPlayerWeapon(int playerid) {
 static inline bool GetPlayerKeys(int playerid, int * keys, int * updown, int * leftright) {
   return ::sampgdk_GetPlayerKeys(playerid, keys, updown, leftright);
 }
-static inline bool GetPlayerName(int playerid, char * name, int size) {
+static inline int GetPlayerName(int playerid, char * name, int size) {
   return ::sampgdk_GetPlayerName(playerid, name, size);
 }
 static inline bool SetPlayerTime(int playerid, int hour, int minute) {

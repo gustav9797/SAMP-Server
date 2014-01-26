@@ -106,10 +106,10 @@ namespace main
 		EnableStuntBonusForAll(false);
 		SetTimer(2000, true, CheckForHacks, 0);
 		SetTimer(500, true, Update, 0);
-		SetWorldTime(24);
-		ServerLog::Printf("--------------------------------------------------\n");
-		ServerLog::Printf("   The most softcoded gamemode ever was loaded!    \n");
-		ServerLog::Printf("--------------------------------------------------\n");
+		//SetWorldTime(24);
+		//ServerLog::Printf("--------------------------------------------------\n"); //stopped working?>.<
+		//ServerLog::Printf("   The most softcoded gamemode ever was loaded!    \n");
+		//ServerLog::Printf("--------------------------------------------------\n");
 		return true;
 	}
 

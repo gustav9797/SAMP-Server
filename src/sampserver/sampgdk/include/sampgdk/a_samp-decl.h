@@ -45,7 +45,7 @@ SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_BanEx(int playerid, const
 SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_SendRconCommand(const char * command);
 SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_GetServerVarAsString(const char * varname, char * value, int size);
 SAMPGDK_NATIVE_EXPORT int SAMPGDK_NATIVE_CALL sampgdk_GetServerVarAsInt(const char * varname);
-SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_GetServerVarAsbool(const char * varname);
+SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_GetServerVarAsBool(const char * varname);
 SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_GetPlayerNetworkStats(int playerid, char * retstr, int size);
 SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_GetNetworkStats(char * retstr, int size);
 SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_GetPlayerVersion(int playerid, char * version, int len);
@@ -184,7 +184,7 @@ SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_gpci(int playerid, char *
 #define WEAPON_SATCHEL (39)
 #define WEAPON_BOMB (40)
 #define WEAPON_SPRAYCAN (41)
-#define WEAPON_FIREEXTINGUISHR (42)
+#define WEAPON_FIREEXTINGUISHER (42)
 #define WEAPON_CAMERA (43)
 #define WEAPON_PARACHUTE (46)
 #define WEAPON_VEHICLE (49)
@@ -219,6 +219,11 @@ SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_gpci(int playerid, char *
 #define EDIT_RESPONSE_UPDATE (2)
 #define SELECT_OBJECT_GLOBAL_OBJECT (1)
 #define SELECT_OBJECT_PLAYER_OBJECT (2)
+#define BULLET_HIT_TYPE_NONE (0)
+#define BULLET_HIT_TYPE_PLAYER (1)
+#define BULLET_HIT_TYPE_VEHICLE (2)
+#define BULLET_HIT_TYPE_OBJECT (3)
+#define BULLET_HIT_TYPE_PLAYER_OBJECT (4)
 
 #undef  SendClientMessage
 #define SendClientMessage sampgdk_SendClientMessage
@@ -314,8 +319,8 @@ SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_gpci(int playerid, char *
 #define GetServerVarAsString sampgdk_GetServerVarAsString
 #undef  GetServerVarAsInt
 #define GetServerVarAsInt sampgdk_GetServerVarAsInt
-#undef  GetServerVarAsbool
-#define GetServerVarAsbool sampgdk_GetServerVarAsbool
+#undef  GetServerVarAsBool
+#define GetServerVarAsBool sampgdk_GetServerVarAsBool
 #undef  GetPlayerNetworkStats
 #define GetPlayerNetworkStats sampgdk_GetPlayerNetworkStats
 #undef  GetNetworkStats
@@ -515,7 +520,7 @@ const int WEAPON_MINIGUN = 38;
 const int WEAPON_SATCHEL = 39;
 const int WEAPON_BOMB = 40;
 const int WEAPON_SPRAYCAN = 41;
-const int WEAPON_FIREEXTINGUISHR = 42;
+const int WEAPON_FIREEXTINGUISHER = 42;
 const int WEAPON_CAMERA = 43;
 const int WEAPON_PARACHUTE = 46;
 const int WEAPON_VEHICLE = 49;
@@ -550,6 +555,11 @@ const int EDIT_RESPONSE_FINAL = 1;
 const int EDIT_RESPONSE_UPDATE = 2;
 const int SELECT_OBJECT_GLOBAL_OBJECT = 1;
 const int SELECT_OBJECT_PLAYER_OBJECT = 2;
+const int BULLET_HIT_TYPE_NONE = 0;
+const int BULLET_HIT_TYPE_PLAYER = 1;
+const int BULLET_HIT_TYPE_VEHICLE = 2;
+const int BULLET_HIT_TYPE_OBJECT = 3;
+const int BULLET_HIT_TYPE_PLAYER_OBJECT = 4;
 
 static inline bool SendClientMessage(int playerid, int color, const char * message) {
   return ::sampgdk_SendClientMessage(playerid, color, message);
@@ -692,8 +702,8 @@ static inline bool GetServerVarAsString(const char * varname, char * value, int 
 static inline int GetServerVarAsInt(const char * varname) {
   return ::sampgdk_GetServerVarAsInt(varname);
 }
-static inline bool GetServerVarAsbool(const char * varname) {
-  return ::sampgdk_GetServerVarAsbool(varname);
+static inline bool GetServerVarAsBool(const char * varname) {
+  return ::sampgdk_GetServerVarAsBool(varname);
 }
 static inline bool GetPlayerNetworkStats(int playerid, char * retstr, int size) {
   return ::sampgdk_GetPlayerNetworkStats(playerid, retstr, size);
@@ -917,8 +927,8 @@ SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerStreamOut(int playeri
 SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnVehicleStreamIn(int vehicleid, int forplayerid);
 SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnVehicleStreamOut(int vehicleid, int forplayerid);
 SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnDialogResponse(int playerid, int dialogid, int response, int listitem, const char * inputtext);
-SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerTakeDamage(int playerid, int issuerid, float amount, int weaponid);
-SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerGiveDamage(int playerid, int damagedid, float amount, int weaponid);
+SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerTakeDamage(int playerid, int issuerid, float amount, int weaponid, int bodypart);
+SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerGiveDamage(int playerid, int damagedid, float amount, int weaponid, int bodypart);
 SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerClickMap(int playerid, float fX, float fY, float fZ);
 SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerClickTextDraw(int playerid, int clickedid);
 SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerClickPlayerTextDraw(int playerid, int playertextid);
@@ -926,3 +936,4 @@ SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerClickPlayer(int playe
 SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerEditObject(int playerid, bool playerobject, int objectid, int response, float fX, float fY, float fZ, float fRotX, float fRotY, float fRotZ);
 SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerEditAttachedObject(int playerid, int response, int index, int modelid, int boneid, float fOffsetX, float fOffsetY, float fOffsetZ, float fRotX, float fRotY, float fRotZ, float fScaleX, float fScaleY, float fScaleZ);
 SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerSelectObject(int playerid, int type, int objectid, int modelid, float fX, float fY, float fZ);
+SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerWeaponShot(int playerid, int weaponid, int hittype, int hitid, float fX, float fY, float fZ);

@@ -17,16 +17,16 @@
 #define SAMPGDK_VERSION_H
 
 #define SAMPGDK_VERSION_MAJOR  3
-#define SAMPGDK_VERSION_MINOR  4
-#define SAMPGDK_VERSION_PATCH  1
+#define SAMPGDK_VERSION_MINOR  7
+#define SAMPGDK_VERSION_PATCH  0
 #define SAMPGDK_VERSION_TWEAK  0
 #define SAMPGDK_VERSION_ID     ((SAMPGDK_VERSION_MAJOR << 24) |\
                                 (SAMPGDK_VERSION_MINOR << 16) |\
                                 (SAMPGDK_VERSION_PATCH << 8) |\
                                 (SAMPGDK_VERSION_TWEAK))
-#define SAMPGDK_VERSION_STRING "3.4.1"
+#define SAMPGDK_VERSION_STRING "3.7"
 
-SAMPGDK_EXPORT int SAMPGDK_CALL sampgdk_version_id();
-SAMPGDK_EXPORT const char *SAMPGDK_CALL sampgdk_version_string();
+SAMPGDK_EXPORT int SAMPGDK_CALL sampgdk_version_id(void);
+SAMPGDK_EXPORT const char *SAMPGDK_CALL sampgdk_version_string(void);
 
 #endif /* !SAMPGDK_VERSION_H */

@@ -15,11 +15,15 @@
 #ifndef SAMPGDK_CORE_HPP
 #define SAMPGDK_CORE_HPP
 
-#include <cassert>
 #include <cstdarg>
 
 #include <sampgdk/compatibility.h>
 #include <sampgdk/core.h>
+
+#ifdef _MSC_VER
+  #pragma warning(push)
+  #pragma warning(disable:4355) // 'this' : used in base member initializer list
+#endif
 
 SAMPGDK_BEGIN_NAMESPACE
 
@@ -59,13 +63,15 @@ class ServerLog {
     VPrintf(format, args);
     va_end(args);
   }
-
   static void VPrintf(const char *format, std::va_list args) {
-    assert(sampgdk_logprintf != 0 && "sampgdk is not initialized");
     sampgdk_vlogprintf(format, args);
   }
 };
 
 SAMPGDK_END_NAMESPACE
+
+#ifdef _MSC_VER
+  #pragma warning(pop)
+#endif
 
 #endif // !SAMPGDK_CORE_HPP

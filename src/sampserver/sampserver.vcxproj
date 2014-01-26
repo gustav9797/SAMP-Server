@@ -62,7 +62,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sampgdk3.lib;mysqlcppconn.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sampgdk4d.lib;mysqlcppconn.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>Main.def</ModuleDefinitionFile>
       <AdditionalLibraryDirectories>$(ProjectDir)\sampgdk\lib</AdditionalLibraryDirectories>
     </Link>

@@ -22,6 +22,12 @@
 #include <sampgdk/bool.h>
 #include <sampgdk/export.h>
 
+typedef void (SAMPGDK_CALL *sampgdk_logprintf_t)(const char *format, ...);
+typedef void (SAMPGDK_CALL *sampgdk_vlogprintf_t)(const char *format, va_list args);
+
+SAMPGDK_EXPORT sampgdk_logprintf_t sampgdk_logprintf;
+SAMPGDK_EXPORT sampgdk_vlogprintf_t sampgdk_vlogprintf;
+
 /* Deprecated. Use sampgdk_init() or sampgdk_init_plugin() instead. */
 SAMPGDK_DEPRECATED(SAMPGDK_EXPORT void SAMPGDK_CALL sampgdk_initialize(void **data));
 /* Deprecated. Use sampgdk_cleanup() or sampgdk_cleanup_plugin() instead. */
@@ -45,14 +51,20 @@ SAMPGDK_EXPORT void *SAMPGDK_CALL sampgdk_get_plugin_symbol(void *plugin, const 
 SAMPGDK_EXPORT void SAMPGDK_CALL sampgdk_process_timers(void);
 SAMPGDK_EXPORT void SAMPGDK_CALL sampgdk_process_plugin_timers(void *plugin);
 
-SAMPGDK_EXPORT const AMX_NATIVE_INFO *SAMPGDK_CALL sampgdk_get_natives();
-SAMPGDK_EXPORT int SAMPGDK_CALL sampgdk_num_natives(void);
+SAMPGDK_EXPORT const AMX_NATIVE_INFO *SAMPGDK_CALL sampgdk_get_natives(void);
+SAMPGDK_EXPORT int SAMPGDK_CALL sampgdk_get_num_natives(void);
 
-typedef void (*sampgdk_logprintf_t)(const char *format, ...);
-SAMPGDK_EXPORT sampgdk_logprintf_t sampgdk_logprintf;
+/* Deprecated. Use sampgdk_get_num_natives() instead. */
+SAMPGDK_DEPRECATED(SAMPGDK_EXPORT int SAMPGDK_CALL sampgdk_num_natives(void));
 
-typedef void (*sampgdk_vlogprintf_t)(const char *format, va_list args);
-SAMPGDK_EXPORT sampgdk_vlogprintf_t sampgdk_vlogprintf;
+SAMPGDK_EXPORT AMX_NATIVE SAMPGDK_CALL sampgdk_find_native(const char *name);
+SAMPGDK_EXPORT cell SAMPGDK_CALL sampgdk_call_native(AMX_NATIVE native, cell *params);
+SAMPGDK_EXPORT cell SAMPGDK_CALL sampgdk_invoke_native(AMX_NATIVE native, const char *format, ...);
+
+typedef bool (SAMPGDK_CALL *sampgdk_public_hook)(AMX *amx, const char *name, cell *params);
+
+SAMPGDK_EXPORT sampgdk_public_hook SAMPGDK_CALL sampgdk_get_public_hook(void);
+SAMPGDK_EXPORT void SAMPGDK_CALL sampgdk_set_public_hook(sampgdk_public_hook hook);
 
 #ifdef __cplusplus
   #include <sampgdk/core.hpp>

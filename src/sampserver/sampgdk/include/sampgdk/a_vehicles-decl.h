@@ -1,3 +1,4 @@
+SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_IsValidVehicle(int vehicleid);
 SAMPGDK_NATIVE_EXPORT float SAMPGDK_NATIVE_CALL sampgdk_GetVehicleDistanceFromPoint(int vehicleid, float x, float y, float z);
 SAMPGDK_NATIVE_EXPORT int SAMPGDK_NATIVE_CALL sampgdk_CreateVehicle(int vehicletype, float x, float y, float z, float rotation, int color1, int color2, int respawn_delay);
 SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_DestroyVehicle(int vehicleid);
@@ -66,6 +67,8 @@ SAMPGDK_NATIVE_EXPORT bool SAMPGDK_NATIVE_CALL sampgdk_GetVehicleModelInfo(int m
 #define VEHICLE_MODEL_INFO_FRONT_BUMPER_Z (8)
 #define VEHICLE_MODEL_INFO_REAR_BUMPER_Z (9)
 
+#undef  IsValidVehicle
+#define IsValidVehicle sampgdk_IsValidVehicle
 #undef  GetVehicleDistanceFromPoint
 #define GetVehicleDistanceFromPoint sampgdk_GetVehicleDistanceFromPoint
 #undef  CreateVehicle
@@ -174,6 +177,9 @@ const int VEHICLE_MODEL_INFO_WHEELSMID = 7;
 const int VEHICLE_MODEL_INFO_FRONT_BUMPER_Z = 8;
 const int VEHICLE_MODEL_INFO_REAR_BUMPER_Z = 9;
 
+static inline bool IsValidVehicle(int vehicleid) {
+  return ::sampgdk_IsValidVehicle(vehicleid);
+}
 static inline float GetVehicleDistanceFromPoint(int vehicleid, float x, float y, float z) {
   return ::sampgdk_GetVehicleDistanceFromPoint(vehicleid, x, y, z);
 }
