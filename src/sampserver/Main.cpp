@@ -195,7 +195,7 @@ namespace main
 		return false;
 	}
 
-	PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerTakeDamage(int playerid, int issuerid, float damage, int weaponid)
+	PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerTakeDamage(int playerid, int issuerid, float amount, int weaponid, int bodypart)
 	{
 		if(issuerid != INVALID_PLAYER_ID) // If not self-inflicted
 		{
