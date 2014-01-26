@@ -55,7 +55,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SAMPSERVER_EXPORTS;HAVE_INT8_T=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SAMPSERVER_EXPORTS;_CRT_SECURE_NO_WARNINGS;HAVE_INT8_T=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\boost_1_54_0;$(ProjectDir)\mysql\driver;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -97,6 +97,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="LightStatus.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="md5.cpp" />
     <ClCompile Include="MyObject.cpp" />
     <ClCompile Include="MySQLFunctions.cpp" />
     <ClCompile Include="NormalItem.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="LightStatus.h" />
+    <ClInclude Include="md5.h" />
     <ClInclude Include="MyObject.h" />
     <ClInclude Include="MySQLFunctions.h" />
     <ClInclude Include="NormalItem.h" />

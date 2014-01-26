@@ -134,6 +134,9 @@
     <ClCompile Include="VehicleDamageStatus.cpp">
       <Filter>Source Files\Vehicle\Damage</Filter>
     </ClCompile>
+    <ClCompile Include="md5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MySQLFunctions.h">
@@ -219,6 +222,9 @@
     </ClInclude>
     <ClInclude Include="VehicleDamageStatus.h">
       <Filter>Header Files\Vehicle\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="md5.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

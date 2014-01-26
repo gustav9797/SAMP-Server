@@ -1,4 +1,5 @@
 #include "RegisterLogin.h"
+#include "md5.h"
 
 namespace registerlogin
 {
@@ -41,7 +42,7 @@ namespace registerlogin
 
 					sql::PreparedStatement *stmt = MySQLFunctions::con->prepareStatement("INSERT INTO players(mainaccountname, password) VALUES(?, ?)");
 					stmt->setString(1, playerName);
-					stmt->setString(2, inputtext);
+					stmt->setString(2, md5(inputtext));
 					MySQLFunctions::ExecutePreparedQuery(stmt);
 
 					ShowPlayerDialog(playerid, DIALOG_SUCCESS_1, DIALOG_STYLE_MSGBOX, ""COL_WHITE"Register", ""COL_GREEN"Registered! You have been logged in automatically.", "Ok", "");
@@ -60,7 +61,7 @@ namespace registerlogin
 					if (res != nullptr && res->rowsCount() == 1)
 					{
 						std::string password = res->getString("password");
-						if (inputtext == password)
+						if (md5(inputtext) == password)
 						{
 							sql::PreparedStatement *stmt = MySQLFunctions::con->prepareStatement("SELECT * FROM players WHERE mainaccountname = ? LIMIT 1");
 							stmt->setString(1, playerName);
