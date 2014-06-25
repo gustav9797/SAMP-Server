@@ -40,6 +40,7 @@ bool RegisterLoginHandler::AccountExists(std::string name)
 
 bool RegisterLoginHandler::OnPlayerConnect(int playerid)
 {
+	return true;
 	char *playerName = new char[32];
 	GetPlayerName(playerid, playerName, 32);
 	if (AccountExists(playerName))

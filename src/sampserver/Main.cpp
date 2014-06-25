@@ -2,14 +2,13 @@
 #include <cstring>
 #include <iostream>
 #include <sstream>
-#include<cstdlib>
-#include<ctime>
+#include <cstdlib>
+#include <ctime>
 
-#include <sampgdk\a_players.h>
-#include <sampgdk\a_vehicles.h>
-#include <sampgdk\a_samp.h>
-#include <sampgdk\core.h>
-#include <sampgdk\plugin.h>
+#include <sampgdk/a_players.h>
+#include <sampgdk/a_samp.h>
+#include <sampgdk/core.h>
+#include <sampgdk/sdk.h>
 
 #include "HouseHandler.h"
 #include "PlayerHandler.h"
@@ -25,10 +24,11 @@
 #include "GameUtility.h"
 #include "Pickup.h"
 
+using sampgdk::logprintf;
+
 namespace main
 {
 	using namespace std;
-	static ThisPlugin samptest;
 	PlayerHandler *playerHandler = new PlayerHandler();
 	InteriorHandler *interiorHandler = new InteriorHandler();
 	HouseHandler *houseHandler = new HouseHandler();
@@ -262,20 +262,24 @@ namespace main
 		return vehicleHandler->UpdateVehicleDamageStatus(vehicleid, playerid);
 	}
 
-	PLUGIN_EXPORT unsigned int PLUGIN_CALL Supports() {
-		return SUPPORTS_VERSION | SUPPORTS_PROCESS_TICK;
+	PLUGIN_EXPORT unsigned int PLUGIN_CALL Supports() 
+	{
+		return sampgdk::Supports() | SUPPORTS_PROCESS_TICK;
 	}
 
-	PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData) {
-		return samptest.Load(ppData) >= 0;
+	PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData) 
+	{
+		return sampgdk::Load(ppData);
 	}
 
-	PLUGIN_EXPORT void PLUGIN_CALL Unload() {
-		samptest.Unload();
+	PLUGIN_EXPORT void PLUGIN_CALL Unload() 
+	{
+		sampgdk::Unload();
 	}
 
-	PLUGIN_EXPORT void PLUGIN_CALL ProcessTick() {
-		samptest.ProcessTimers();
+	PLUGIN_EXPORT void PLUGIN_CALL ProcessTick() 
+	{
+		sampgdk::ProcessTick();
 	}
 }
 

@@ -3,7 +3,6 @@
 #include <map>
 #include "MyPlayer.h"
 #include "Handler.h"
-#include <sampgdk\a_samp.h>
 class WorldPositionObject;
 class PlayerHandler : public Handler
 {

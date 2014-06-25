@@ -2,12 +2,11 @@
 #include "Weapon.h"
 #include "WeaponHandler.h"
 
-
 MyPlayer::MyPlayer(int id) : Player(id)
 {
 	money_ = 0;
 	weapons = new std::map<int, Weapon*>();
-	vehicles = new std::map<int, MyVehicle*>();
+	vehicles = new std::map<int, Vehicle*>();
 }
 
 
@@ -18,11 +17,13 @@ MyPlayer::~MyPlayer()
 
 void MyPlayer::GiveWeapon(Weapon *weapon)
 {
-	if(weapon != nullptr)
+	if (weapon != nullptr)
 	{
 		Weapon *currentWeapon = getWeapon(weapon->slot_);
-		if(currentWeapon == nullptr || currentWeapon->id_ != weapon->id_)
+		if (currentWeapon == nullptr)
 			weapons->emplace(weapon->slot_, weapon);
+		else if (currentWeapon->id_ != weapon->id_)
+			(*weapons)[weapon->slot_] = weapon;
 		else
 			currentWeapon->ammo_ += weapon->ammo_;
 		GivePlayerWeapon(GetId(), weapon->id_, weapon->ammo_);
@@ -41,12 +42,12 @@ void MyPlayer::RemoveWeapon(int weaponid, WeaponHandler* weaponHandler)
 	Weapon *avaliableWeapon = weaponHandler->getWeapon(weaponid);
 	if (weapons->find(avaliableWeapon->slot_) != weapons->end())
 	{
-		if(weapons->at(avaliableWeapon->slot_) != nullptr && weapons->at(avaliableWeapon->slot_)->id_ == weaponid)
+		if (weapons->at(avaliableWeapon->slot_) != nullptr && weapons->at(avaliableWeapon->slot_)->id_ == weaponid)
 		{
 			delete weapons->at(avaliableWeapon->slot_);
 			weapons->erase(avaliableWeapon->slot_);
 			ResetPlayerWeapons(GetId());
-			for(auto it = weapons->begin(); it != weapons->end(); it++)
+			for (auto it = weapons->begin(); it != weapons->end(); it++)
 			{
 				GivePlayerWeapon(GetId(), it->second->id_, it->second->ammo_);
 			}

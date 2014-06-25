@@ -12,15 +12,15 @@ TireStatus::~TireStatus(void)
 
 int TireStatus::Encode()
 {
-	return frontLeft_.to_ulong() | (rearLeft_.to_ulong() << 1) | (frontRight_.to_ulong() << 2) |  (rearRight_.to_ulong() << 3);
+	return rearRight_.to_ulong() | (frontRight_.to_ulong() << 1) | (rearLeft_.to_ulong() << 2) | (frontLeft_.to_ulong() << 3);
 }
 
 void TireStatus::Decode(int raw)
 {
-	rearRight_ = raw >> 3;
+	frontLeft_ = raw >> 3;
 	rearLeft_ = raw >> 2;
 	frontRight_ = raw >> 1;
-	frontLeft_ = raw;
+	rearRight_ = raw;
 }
 
 bool TireStatus::getBit(int tire, int bit)

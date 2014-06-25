@@ -1,4 +1,3 @@
-LIBRARY Main
 EXPORTS
 	Supports
 	Load

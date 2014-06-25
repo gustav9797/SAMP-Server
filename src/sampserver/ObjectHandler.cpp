@@ -8,6 +8,7 @@
 #include "MyPlayer.h"
 #include "PlayerHandler.h"
 #include "MySQLFunctions.h"
+#include "PlayerObject.h"
 
 ObjectHandler::ObjectHandler(void)
 {

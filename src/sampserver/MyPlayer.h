@@ -1,16 +1,16 @@
 #pragma once
 #include <iostream>
 #include <map>
-#include <sampgdk/a_players.h>
+#include "Player.h"
 class WeaponHandler;
 class Weapon;
-class MyVehicle;
+class Vehicle;
 class MyPlayer : public Player
 {
 private:
 	int money_;
 	std::map<int, Weapon*> *weapons;
-	std::map<int, MyVehicle*> *vehicles;
+	std::map<int, Vehicle*> *vehicles;
 	//int GetFreeWeaponSlot();
 	int getFreeVehicleSlot();
 public:

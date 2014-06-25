@@ -37,6 +37,8 @@ bool WeaponHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 			{
 				player->GiveWeapon(new Weapon(*avaliable));
 			}
+			else
+				SendClientMessage(player->GetId(), 0xFFFFFFFF, "Weapon does not exist.");
 		}
 		else
 			SendClientMessage(player->GetId(), 0xFFFFFFFF, "Usage: /wgive <weaponID>");

@@ -222,7 +222,7 @@ Interior* InteriorHandler::getInterior(int interiorId)
 	if (interiors->find(interiorId) != interiors->end())
 		return interiors->at(interiorId);
 	else
-		ServerLog::Printf("Tried to get interior which did not exist.");
+		sampgdk::logprintf("Tried to get interior which did not exist.");
 	return nullptr;
 }
 
@@ -231,7 +231,7 @@ Pickup* InteriorHandler::getPickup(int pickupId)
 	if(pickups->find(pickupId) != pickups->end())
 		return pickups->at(pickupId);
 	else
-		ServerLog::Printf("Tried to get pickup which did not exist.");
+		sampgdk::logprintf("Tried to get pickup which did not exist.");
 	return nullptr;
 }
 
@@ -240,7 +240,7 @@ Interior* InteriorHandler::getDefaultInterior(int interiorId)
 	if (defaultInteriors->find(interiorId) != defaultInteriors->end())
 		return defaultInteriors->at(interiorId);
 	else
-		ServerLog::Printf("Tried to get default interior which did not exist.");
+		sampgdk::logprintf("Tried to get default interior which did not exist.");
 	return nullptr;
 }
 

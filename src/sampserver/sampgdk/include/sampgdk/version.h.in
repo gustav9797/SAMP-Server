@@ -26,28 +26,28 @@
 /**
  * \brief Major version.
  */
-#define SAMPGDK_VERSION_MAJOR 4
+#define SAMPGDK_VERSION_MAJOR @SAMPGDK_VERSION_MAJOR@
 
 /**
  * \brief Minor version.
  */
-#define SAMPGDK_VERSION_MINOR 0
+#define SAMPGDK_VERSION_MINOR @SAMPGDK_VERSION_MINOR@
 
 /**
  * \brief Patch version.
  */
-#define SAMPGDK_VERSION_PATCH 0
+#define SAMPGDK_VERSION_PATCH @SAMPGDK_VERSION_PATCH@
 
 /**
  * \brief Library version in the form of \c 0xAABBCC00 where \c AA, \c BB
  * and \c CC are the major, minor and patch numbers.
  */
-#define SAMPGDK_VERSION_ID 67108864
+#define SAMPGDK_VERSION_ID @SAMPGDK_VERSION_ID@
 
 /**
  * \brief Library version string.
  */
-#define SAMPGDK_VERSION_STRING "4.0.0-beta"
+#define SAMPGDK_VERSION_STRING "@SAMPGDK_VERSION@"
 
 /**
  * \brief Gets library version number.

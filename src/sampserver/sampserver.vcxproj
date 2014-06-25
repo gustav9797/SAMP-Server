@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -41,10 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)\sampgdk\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\sampgdk\lib;$(ProjectDir)\mysql\driver\Debug;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)\plugins\</OutDir>
-    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -55,16 +52,16 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SAMPSERVER_EXPORTS;_CRT_SECURE_NO_WARNINGS;HAVE_INT8_T=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;sampserver_EXPORTS;_CRT_SECURE_NO_WARNINGS;HAVE_INT8_T=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\boost_1_54_0;$(ProjectDir)\mysql\driver;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_55_0;$(ProjectDir)\mysql\driver;C:/Users/Gustav/Documents/GitHub/samp-plugin-sdk;C:/Users/Gustav/Documents/GitHub/samp-plugin-sdk/amx;C:/Users/Gustav/Documents/GitHub/sampgdk/include;C:/Users/Gustav/Documents/GitHub/sampgdk/cmake-out-new/include;C:/Users/Gustav/Documents/GitHub/sampgdk/cmake-out-new/src;C:/Users/Gustav/Documents/GitHub/sampgdk/lib/subhook;C:\Users\Gustav\Documents\GitHub\sampserver\src\sampserver\mysql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sampgdk4d.lib;mysqlcppconn.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sampgdk4.lib;mysqlcppconn.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>Main.def</ModuleDefinitionFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)\sampgdk\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Gustav\Documents\GitHub\sampserver\src\sampserver\sampgdk\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -106,7 +103,7 @@
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="MyPlayer.cpp" />
     <ClCompile Include="PlayerHandler.cpp" />
-    <ClCompile Include="MyVehicle.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="RegisterLoginHandler.cpp" />
     <ClCompile Include="TireStatus.cpp" />
     <ClCompile Include="VehicleDamageStatus.cpp" />
@@ -116,13 +113,12 @@
     <ClCompile Include="WorldPositionObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Main.def" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="DamageStatus.h" />
     <ClInclude Include="DoorStatus.h" />
     <ClInclude Include="GameUtility.h" />
     <ClInclude Include="Handler.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="House.h" />
     <ClInclude Include="HouseHandler.h" />
     <ClInclude Include="Interior.h" />
@@ -139,8 +135,9 @@
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="MyPlayer.h" />
     <ClInclude Include="PlayerHandler.h" />
+    <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PositionObject.h" />
-    <ClInclude Include="MyVehicle.h" />
+    <ClInclude Include="Vehicle.h" />
     <ClInclude Include="RegisterLoginHandler.h" />
     <ClInclude Include="TireStatus.h" />
     <ClInclude Include="VehicleDamageStatus.h" />
@@ -148,6 +145,9 @@
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponHandler.h" />
     <ClInclude Include="WorldPositionObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Main.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
