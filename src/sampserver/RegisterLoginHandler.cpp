@@ -17,7 +17,7 @@ RegisterLoginHandler::~RegisterLoginHandler(void)
 {
 }
 
-bool RegisterLoginHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
+bool RegisterLoginHandler::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
 {
 	return false;
 }

@@ -116,7 +116,7 @@ namespace main
 		SetSpawnInfo(playerid, NO_TEAM, 0, -72.4094f, -1123.83f, 1.07812f, 269.1425f, 0, 0, 0, 0, 0, 0);
 		SetPVarInt(playerid, "currentinterior", -1);
 		SetPVarInt(playerid, "selectedobject", -1);
-		playerHandler->players->emplace(playerid, new MyPlayer(playerid));
+		playerHandler->players->emplace(playerid, new Player(playerid));
 		return registerLoginHandler->OnPlayerConnect(playerid);
 	}
 
@@ -149,7 +149,7 @@ namespace main
 	}
 
 	PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerCommandText(int playerid, const char *cmdtext) {
-		MyPlayer *player = playerHandler->players->at(playerid);
+		Player *player = playerHandler->players->at(playerid);
 		std::string cmd = GetCommand(cmdtext);
 		cmd.erase(0, 1);
 		vector<string> args = GetParams(cmdtext);
@@ -192,8 +192,8 @@ namespace main
 	{
 		if(issuerid != INVALID_PLAYER_ID) // If not self-inflicted
 		{
-			MyPlayer *victim = playerHandler->players->at(playerid);
-			MyPlayer *issuer = playerHandler->players->at(issuerid);
+			Player *victim = playerHandler->players->at(playerid);
+			Player *issuer = playerHandler->players->at(issuerid);
 			if(issuer != nullptr)
 			{
 				if(victim != nullptr)
@@ -215,10 +215,10 @@ namespace main
 		{
 			if(oldkeys == KEY_FIRE || oldkeys == KEY_HANDBRAKE || newkeys == KEY_FIRE || newkeys == KEY_HANDBRAKE)
 			{
-				MyPlayer *shooter = playerHandler->players->at(playerid);
+				Player *shooter = playerHandler->players->at(playerid);
 				if(shooter != nullptr)
 				{
-					int weaponId = GetPlayerWeapon(shooter->GetId());
+					int weaponId = GetPlayerWeapon(shooter->getId());
 					Weapon *avaliable = weaponHandler->getWeapon(weaponId);
 					if(avaliable != nullptr && avaliable->ammo_ != -1)
 					{
@@ -227,7 +227,7 @@ namespace main
 						{
 							int *unused = new int();
 							int *ammo = new int();
-							GetPlayerWeaponData(shooter->GetId(), avaliable->slot_, unused, ammo);
+							GetPlayerWeaponData(shooter->getId(), avaliable->slot_, unused, ammo);
 							if(ammo != nullptr)
 							{
 								currentWeapon->ammo_ = *ammo;

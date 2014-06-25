@@ -1,6 +1,6 @@
 #include "HouseHandler.h"
 #include "Interior.h"
-#include "MyPlayer.h"
+#include "Player.h"
 
 HouseHandler::HouseHandler(void)
 {
@@ -12,7 +12,7 @@ HouseHandler::~HouseHandler(void)
 {
 }
 
-bool HouseHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
+bool HouseHandler::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
 {
 	if (cmd == "createhouse")
 	{
@@ -20,8 +20,8 @@ bool HouseHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std:
 		{
 			int destinationId = atoi(args[0].c_str());
 			float *x = new float(), *y = new float(), *z = new float();
-			GetPlayerPos(player->GetId(), x, y, z);
-			CreateHouse(destinationId, *x, *y, *z, gameUtility->interiorHandler->getInterior(GetPVarInt(player->GetId(), "currentinterior")), gameUtility->interiorHandler);
+			GetPlayerPos(player->getId(), x, y, z);
+			CreateHouse(destinationId, *x, *y, *z, gameUtility->interiorHandler->getInterior(GetPVarInt(player->getId(), "currentinterior")), gameUtility->interiorHandler);
 			delete x, y, z;			
 		}
 		return true;

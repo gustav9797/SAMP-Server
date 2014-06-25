@@ -69,9 +69,6 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="House.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
@@ -105,9 +102,6 @@
     <ClCompile Include="GameUtility.cpp">
       <Filter>Source Files\Handler</Filter>
     </ClCompile>
-    <ClCompile Include="MyObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DoorStatus.cpp">
       <Filter>Source Files\Vehicle\Damage</Filter>
     </ClCompile>
@@ -132,6 +126,12 @@
     <ClCompile Include="Vehicle.cpp">
       <Filter>Source Files\Vehicle</Filter>
     </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MySQLFunctions.h">
@@ -147,9 +147,6 @@
       <Filter>Header Files\World</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MyPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="House.h">
@@ -185,9 +182,6 @@
     <ClInclude Include="GameUtility.h">
       <Filter>Header Files\Handler</Filter>
     </ClInclude>
-    <ClInclude Include="MyObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PositionObject.h">
       <Filter>Header Files\World</Filter>
     </ClInclude>
@@ -218,17 +212,17 @@
     <ClInclude Include="Handler.h">
       <Filter>Header Files\Handler</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vehicle.h">
       <Filter>Header Files\Vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

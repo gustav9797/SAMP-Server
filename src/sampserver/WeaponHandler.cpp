@@ -2,7 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include "Weapon.h"
-#include "MyPlayer.h"
+#include "Player.h"
 #include "MySQLFunctions.h"
 
 WeaponHandler::WeaponHandler(void)
@@ -25,7 +25,7 @@ void WeaponHandler::Load(GameUtility* gameUtility)
 	delete res;
 }
 
-bool WeaponHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
+bool WeaponHandler::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
 {
 	if(cmd == "wgive")
 	{
@@ -38,10 +38,10 @@ bool WeaponHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 				player->GiveWeapon(new Weapon(*avaliable));
 			}
 			else
-				SendClientMessage(player->GetId(), 0xFFFFFFFF, "Weapon does not exist.");
+				SendClientMessage(player->getId(), 0xFFFFFFFF, "Weapon does not exist.");
 		}
 		else
-			SendClientMessage(player->GetId(), 0xFFFFFFFF, "Usage: /wgive <weaponID>");
+			SendClientMessage(player->getId(), 0xFFFFFFFF, "Usage: /wgive <weaponID>");
 		return true;
 	}
 	else if(cmd == "wremove")
@@ -52,12 +52,12 @@ bool WeaponHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 			player->RemoveWeapon(id, this);
 		}
 		else
-			SendClientMessage(player->GetId(), 0xFFFFFFFF, "Usage: /wremove <weaponID>");
+			SendClientMessage(player->getId(), 0xFFFFFFFF, "Usage: /wremove <weaponID>");
 		return true;
 	}
 	else if(cmd == "winfo")
 	{
-		int id = GetPlayerWeapon(player->GetId());
+		int id = GetPlayerWeapon(player->getId());
 		Weapon *avaliable = WeaponHandler::avaliableWeapons->at(id);
 		if(avaliable != nullptr)
 		{
@@ -66,10 +66,10 @@ bool WeaponHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 			{
 				std::stringstream info;
 				info << "ID: " << currentWeapon->id_ << "\nName: " << currentWeapon->name_ << "\nAmmo: " << currentWeapon->ammo_ << std::endl;
-				SendClientMessage(player->GetId(), 0xFFFFFFFF, info.str().c_str());
+				SendClientMessage(player->getId(), 0xFFFFFFFF, info.str().c_str());
 			}
 			else
-				SendClientMessage(player->GetId(), 0xFFFFFFFF, "You don't have any weapon selected.");
+				SendClientMessage(player->getId(), 0xFFFFFFFF, "You don't have any weapon selected.");
 		}
 		return true;
 	}

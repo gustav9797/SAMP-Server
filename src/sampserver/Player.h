@@ -1,16 +1,35 @@
-#include <sampgdk/a_players.h>
-#include <cmath>
-#include <cstddef>
-#include <string>
+#pragma once
+#include <iostream>
+#include <map>
 #include <vector>
-
-class Player {
+#include <sampgdk\a_players.h>
+class WeaponHandler;
+class Weapon;
+class Vehicle;
+class Player
+{
+private:
+	int id_;
+	int money_;
+	std::map<int, Weapon*> *weapons;
+	std::map<int, Vehicle*> *vehicles;
+	//int GetFreeWeaponSlot();
+	int getFreeVehicleSlot();
 public:
-	Player(int playerid) : id_(playerid) {}
+	Player(int id);
+	~Player();
 
-	int GetId() const { return id_; }
-	operator int() const { return id_; }
+	int getId() { return id_; };
 
+	void GiveMoney(int money) { money_ += money; };
+	void SetMoney(int money) { money_ = money; };
+	void RemoveMoney(int money) { money_ -= money; };
+	int getMoney() { return money_; };
+
+	void GiveWeapon(Weapon *weapon);
+	Weapon *getWeapon(int slot);
+	void RemoveWeapon(int weaponid, WeaponHandler* weaponHandler);
+#pragma region Wrapper
 	bool Spawn() const
 	{
 		return SpawnPlayer(id_);
@@ -540,7 +559,6 @@ public:
 	{
 		return GetPlayerVersion(id_, version, len);
 	}
-
-private:
-	const int id_;
+#pragma endregion
 };
+

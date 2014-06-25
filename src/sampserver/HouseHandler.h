@@ -8,7 +8,7 @@ class HouseHandler : public Handler
 public:
 	HouseHandler(void);
 	~HouseHandler(void);
-	virtual bool OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
+	virtual bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
 	virtual void CheckForHacks();
 	virtual void Load(GameUtility* gameUtility);
 	std::map<int, House*> *houses;

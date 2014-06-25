@@ -1,9 +1,9 @@
-#include "MyObject.h"
+#include "Object.h"
 #include <map>
 #include "MySQLFunctions.h"
 #include "Interior.h"
 
-MyObject::MyObject(int id, int model, Interior *interior, float x, float y, float z, float rx, float ry, float rz, float drawDistance)
+Object::Object(int id, int model, Interior *interior, float x, float y, float z, float rx, float ry, float rz, float drawDistance)
 	: id_(id), 
 	model_(model), 
 	interior_(interior), 
@@ -18,12 +18,12 @@ MyObject::MyObject(int id, int model, Interior *interior, float x, float y, floa
 	playerObjectsOwned = new std::map<int, int>();
 }
 
-MyObject::~MyObject(void)
+Object::~Object(void)
 {
 	delete  playerObjectsOwned;
 }
 
-void MyObject::UpdatePosition(bool offset, float xo, float yo, float zo, float rx, float ry, float rz)
+void Object::UpdatePosition(bool offset, float xo, float yo, float zo, float rx, float ry, float rz)
 {
 	x_ = xo; y_ = yo; z_ = zo;
 	rx_ = rx; ry_ = ry; rz_ = rz;
@@ -37,7 +37,7 @@ void MyObject::UpdatePosition(bool offset, float xo, float yo, float zo, float r
 	Save();
 }
 
-bool MyObject::HasObject(int objectId)
+bool Object::HasObject(int objectId)
 {
 	for(auto it = playerObjectsOwned->begin(); it != playerObjectsOwned->end(); it++)
 	{
@@ -47,12 +47,12 @@ bool MyObject::HasObject(int objectId)
 	return false;
 }
 
-bool MyObject::HasPlayerObject(int player)
+bool Object::HasPlayerObject(int player)
 {
 	return playerObjectsOwned->find(player) != playerObjectsOwned->end();
 }
 
-void MyObject::AddPlayerObject(int player, int objectId)
+void Object::AddPlayerObject(int player, int objectId)
 {
 	if(playerObjectsOwned->find(player) == playerObjectsOwned->end())
 	{
@@ -60,7 +60,7 @@ void MyObject::AddPlayerObject(int player, int objectId)
 	}
 }
 
-void MyObject::RemovePlayerObject(int player)
+void Object::RemovePlayerObject(int player)
 {
 	if(playerObjectsOwned->find(player) != playerObjectsOwned->end())
 	{
@@ -69,7 +69,7 @@ void MyObject::RemovePlayerObject(int player)
 	}
 }
 
-void MyObject::RemoveAll()
+void Object::RemoveAll()
 {
 	for(auto it = playerObjectsOwned->begin(); it != playerObjectsOwned->end(); it++)
 	{
@@ -78,7 +78,7 @@ void MyObject::RemoveAll()
 	}
 }
 
-void MyObject::Save()
+void Object::Save()
 {
 	sql::PreparedStatement *s = MySQLFunctions::con->prepareStatement("UPDATE `samp`.`objects` SET `interior`=?, `model`=?, `x`=?, `y`=?, `z`=?, `rx`=?, `ry`=?, `rz`=?, `drawdistance`=? WHERE `id`=?");
 	s->setInt(1, interior_->interiorId_);
@@ -94,7 +94,7 @@ void MyObject::Save()
 	MySQLFunctions::ExecutePreparedQuery(s);
 }
 
-void MyObject::Destroy()
+void Object::Destroy()
 {
 	for(auto it = playerObjectsOwned->begin(); it != playerObjectsOwned->end(); it++)
 	{

@@ -7,7 +7,7 @@
 
 PlayerHandler::PlayerHandler()
 {
-	players = new std::map<int, MyPlayer*>();
+	players = new std::map<int, Player*>();
 }
 
 
@@ -16,26 +16,26 @@ PlayerHandler::~PlayerHandler()
 }
 
 
-bool PlayerHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
+bool PlayerHandler::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
 {
 	if (cmd == "hack")
 	{
-		GivePlayerMoney(player->GetId(), 500000);
+		GivePlayerMoney(player->getId(), 500000);
 		return true;
 	}
 	else if (cmd == "pos")
 	{
 		float *x = new float(), *y = new float(), *z = new float(), *angle = new float();
-		GetPlayerPos(player->GetId(), x, y, z);
+		GetPlayerPos(player->getId(), x, y, z);
 		std::stringstream pos;
 		pos << "Pos: X" << *x << " Y" << *y << " Z" << *z << "\nInterior: " << player->GetInterior() << " VirtualWorld: " << player->GetVirtualWorld();
-		SendClientMessage(player->GetId(), 0xFFFFFFFF, pos.str().c_str());
+		SendClientMessage(player->getId(), 0xFFFFFFFF, pos.str().c_str());
 		delete x, y, z;
 		return true;
 	}
 	else if (cmd == "spawn")
 	{
-		TeleportPlayer(player->GetId(), WorldPositionObject(1958.3783f, 1343.1572f, 15.3746f, gameUtility->interiorHandler->getInterior(-1)));
+		TeleportPlayer(player->getId(), WorldPositionObject(1958.3783f, 1343.1572f, 15.3746f, gameUtility->interiorHandler->getInterior(-1)));
 		return true;
 	}
 	return false;
@@ -43,9 +43,9 @@ bool PlayerHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std
 
 void PlayerHandler::CheckForHacks()
 {
-	for (std::map<int, MyPlayer*>::iterator it = players->begin(); it != players->end(); it++)
+	for (std::map<int, Player*>::iterator it = players->begin(); it != players->end(); it++)
 	{
-		if (it->second->GetMoney() != GetPlayerMoney(it->first))
+		if (it->second->getMoney() != GetPlayerMoney(it->first))
 		{
 			it->second->SendMessage(0xF81414, "Kicked from server: Moneyhacks");
 			//SetTimer(1000, false, KickDelayed, (void*)(it->first));

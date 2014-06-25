@@ -3,32 +3,38 @@
 #include <cmath>
 #include <string>
 class VehicleDamageStatus;
+class PositionObject;
 class Vehicle
 {
 public:
 	Vehicle(int model, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, std::string licensePlate);
 	~Vehicle();
-	int id_;
-	int model_;
-	float x_;
-	float y_;
-	float z_;
-	float rotation_;
-	int color1_;
-	int color2_;
-	int respawnDelay_;
-	int getId() { return id_; };
-	std::string licensePlate_;
 
+	int getId() { return id_; };
+	PositionObject getPosition();
+	int getSampInterior();
+	int getVirtualWorld();
+	int getColor1() { return color1_; };
+	int getColor2() { return color2_; };
+	float getRotation();
+	std::string getLicensePlate() { return licensePlate_; };
 	void setDamage(float health, int panels, int doors, int lights, int tires);
 	void setHealth(float health);
 	void setVirtualWorld(int virtualWorld);
 	void LinkToInterior(int interior);
+	void Delete();
+	void Repair();
 	VehicleDamageStatus *damageStatus_;
-
 private:
+	int id_;
+	int model_;
+	int color1_;
+	int color2_;
+	int respawnDelay_;
+	int sampInterior_ = -1;
+	std::string licensePlate_;
 #pragma region Wrapper
-	static int samp_Create(int type, float x, float y, float z, float rotation, int color1, int color2, int respawn_delay) 
+	static int samp_Create(int type, float x, float y, float z, float rotation, int color1, int color2, int respawn_delay)
 	{
 		return CreateVehicle(type, x, y, z, rotation, color1, color2, respawn_delay);
 	}
@@ -225,7 +231,7 @@ private:
 	float samp_GetSpeed() const
 	{
 		float velX, velY, velZ;
-		GetVelocity(velX, velY, velZ);
+		samp_GetVelocity(velX, velY, velZ);
 		return std::sqrt(velX*velX + velY*velY + velZ*velZ);
 	}
 

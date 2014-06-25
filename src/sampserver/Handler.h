@@ -2,11 +2,11 @@
 #include <iostream>
 #include <vector>
 #include "GameUtility.h"
-class MyPlayer;
+class Player;
 class Handler
 {
 public:
-	virtual bool OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)=0;
+	virtual bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)=0;
 	virtual void CheckForHacks()=0;
 	virtual void Load(GameUtility* gameUtility)=0;
 };

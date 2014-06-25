@@ -11,7 +11,7 @@ class ObjectHandler;
 class RegisterLoginHandler;
 
 class Handler;
-class MyPlayer;
+class Player;
 class WorldPositionObject;
 class Interior;
 
@@ -23,13 +23,13 @@ public:
 	GameUtility(void);
 	~GameUtility(void);
 
-	bool OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
+	bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
 	void CheckForHacks();
 	void Load(GameUtility* gameUtility);
 
 	void AddHandler(Handler *handler);
-	static bool IsPlayerClose(MyPlayer *player, WorldPositionObject object, float range);
-	static bool IsPlayerClose(MyPlayer *player, float x, float y, float z, Interior *interior, float range);
+	static bool IsPlayerClose(Player *player, WorldPositionObject object, float range);
+	static bool IsPlayerClose(Player *player, float x, float y, float z, Interior *interior, float range);
 
 	PlayerHandler *playerHandler;
 	InteriorHandler *interiorHandler;

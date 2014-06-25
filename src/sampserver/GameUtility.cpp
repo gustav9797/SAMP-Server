@@ -10,7 +10,7 @@
 
 #include "WorldPositionObject.h"
 #include "Interior.h"
-#include "MyPlayer.h"
+#include "Player.h"
 
 GameUtility::GameUtility(void)
 {
@@ -22,7 +22,7 @@ GameUtility::~GameUtility(void)
 {
 }
 
-bool GameUtility::OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
+bool GameUtility::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
 {
 	bool temp = false;
 	for(auto i : *handlers)
@@ -54,20 +54,20 @@ void GameUtility::AddHandler(Handler *handler)
 	handlers->push_back(handler);
 }
 
-bool GameUtility::IsPlayerClose(MyPlayer *player, WorldPositionObject object, float range)
+bool GameUtility::IsPlayerClose(Player *player, WorldPositionObject object, float range)
 {
-	int playerInterior = GetPVarInt(player->GetId(), "currentinterior");
+	int playerInterior = GetPVarInt(player->getId(), "currentinterior");
 	if(playerInterior == object.interiorId_)
 	{
-		return IsPlayerInRangeOfPoint(player->GetId(), range, object.x_, object.y_, object.z_);
+		return IsPlayerInRangeOfPoint(player->getId(), range, object.x_, object.y_, object.z_);
 	}
 }
 
-bool GameUtility::IsPlayerClose(MyPlayer *player, float x, float y, float z, Interior *interior, float range)
+bool GameUtility::IsPlayerClose(Player *player, float x, float y, float z, Interior *interior, float range)
 {
-	int playerInterior = GetPVarInt(player->GetId(), "currentinterior");
+	int playerInterior = GetPVarInt(player->getId(), "currentinterior");
 	if(playerInterior == interior->interiorId_)
 	{
-		return IsPlayerInRangeOfPoint(player->GetId(), range, x, y, z);
+		return IsPlayerInRangeOfPoint(player->getId(), range, x, y, z);
 	}
 }

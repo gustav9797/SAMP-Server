@@ -19,7 +19,7 @@ private:
 public:
 	RegisterLoginHandler(void);
 	~RegisterLoginHandler(void);
-	virtual bool OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
+	virtual bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
 	virtual void CheckForHacks();
 	virtual void Load(GameUtility* gameUtility);
 	bool AccountExists(std::string name);

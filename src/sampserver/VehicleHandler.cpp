@@ -5,6 +5,7 @@
 #include "VehicleDamageStatus.h"
 #include "InteriorHandler.h"
 #include "Interior.h"
+#include "PositionObject.h"
 
 VehicleHandler::VehicleHandler(void)
 {
@@ -17,7 +18,7 @@ VehicleHandler::~VehicleHandler(void)
 {
 }
 
-bool VehicleHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
+bool VehicleHandler::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
 {
 	if (cmd == "v")
 	{
@@ -25,10 +26,10 @@ bool VehicleHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<st
 		{
 			int model = atoi(args[0].c_str());
 			Vehicle *vehicle = CreateVehicleForPlayer(model, 0, 0, 60, player, "", nullptr, gameUtility);
-			SendClientMessage(player->GetId(), 0xFFFFFFFF, "Vehicle spawned!");
+			SendClientMessage(player->getId(), 0xFFFFFFFF, "Vehicle spawned!");
 		}
 		else
-			SendClientMessage(player->GetId(), 0xFFFFFFFF, "Usage: /v <vehicleID>");
+			SendClientMessage(player->getId(), 0xFFFFFFFF, "Usage: /v <vehicleID>");
 		return true;
 	}
 	else if(cmd == "rv")
@@ -47,7 +48,7 @@ bool VehicleHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<st
 	{
 		if(args.size() == 3)
 		{
-			Vehicle *currentVehicle = vehicles->at(GetPlayerVehicleID(player->GetId()));
+			Vehicle *currentVehicle = vehicles->at(GetPlayerVehicleID(player->getId()));
 			if(currentVehicle != nullptr)
 			{
 				VehicleDamageStatus *dmg = currentVehicle->damageStatus_;
@@ -167,7 +168,7 @@ bool VehicleHandler::OnCommand(MyPlayer *player, std::string cmd, std::vector<st
 	}
 	else if (cmd == "repair")
 	{
-		Vehicle *currentVehicle = vehicles->at(GetPlayerVehicleID(player->GetId()));
+		Vehicle *currentVehicle = vehicles->at(GetPlayerVehicleID(player->getId()));
 		if (currentVehicle != nullptr)
 		{
 			currentVehicle->Repair();
@@ -230,8 +231,8 @@ void VehicleHandler::RemoveVehicle(int vehicleId)
 	if(vehicles->find(vehicleId) != vehicles->end())
 	{
 		Vehicle *vehicle = vehicles->at(vehicleId);
-		vehicle->Destroy();
-		std::string licensePlate = vehicle->licensePlate_;
+		vehicle->Delete();
+		std::string licensePlate = vehicle->getLicensePlate();
 		delete vehicles->at(vehicleId);
 		vehicles->erase(vehicleId);
 		for(auto it = playerVehicles->begin(); it != playerVehicles->end(); it++)
@@ -249,7 +250,7 @@ void VehicleHandler::RemoveVehicle(int vehicleId)
 	}
 }
 
-void VehicleHandler::RemoveCurrentVehicle(MyPlayer *player)
+void VehicleHandler::RemoveCurrentVehicle(Player *player)
 {
 	int vehicleId = player->GetVehicleID();
 	if(vehicleId != 0)
@@ -257,7 +258,7 @@ void VehicleHandler::RemoveCurrentVehicle(MyPlayer *player)
 }
 
 //Creates a vehicle at specified position (owner is null for server)
-Vehicle *VehicleHandler::CreateVehicle(int model, int interior, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, std::string licensePlate, MyPlayer *owner, GameUtility *gameUtility)
+Vehicle *VehicleHandler::CreateVehicle(int model, int interior, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, std::string licensePlate, Player *owner, GameUtility *gameUtility)
 {
 	while(isLicensePlateUsed(licensePlate))
 		licensePlate = randomizeLicensePlate();
@@ -310,21 +311,21 @@ Vehicle *VehicleHandler::CreateVehicle(int model, int interior, float x, float y
 }
 
 //Creates a vehicle at players position, puts player inside it (owner is null for server)
-Vehicle *VehicleHandler::CreateVehicleForPlayer(int model, int color1, int color2, int respawnDelay, MyPlayer *player, std::string licensePlate, MyPlayer *owner, GameUtility *gameUtility)
+Vehicle *VehicleHandler::CreateVehicleForPlayer(int model, int color1, int color2, int respawnDelay, Player *player, std::string licensePlate, Player *owner, GameUtility *gameUtility)
 {
 	float *x = new float(), *y = new float(), *z = new float(), *rotation = new float();
 	player->GetPos(x, y, z);
 	player->GetFacingAngle(rotation);
-	Vehicle *vehicle = CreateVehicle(model, GetPVarInt(player->GetId(), "currentinterior"), *x, *y, *z, *rotation, color1, color2, respawnDelay, licensePlate, owner, gameUtility);//Vehicle::Create(model, *x, *y, *z, *rotation, color1, color2, respawnDelay);
+	Vehicle *vehicle = CreateVehicle(model, GetPVarInt(player->getId(), "currentinterior"), *x, *y, *z, *rotation, color1, color2, respawnDelay, licensePlate, owner, gameUtility);//Vehicle::Create(model, *x, *y, *z, *rotation, color1, color2, respawnDelay);
 	delete x, y, z, rotation;
 	if(vehicle == nullptr)
 		return nullptr;
-	PutPlayerInVehicle(player->GetId(), vehicle->getId(), 0);
+	PutPlayerInVehicle(player->getId(), vehicle->getId(), 0);
 	return vehicle;
 }
 
 //Checks if vehicle is owned by the specified player
-bool VehicleHandler::VehicleOwnedByPlayer(int vehicleId, MyPlayer *player)
+bool VehicleHandler::VehicleOwnedByPlayer(int vehicleId, Player *player)
 {
 	if(playerVehicles->find(player->GetName()) != playerVehicles->end())
 	{
@@ -354,18 +355,16 @@ void VehicleHandler::SaveVehicleData(int vehicleId)
 		Vehicle *vehicle = vehicles->at(vehicleId);
 		sql::PreparedStatement *s = MySQLFunctions::con->prepareStatement("UPDATE `samp`.`vehicles` SET `x`=?, `y`=?, `z`=?, `rotation`=?, `color1`=?, `color2`=? WHERE `licenseplate`=?");
 
-		float *x = new float(), *y = new float(), *z = new float(), *rotation = new float();
-		vehicle->GetPos(x, y, z);
-		vehicle->GetZAngle(rotation);
-		s->setDouble(1, *x);
-		s->setDouble(2, *y);
-		s->setDouble(3, *z);
-		s->setDouble(4, *rotation);
-		s->setInt(5, vehicle->color1_);
-		s->setInt(6, vehicle->color2_);
-		s->setString(7, vehicle->licensePlate_);
+		PositionObject pos = vehicle->getPosition();
+		float rotation = vehicle->getRotation();
+		s->setDouble(1, pos.getX());
+		s->setDouble(2, pos.getY());
+		s->setDouble(3, pos.getZ());
+		s->setDouble(4, rotation);
+		s->setInt(5, vehicle->getColor1());
+		s->setInt(6, vehicle->getColor2());
+		s->setString(7, vehicle->getLicensePlate());
 		MySQLFunctions::ExecutePreparedQuery(s);
-		delete x, y, z, rotation;
 	}
 }
 
@@ -387,7 +386,7 @@ bool VehicleHandler::isLicensePlateUsed(std::string licensePlate)
 {
 	for(auto it = vehicles->begin(); it != vehicles->end(); it++)
 	{
-		if(it->second->licensePlate_ == licensePlate)
+		if(it->second->getLicensePlate() == licensePlate)
 			return true;
 	}
 	return false;
@@ -429,7 +428,7 @@ bool VehicleHandler::UpdateVehicleDamageStatus(int vehicleId, int playerId)
 		st->setInt(3, *doors);
 		st->setInt(4, *lights);
 		st->setInt(5, *tires);
-		st->setString(6, vehicle->licensePlate_);
+		st->setString(6, vehicle->getLicensePlate());
 		MySQLFunctions::ExecutePreparedQuery(st);
 		delete panels, doors, lights, tires, health;
 	}

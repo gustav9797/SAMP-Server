@@ -1,7 +1,7 @@
 #pragma once
 #include "Handler.h"
 #include "Vehicle.h"
-#include "MyPlayer.h"
+#include "Player.h"
 #include <map>
 #include <vector>
 class VehicleHandler : public Handler
@@ -12,14 +12,14 @@ private:
 public:
 	VehicleHandler(void);
 	~VehicleHandler(void);
-	virtual bool OnCommand(MyPlayer *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
+	virtual bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
 	virtual void CheckForHacks();
 	virtual void Load(GameUtility* gameUtility);
 	void RemoveVehicle(int vehicleId);
-	void RemoveCurrentVehicle(MyPlayer *player);
-	Vehicle *CreateVehicle(int model, int interior, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, std::string licensePlate, MyPlayer *owner, GameUtility *gameUtility);
-	Vehicle *CreateVehicleForPlayer(int model, int color1, int color2, int respawnDelay, MyPlayer *player, std::string licensePlate, MyPlayer *owner, GameUtility *gameUtility);
-	bool VehicleOwnedByPlayer(int vehicleId, MyPlayer *player);
+	void RemoveCurrentVehicle(Player *player);
+	Vehicle *CreateVehicle(int model, int interior, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, std::string licensePlate, Player *owner, GameUtility *gameUtility);
+	Vehicle *CreateVehicleForPlayer(int model, int color1, int color2, int respawnDelay, Player *player, std::string licensePlate, Player *owner, GameUtility *gameUtility);
+	bool VehicleOwnedByPlayer(int vehicleId, Player *player);
 	std::string VehicleOwnedByAnyPlayer(int vehicleId);
 	void SaveVehicleData(int vehicleId);
 	int getFreeVehicleUniqueId();
