@@ -84,7 +84,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CommandManager.cpp" />
     <ClCompile Include="DoorStatus.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="GameUtility.cpp" />
     <ClCompile Include="House.cpp" />
     <ClCompile Include="HouseHandler.cpp" />
@@ -113,12 +116,19 @@
     <ClCompile Include="WorldPositionObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandExecutor.h" />
+    <ClInclude Include="CommandManager.h" />
     <ClInclude Include="DamageStatus.h" />
     <ClInclude Include="DoorStatus.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventHandler.h" />
     <ClInclude Include="GameUtility.h" />
     <ClInclude Include="Handler.h" />
+    <ClInclude Include="Console.h" />
     <ClInclude Include="House.h" />
     <ClInclude Include="HouseHandler.h" />
+    <ClInclude Include="IEvent.h" />
     <ClInclude Include="Interior.h" />
     <ClInclude Include="InteriorHandler.h" />
     <ClInclude Include="Inventory.h" />

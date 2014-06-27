@@ -1,8 +1,16 @@
 #pragma once
 #include <iostream>
 #include <map>
-#include "House.h"
-#include "InteriorHandler.h"
+#include <vector>
+
+#include "Handler.h"
+
+class House;
+class InteriorHandler;
+class GameUtility;
+class Interior;
+class Player;
+
 class HouseHandler : public Handler
 {
 public:

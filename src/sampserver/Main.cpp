@@ -23,6 +23,9 @@
 #include "Weapon.h"
 #include "GameUtility.h"
 #include "Pickup.h"
+#include "House.h"
+#include "CommandManager.h"
+#include "EventHandler.h"
 
 using sampgdk::logprintf;
 
@@ -38,30 +41,15 @@ namespace main
 	RegisterLoginHandler *registerLoginHandler = new RegisterLoginHandler();
 	GameUtility *gameUtility = new GameUtility();
 
+	CommandManager *commandManager = new CommandManager();
+	EventHandler *eventHandler = new EventHandler();
+
 	static string ToString(int number)
 	{
 		int Number = number; // number to convert
 		char Result[16]; // string which will contain the number
 		sprintf_s(Result, "%d", Number);
 		return Result;
-	}
-
-	static vector<string> GetParams(std::string input)
-	{
-		std::vector<std::string> tokens;
-		istringstream iss(input);
-		copy(istream_iterator<string>(iss), istream_iterator<string>(), back_inserter<vector<string> >(tokens));
-		if(tokens.size() >= 1)
-			tokens.erase(tokens.begin());
-		return tokens;
-	}
-
-	static std::string GetCommand(std::string input)
-	{
-		std::vector<std::string> tokens;
-		istringstream iss(input);
-		copy(istream_iterator<string>(iss), istream_iterator<string>(), back_inserter<vector<string> >(tokens));
-		return tokens.at(0);
 	}
 
 	static void SAMPGDK_CALL CheckForHacks(int, void *) 
@@ -93,6 +81,7 @@ namespace main
 		gameUtility->weaponHandler = weaponHandler;
 		gameUtility->objectHandler = objectHandler;
 		gameUtility->registerLoginHandler = registerLoginHandler;
+		gameUtility->eventHandler = eventHandler;
 		std::cout << "  Initialized" << std::endl;
 
 		std::cout << "MySQL data is loading...";
@@ -148,12 +137,22 @@ namespace main
 		return true;
 	}
 
-	PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerCommandText(int playerid, const char *cmdtext) {
-		Player *player = playerHandler->players->at(playerid);
-		std::string cmd = GetCommand(cmdtext);
-		cmd.erase(0, 1);
-		vector<string> args = GetParams(cmdtext);
-		return gameUtility->OnCommand(player, cmd, args, gameUtility);
+	PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerCommandText(int playerid, const char *cmdtext) 
+	{
+		/*Player *player = playerHandler->players->at(playerid);
+		if (player)
+		{
+			commandManager->OnTextInput()
+			std::string cmd = GetCommand(cmdtext);
+			cmd.erase(0, 1);
+			vector<string> args = GetParams(cmdtext);
+			gameUtility->OnCommand(player, cmd, args, gameUtility);
+		}
+		else
+			SendClientMessage(playerid, 0xFFFFFF, "Sorry, you do not exist.");
+		return true;*/
+		//eventHandler->PlayerCommandTextCallback(gameUtility, playerid, std::string(cmdtext));
+		return true;
 	}
 
 	PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerPickUpPickup(int playerid, int pickupid)
