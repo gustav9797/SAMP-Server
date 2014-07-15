@@ -1,8 +1,6 @@
 #include "HouseHandler.h"
 #include "Interior.h"
 #include "Player.h"
-#include "House.h"
-#include "InteriorHandler.h"
 
 HouseHandler::HouseHandler(void)
 {

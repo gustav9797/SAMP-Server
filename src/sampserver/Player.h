@@ -3,27 +3,23 @@
 #include <map>
 #include <vector>
 #include <sampgdk\a_players.h>
-
-#include "CommandExecutor.h"
-
 class WeaponHandler;
 class Weapon;
 class Vehicle;
-
-class Player : CommandExecutor
+class Player
 {
 private:
 	int id_;
 	int money_;
 	std::map<int, Weapon*> *weapons;
 	std::map<int, Vehicle*> *vehicles;
+	//int GetFreeWeaponSlot();
 	int getFreeVehicleSlot();
 public:
 	Player(int id);
 	~Player();
 
 	int getId() { return id_; };
-	inline void SendMessage(std::string msg) { SendMessage(0xFFFFFFFF, msg.c_str()); };
 
 	void GiveMoney(int money) { money_ += money; };
 	void SetMoney(int money) { money_ = money; };

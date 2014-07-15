@@ -14,7 +14,6 @@ class Handler;
 class Player;
 class WorldPositionObject;
 class Interior;
-class EventHandler;
 
 class GameUtility
 {
@@ -39,6 +38,5 @@ public:
 	VehicleHandler *vehicleHandler;
 	ObjectHandler *objectHandler;
 	RegisterLoginHandler *registerLoginHandler;
-	EventHandler *eventHandler;
 };
 
