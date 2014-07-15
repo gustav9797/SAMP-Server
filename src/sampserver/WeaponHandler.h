@@ -7,9 +7,11 @@ class WeaponHandler : public Handler
 private:
 	std::map<int, Weapon*> *avaliableWeapons;
 public:
-	WeaponHandler(GameUtility *gameUtility);
+	WeaponHandler(void);
 	~WeaponHandler(void);
-	virtual void Load();
+	virtual bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
+	virtual void CheckForHacks();
+	virtual void Load(GameUtility* gameUtility);
 	Weapon* getWeapon(int weaponId);
 };
 

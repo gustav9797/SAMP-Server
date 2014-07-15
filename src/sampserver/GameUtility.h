@@ -24,7 +24,9 @@ public:
 	GameUtility(void);
 	~GameUtility(void);
 
-	void Load();
+	bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
+	void CheckForHacks();
+	void Load(GameUtility* gameUtility);
 
 	void AddHandler(Handler *handler);
 	static bool IsPlayerClose(Player *player, WorldPositionObject object, float range);

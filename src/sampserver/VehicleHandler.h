@@ -10,9 +10,11 @@ private:
 	std::map<int, Vehicle*> *vehicles;
 	std::map<std::string, std::map<int, Vehicle*>*> *playerVehicles;
 public:
-	VehicleHandler(GameUtility *gameUtility);
+	VehicleHandler(void);
 	~VehicleHandler(void);
-	virtual void Load();
+	virtual bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
+	virtual void CheckForHacks();
+	virtual void Load(GameUtility* gameUtility);
 	void RemoveVehicle(int vehicleId);
 	void RemoveCurrentVehicle(Player *player);
 	Vehicle *CreateVehicle(int model, int interior, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, std::string licensePlate, Player *owner, GameUtility *gameUtility);

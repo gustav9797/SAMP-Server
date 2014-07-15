@@ -6,15 +6,8 @@
 #include "Command.h"
 #include "CommandExecutor.h"
 #include "GameUtility.h"
-#include "EventPlayerCommandText.h"
-#include "Event.h"
-#include "EventHandler.h"
-#include "HouseHandler.h"
 
-#include "CommandSpawnVehicle.h"
-
-CommandManager::CommandManager(GameUtility *gameUtility)
-: Handler(gameUtility)
+CommandManager::CommandManager()
 {
 	commands = new std::map<std::string, Command*>();
 }
@@ -22,15 +15,6 @@ CommandManager::CommandManager(GameUtility *gameUtility)
 
 CommandManager::~CommandManager()
 {
-}
-
-void CommandManager::Load()
-{
-	using namespace std::placeholders;
-	std::function<void(Event*)> f(std::bind(&CommandManager::OnPlayerCommandText, this, _1));
-	gameUtility->eventHandler->RegisterHandler<EventPlayerCommandText>(f);
-
-	RegisterCommand(new CommandSpawnVehicle(gameUtility));
 }
 
 bool CommandManager::RegisterCommand(Command *cmd)
@@ -75,19 +59,4 @@ std::vector<std::string> CommandManager::getParams(std::string input)
 	if (tokens.size() >= 1)
 		tokens.erase(tokens.begin());
 	return tokens;
-}
-
-void CommandManager::OnPlayerCommandText(Event *ev)
-{
-	EventPlayerCommandText *eve = static_cast<EventPlayerCommandText*>(ev);
-	std::string cmd = getCommand(eve->getCommandText());
-	std::vector<std::string> args = getParams(eve->getCommandText());
-	Player *player = eve->getPlayer();
-
-	if (commands->find(cmd) != commands->end())
-	{
-		Command *command = commands->at(cmd);
-		//TODO: Check if player has perms
-		command->Execute((CommandExecutor*)player, args);
-	}
 }

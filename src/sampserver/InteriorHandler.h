@@ -14,9 +14,11 @@ private:
 	std::map<int, Pickup*> *pickups;
 	std::map<int, int> *sampPickupIdToPickupId;
 public:
-	InteriorHandler(GameUtility *gameUtility);
+	InteriorHandler();
 	~InteriorHandler();
-	virtual void Load();
+	virtual bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
+	virtual void CheckForHacks();
+	virtual void Load(GameUtility* gameUtility);
 	Interior* getInterior(int interiorId);
 	Interior* getDefaultInterior(int interiorId);
 	bool AddInterior(int interiorId, Interior *interior);

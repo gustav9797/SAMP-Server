@@ -14,9 +14,11 @@ class Player;
 class HouseHandler : public Handler
 {
 public:
-	HouseHandler(GameUtility *gameUtility);
+	HouseHandler(void);
 	~HouseHandler(void);
-	virtual void Load();
+	virtual bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
+	virtual void CheckForHacks();
+	virtual void Load(GameUtility* gameUtility);
 	std::map<int, House*> *houses;
 	bool CreateHouse(int destinationId, float x, float y, float z, Interior *interior, InteriorHandler *interiorHandler);
 };

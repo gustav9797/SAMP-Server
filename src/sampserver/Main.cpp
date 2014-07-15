@@ -25,25 +25,23 @@
 #include "Pickup.h"
 #include "House.h"
 #include "CommandManager.h"
-
-#include "EventPlayerCommandText.h"
-#include "Event.h"
+#include "EventHandler.h"
 
 using sampgdk::logprintf;
 
 namespace main
 {
 	using namespace std;
+	PlayerHandler *playerHandler = new PlayerHandler();
+	InteriorHandler *interiorHandler = new InteriorHandler();
+	HouseHandler *houseHandler = new HouseHandler();
+	WeaponHandler *weaponHandler = new WeaponHandler();
+	VehicleHandler *vehicleHandler = new VehicleHandler();
+	ObjectHandler *objectHandler =  new ObjectHandler();
+	RegisterLoginHandler *registerLoginHandler = new RegisterLoginHandler();
 	GameUtility *gameUtility = new GameUtility();
-	PlayerHandler *playerHandler = new PlayerHandler(gameUtility);
-	InteriorHandler *interiorHandler = new InteriorHandler(gameUtility);
-	HouseHandler *houseHandler = new HouseHandler(gameUtility);
-	WeaponHandler *weaponHandler = new WeaponHandler(gameUtility);
-	VehicleHandler *vehicleHandler = new VehicleHandler(gameUtility);
-	ObjectHandler *objectHandler = new ObjectHandler(gameUtility);
-	RegisterLoginHandler *registerLoginHandler = new RegisterLoginHandler(gameUtility);
 
-	CommandManager *commandManager = new CommandManager(gameUtility);
+	CommandManager *commandManager = new CommandManager();
 	EventHandler *eventHandler = new EventHandler();
 
 	static string ToString(int number)
@@ -56,7 +54,7 @@ namespace main
 
 	static void SAMPGDK_CALL CheckForHacks(int, void *) 
 	{
-		
+		gameUtility->CheckForHacks();
 	}
 
 	static void SAMPGDK_CALL Update(int, void *) 
@@ -76,7 +74,6 @@ namespace main
 		gameUtility->AddHandler(weaponHandler);
 		gameUtility->AddHandler(objectHandler);
 		gameUtility->AddHandler(registerLoginHandler);
-		gameUtility->AddHandler(commandManager);
 		gameUtility->houseHandler = houseHandler;
 		gameUtility->interiorHandler = interiorHandler;
 		gameUtility->playerHandler = playerHandler;
@@ -88,7 +85,7 @@ namespace main
 		std::cout << "  Initialized" << std::endl;
 
 		std::cout << "MySQL data is loading...";
-		gameUtility->Load();
+		gameUtility->Load(gameUtility);
 		std::cout << "  Loaded" << std::endl;
 
 		SetGameModeText("sampserver v1.0");
@@ -155,7 +152,6 @@ namespace main
 			SendClientMessage(playerid, 0xFFFFFF, "Sorry, you do not exist.");
 		return true;*/
 		//eventHandler->PlayerCommandTextCallback(gameUtility, playerid, std::string(cmdtext));
-		eventHandler->CallEvent(new EventPlayerCommandText(playerHandler->players->at(playerid), std::string(cmdtext)));
 		return true;
 	}
 
