@@ -7,7 +7,10 @@ class GameUtility;
 
 class Command
 {
+private:
+	GameUtility *gameUtility;
 public:
-	virtual std::vector<std::string> getAliases()=0;
-	virtual void Execute(CommandExecutor *sender, std::vector<std::string> args, GameUtility *gameUtility)=0;
+	Command(GameUtility *gameUtility){ this->gameUtility = gameUtility; }
+	virtual std::vector<std::string> getAliases() = 0;
+	virtual void Execute(CommandExecutor *sender, std::vector<std::string> args) = 0;
 };

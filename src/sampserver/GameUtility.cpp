@@ -22,30 +22,11 @@ GameUtility::~GameUtility(void)
 {
 }
 
-bool GameUtility::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
-{
-	bool temp = false;
-	for(auto i : *handlers)
-	{
-		if(i->OnCommand(player, cmd, args, gameUtility))
-			temp = true;
-	}
-	return temp;
-}
-
-void GameUtility::CheckForHacks()
+void GameUtility::Load()
 {
 	for(auto i : *handlers)
 	{
-		i->CheckForHacks();
-	}
-}
-
-void GameUtility::Load(GameUtility* gameUtility)
-{
-	for(auto i : *handlers)
-	{
-		i->Load(gameUtility);
+		i->Load();
 	}
 }
 

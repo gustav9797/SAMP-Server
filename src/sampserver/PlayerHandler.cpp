@@ -5,7 +5,8 @@
 #include "WorldPositionObject.h"
 #include "InteriorHandler.h"
 
-PlayerHandler::PlayerHandler()
+PlayerHandler::PlayerHandler(GameUtility *gameUtility)
+: Handler(gameUtility)
 {
 	players = new std::map<int, Player*>();
 }
@@ -16,45 +17,46 @@ PlayerHandler::~PlayerHandler()
 }
 
 
-bool PlayerHandler::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
+/*bool PlayerHandler::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
 {
-	if (cmd == "hack")
-	{
-		GivePlayerMoney(player->getId(), 500000);
-		return true;
-	}
-	else if (cmd == "pos")
-	{
-		float *x = new float(), *y = new float(), *z = new float(), *angle = new float();
-		GetPlayerPos(player->getId(), x, y, z);
-		std::stringstream pos;
-		pos << "Pos: X" << *x << " Y" << *y << " Z" << *z << "\nInterior: " << player->GetInterior() << " VirtualWorld: " << player->GetVirtualWorld();
-		SendClientMessage(player->getId(), 0xFFFFFFFF, pos.str().c_str());
-		delete x, y, z;
-		return true;
-	}
-	else if (cmd == "spawn")
-	{
-		TeleportPlayer(player->getId(), WorldPositionObject(1958.3783f, 1343.1572f, 15.3746f, gameUtility->interiorHandler->getInterior(-1)));
-		return true;
-	}
-	return false;
-}
-
-void PlayerHandler::CheckForHacks()
+if (cmd == "hack")
 {
-	for (std::map<int, Player*>::iterator it = players->begin(); it != players->end(); it++)
-	{
-		if (it->second->getMoney() != GetPlayerMoney(it->first))
-		{
-			it->second->SendMessage(0xF81414, "Kicked from server: Moneyhacks");
-			//SetTimer(1000, false, KickDelayed, (void*)(it->first));
-			break;
-		}
-	}
+GivePlayerMoney(player->getId(), 500000);
+return true;
 }
+else if (cmd == "pos")
+{
+float *x = new float(), *y = new float(), *z = new float(), *angle = new float();
+GetPlayerPos(player->getId(), x, y, z);
+std::stringstream pos;
+pos << "Pos: X" << *x << " Y" << *y << " Z" << *z << "\nInterior: " << player->GetInterior() << " VirtualWorld: " << player->GetVirtualWorld();
+SendClientMessage(player->getId(), 0xFFFFFFFF, pos.str().c_str());
+delete x, y, z;
+return true;
+}
+else if (cmd == "spawn")
+{
+TeleportPlayer(player->getId(), WorldPositionObject(1958.3783f, 1343.1572f, 15.3746f, gameUtility->interiorHandler->getInterior(-1)));
+return true;
+}
+return false;
+}*/
 
-void PlayerHandler::Load(GameUtility* gameUtility)
+//TODO: add event for checkhack and subscribe
+/*void PlayerHandler::CheckForHacks()
+{
+for (std::map<int, Player*>::iterator it = players->begin(); it != players->end(); it++)
+{
+if (it->second->getMoney() != GetPlayerMoney(it->first))
+{
+it->second->SendMessage(0xF81414, "Kicked from server: Moneyhacks");
+//SetTimer(1000, false, KickDelayed, (void*)(it->first));
+break;
+}
+}
+}*/
+
+void PlayerHandler::Load()
 {
 }
 

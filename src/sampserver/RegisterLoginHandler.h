@@ -17,11 +17,9 @@ class RegisterLoginHandler :
 private:
 	std::map<int, int> *loginAttempts;
 public:
-	RegisterLoginHandler(void);
+	RegisterLoginHandler(GameUtility *gameUtility);
 	~RegisterLoginHandler(void);
-	virtual bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
-	virtual void CheckForHacks();
-	virtual void Load(GameUtility* gameUtility);
+	virtual void Load();
 	bool AccountExists(std::string name);
 	bool OnPlayerConnect(int playerid);
 	bool OnDialogResponse(int playerid, int dialogid, int response, int listitem, char* inputtext, GameUtility *gameUtility);

@@ -1,28 +1,24 @@
 #include "EventHandler.h"
-#include "IEvent.h"
+#include "Event.h"
+
+#include <iostream>
 
 EventHandler::EventHandler()
 {
-	eventHandlers = new std::map<size_t, std::vector<std::function<void(IEvent*)>>*>();
+	eventHandlers = new std::map<size_t, std::vector<std::function<void(Event*)>>*>();
 }
 
 
 EventHandler::~EventHandler()
 {
+	delete eventHandlers;
 }
 
-void EventHandler::RegisterHandler(size_t eventId, std::function<void(IEvent*)> function)
-{
-	if (eventHandlers->find(eventId) == eventHandlers->end())
-		eventHandlers->emplace(eventId, new std::vector<std::function<void(IEvent*)>>());
-	eventHandlers->at(eventId)->push_back(function);
-}
-
-void EventHandler::CallEvent(IEvent *ev)
+void EventHandler::CallEvent(Event *ev)
 {
 	if (eventHandlers->find(ev->getComparableId()) != eventHandlers->end())
 	{
-		std::vector<std::function<void(IEvent*)>>* functions = eventHandlers->at(ev->getComparableId());
+		std::vector<std::function<void(Event*)>>* functions = eventHandlers->at(ev->getComparableId());
 		for (auto it = functions->begin(); it != functions->end(); ++it)
 			(*it)(ev);
 	}

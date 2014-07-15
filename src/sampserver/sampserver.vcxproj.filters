@@ -61,6 +61,21 @@
     <Filter Include="Source Files\Event">
       <UniqueIdentifier>{915f38b3-1ebd-4732-8f12-a15bf6feb36e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Event\Events">
+      <UniqueIdentifier>{dc72b627-d866-4e99-b398-ff8169c6838a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player">
+      <UniqueIdentifier>{bb9fde60-7331-4308-a998-d2a2087e7b19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object">
+      <UniqueIdentifier>{623408ef-990f-47c7-9ee2-75dd11f20276}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MySQL">
+      <UniqueIdentifier>{ef94bdba-c178-474f-8c40-fa490f8cc5b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Command\Commands">
+      <UniqueIdentifier>{a9eef727-9f0d-4edf-82ea-7fe35c755302}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -155,9 +170,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MySQLFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Interior.h">
       <Filter>Header Files\World</Filter>
     </ClInclude>
@@ -224,26 +236,14 @@
     <ClInclude Include="VehicleDamageStatus.h">
       <Filter>Header Files\Vehicle\Damage</Filter>
     </ClInclude>
-    <ClInclude Include="md5.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RegisterLoginHandler.h">
       <Filter>Header Files\Handler</Filter>
     </ClInclude>
     <ClInclude Include="Handler.h">
       <Filter>Header Files\Handler</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Vehicle.h">
       <Filter>Header Files\Vehicle</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
       <Filter>Header Files\Command</Filter>
@@ -258,11 +258,44 @@
     <ClInclude Include="EventHandler.h">
       <Filter>Header Files\Event</Filter>
     </ClInclude>
-    <ClInclude Include="IEvent.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
     <ClInclude Include="Event.h">
       <Filter>Header Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObject.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MySQLFunctions.h">
+      <Filter>Header Files\MySQL</Filter>
+    </ClInclude>
+    <ClInclude Include="md5.h">
+      <Filter>Header Files\MySQL</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EventPlayerStateChange.h">
+      <Filter>Header Files\Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventPlayerBeginEnterVehicle.h">
+      <Filter>Header Files\Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventPlayerBeginExitVehicle.h">
+      <Filter>Header Files\Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventPlayerCommandText.h">
+      <Filter>Header Files\Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventPlayerCommand.h">
+      <Filter>Header Files\Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandSpawnVehicle.h">
+      <Filter>Header Files\Command\Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

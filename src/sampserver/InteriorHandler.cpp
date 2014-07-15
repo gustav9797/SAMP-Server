@@ -10,7 +10,8 @@
 #include "Pickup.h"
 #include "GameUtility.h"
 
-InteriorHandler::InteriorHandler()
+InteriorHandler::InteriorHandler(GameUtility *gameUtility)
+	: Handler(gameUtility)
 {
 	interiors = new std::map<int, Interior*>();
 	defaultInteriors = new std::map<int, Interior*>();
@@ -26,196 +27,192 @@ InteriorHandler::~InteriorHandler()
 	delete pickups;
 }
 
-bool InteriorHandler::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
+/*bool InteriorHandler::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
 {
-	if (cmd == "gotoint")
-	{
-		if (args.size() >= 1 && args[0] != "")
-		{
-			int interiorId = 0;
-			Interior *interior = nullptr;
-			if(args[0] != "default" && args.size() != 2)
-			{
-				interiorId = atoi(args[0].c_str());
-				interior = getInterior(interiorId);
-			}
-			else
-			{
-				interiorId = atoi(args[1].c_str());
-				interior = getDefaultInterior(interiorId);
-			}
-			if (interior != nullptr)
-				gameUtility->playerHandler->TeleportPlayer(player->getId(), *interior);
-			else
-				SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: Interior does not exist.");
-		}
-		else
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "Usage: /setint <interiorID>");
-		return true;
-	}
-	else if (cmd == "setworld")
-	{
-		if (args.size() == 1 && args[0] != "")
-		{
-			int worldId = atoi(args[0].c_str());
-			SetPlayerVirtualWorld(player->getId(), worldId);
-		}
-		return true;
-	}
-	else if (cmd == "addpickuppickup")
-	{
-		if (args.size() >= 3)
-		{
-			float *x = new float(), *y = new float(), *z = new float();
-			GetPlayerPos(player->getId(), x, y, z);
-			int model = atoi(args[0].c_str());
-			int destinationId = atoi(args[1].c_str());
-
-			std::string text = std::string();
-			for (int i = 2; i < args.size(); i++)
-				text += args[i] + " ";
-
-			HandlerCreatePickup(model, 1, *x, *y, *z, text, getInterior(GetPVarInt(player->getId(), "currentinterior")), -1, destinationId);
-			delete x, y, z;
-		}
-		else
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "Usage: /addpickuppickup <model> <dest.pickupID> <text>");
-		return true;
-	}
-	else if (cmd == "addpickupinterior")
-	{
-		if (args.size() >= 4)
-		{
-			float *x = new float(), *y = new float(), *z = new float();
-			GetPlayerPos(player->getId(), x, y, z);
-			int model = atoi(args[0].c_str());
-			int destinationId = atoi(args[1].c_str());
-			bool newInterior = (args[2] == "new" ? true : false);
-
-			std::string text = std::string();
-			for (int i = 3; i < args.size(); i++)
-				text += args[i] + " ";
-			if (newInterior)
-				destinationId = AddInterior(new Interior(*getDefaultInterior(destinationId)));
-			Interior *destinationInterior = getInterior(destinationId);
-			if(destinationInterior != nullptr)
-			{
-				Interior *currentInterior = getInterior(GetPVarInt(player->getId(), "currentinterior"));
-				HandlerCreatePickup(model, 1, *x, *y, *z, text, currentInterior, destinationId);
-			}
-			else
-				SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: Destination interior does not exist");
-			delete x, y, z;
-		}
-		else
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "Usage: /addpickupinterior <model> <dest.interiorID> <create new interior?(new/existing)> <text>");
-		return true;
-	}
-	else if (cmd == "removepickup")
-	{
-		int currentPickup = GetPVarInt(player->getId(), "currentpickup");
-		Pickup *pickup = getPickup(currentPickup);
-		if(pickup != nullptr && GameUtility::IsPlayerClose(player, *pickup, 1))
-		{
-			DestroyPickup(currentPickup);
-			HandlerDestroyPickup(currentPickup);
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "Pickup removed.");
-		}
-		else
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: You are not close to any pickup.");
-		return true;
-	}
-	else if (cmd == "addexit")
-	{
-		int currentInteriorID = GetPVarInt(player->getId(), "currentinterior");
-		Interior *currentInterior = getInterior(currentInteriorID);
-		if (GetPlayerInterior(player->getId()) != -1 && currentInterior != nullptr)
-		{
-			float *x = new float(), *y = new float(), *z = new float();
-			GetPlayerPos(player->getId(), x, y, z);
-			HandlerCreatePickup(1318, 1, *x, *y, *z, "[Exit]", currentInterior, -1, GetPVarInt(player->getId(), "currentpickup"));
-			delete x, y, z;
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "Exit added.");
-		}
-		else
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: not inside interior");
-		return true;
-	}
-	else if (cmd == "setentrance")
-	{
-		int currentInteriorID = GetPVarInt(player->getId(), "currentinterior");
-		Interior *currentInterior = getInterior(currentInteriorID);
-		if (GetPlayerInterior(player->getId()) != -1 && currentInterior != nullptr)
-		{
-			float *x = new float(), *y = new float(), *z = new float();
-			GetPlayerPos(player->getId(), x, y, z);
-			currentInterior->x_ = *x;
-			currentInterior->y_ = *y;
-			currentInterior->z_ = *z;
-			delete x, y, z;
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "Entrance set.");
-		}
-		else
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: not inside interior");
-		return true;
-	}
-	else if (cmd == "enter" || cmd == "ent" || cmd == "exit")
-	{
-		int currentPickup = GetPVarInt(player->getId(), "currentpickup");
-		Pickup *temp = getPickup(currentPickup);
-		int state = GetPlayerState(player->getId());
-		if (temp != nullptr && currentPickup != -1 && (state != 2 && GameUtility::IsPlayerClose(player, *temp, 1)) || (state == 2 && GameUtility::IsPlayerClose(player, *temp, 7)))
-		{
-			int destinationInterior = temp->destinationInterior;
-			int destinationPickup = temp->destinationPickup;
-			SetPVarFloat(player->getId(), "oldx", temp->x_);
-			SetPVarFloat(player->getId(), "oldy", temp->y_);
-			SetPVarFloat(player->getId(), "oldz", temp->z_);
-			SetPVarInt(player->getId(), "oldworld", GetPlayerVirtualWorld(player->getId()));
-			if (destinationPickup != -1)
-			{
-				Pickup *pickup = getPickup(destinationPickup);
-				if(pickup != nullptr)
-					gameUtility->playerHandler->TeleportPlayer(player->getId(), WorldPositionObject(pickup->x_, pickup->y_, pickup->z_, getInterior(pickup->interiorId_)));
-				else
-					SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: Destination pickup does not exist");
-			}
-			else if (destinationInterior != -1)
-			{
-				Interior *interior = getInterior(destinationInterior);
-				if(interior !=  nullptr)
-					gameUtility->playerHandler->TeleportPlayer(player->getId(), WorldPositionObject(interior->x_, interior->y_, interior->z_, interior));
-				else
-					SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: Destination interior does not exist");
-			}
-		}
-		return true;
-	}
-	else if (cmd == "info")
-	{
-		std::stringstream s;
-		s << "Interior: " << GetPVarInt(player->getId(), "currentinterior") << "\nSampInterior: " << GetPlayerInterior(player->getId()) << "\nVirtualWorld: " << GetPlayerVirtualWorld(player->getId());
-		SendClientMessage(player->getId(), 0xFFFFFFFF, s.str().c_str());
-		return true;                 
-	}
-	else if(cmd == "pinfo")
-	{
-		int currentPickup = GetPVarInt(player->getId(), "currentpickup");
-		Pickup *pickup = getPickup(currentPickup);
-		if(pickup != nullptr)
-		{
-			std::stringstream s;
-			s << "SampPickupID: " << currentPickup << std::endl << "PickupID: " << sampPickupIdToPickupId->at(currentPickup) << "\nPickupModel: " << pickup->model_ << "\nDestinationInterior: " << pickup->destinationInterior << "\nDestinationPickup: " << pickup->destinationPickup;
-			SendClientMessage(player->getId(), 0xFFFFFFFF, s.str().c_str());
-		}
-		return true;
-	}
-	return false;
-}
-
-void InteriorHandler::CheckForHacks()
+if (cmd == "gotoint")
 {
+if (args.size() >= 1 && args[0] != "")
+{
+int interiorId = 0;
+Interior *interior = nullptr;
+if(args[0] != "default" && args.size() != 2)
+{
+interiorId = atoi(args[0].c_str());
+interior = getInterior(interiorId);
 }
+else
+{
+interiorId = atoi(args[1].c_str());
+interior = getDefaultInterior(interiorId);
+}
+if (interior != nullptr)
+gameUtility->playerHandler->TeleportPlayer(player->getId(), *interior);
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: Interior does not exist.");
+}
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Usage: /setint <interiorID>");
+return true;
+}
+else if (cmd == "setworld")
+{
+if (args.size() == 1 && args[0] != "")
+{
+int worldId = atoi(args[0].c_str());
+SetPlayerVirtualWorld(player->getId(), worldId);
+}
+return true;
+}
+else if (cmd == "addpickuppickup")
+{
+if (args.size() >= 3)
+{
+float *x = new float(), *y = new float(), *z = new float();
+GetPlayerPos(player->getId(), x, y, z);
+int model = atoi(args[0].c_str());
+int destinationId = atoi(args[1].c_str());
+
+std::string text = std::string();
+for (int i = 2; i < args.size(); i++)
+text += args[i] + " ";
+
+HandlerCreatePickup(model, 1, *x, *y, *z, text, getInterior(GetPVarInt(player->getId(), "currentinterior")), -1, destinationId);
+delete x, y, z;
+}
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Usage: /addpickuppickup <model> <dest.pickupID> <text>");
+return true;
+}
+else if (cmd == "addpickupinterior")
+{
+if (args.size() >= 4)
+{
+float *x = new float(), *y = new float(), *z = new float();
+GetPlayerPos(player->getId(), x, y, z);
+int model = atoi(args[0].c_str());
+int destinationId = atoi(args[1].c_str());
+bool newInterior = (args[2] == "new" ? true : false);
+
+std::string text = std::string();
+for (int i = 3; i < args.size(); i++)
+text += args[i] + " ";
+if (newInterior)
+destinationId = AddInterior(new Interior(*getDefaultInterior(destinationId)));
+Interior *destinationInterior = getInterior(destinationId);
+if(destinationInterior != nullptr)
+{
+Interior *currentInterior = getInterior(GetPVarInt(player->getId(), "currentinterior"));
+HandlerCreatePickup(model, 1, *x, *y, *z, text, currentInterior, destinationId);
+}
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: Destination interior does not exist");
+delete x, y, z;
+}
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Usage: /addpickupinterior <model> <dest.interiorID> <create new interior?(new/existing)> <text>");
+return true;
+}
+else if (cmd == "removepickup")
+{
+int currentPickup = GetPVarInt(player->getId(), "currentpickup");
+Pickup *pickup = getPickup(currentPickup);
+if(pickup != nullptr && GameUtility::IsPlayerClose(player, *pickup, 1))
+{
+DestroyPickup(currentPickup);
+HandlerDestroyPickup(currentPickup);
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Pickup removed.");
+}
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: You are not close to any pickup.");
+return true;
+}
+else if (cmd == "addexit")
+{
+int currentInteriorID = GetPVarInt(player->getId(), "currentinterior");
+Interior *currentInterior = getInterior(currentInteriorID);
+if (GetPlayerInterior(player->getId()) != -1 && currentInterior != nullptr)
+{
+float *x = new float(), *y = new float(), *z = new float();
+GetPlayerPos(player->getId(), x, y, z);
+HandlerCreatePickup(1318, 1, *x, *y, *z, "[Exit]", currentInterior, -1, GetPVarInt(player->getId(), "currentpickup"));
+delete x, y, z;
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Exit added.");
+}
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: not inside interior");
+return true;
+}
+else if (cmd == "setentrance")
+{
+int currentInteriorID = GetPVarInt(player->getId(), "currentinterior");
+Interior *currentInterior = getInterior(currentInteriorID);
+if (GetPlayerInterior(player->getId()) != -1 && currentInterior != nullptr)
+{
+float *x = new float(), *y = new float(), *z = new float();
+GetPlayerPos(player->getId(), x, y, z);
+currentInterior->x_ = *x;
+currentInterior->y_ = *y;
+currentInterior->z_ = *z;
+delete x, y, z;
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Entrance set.");
+}
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: not inside interior");
+return true;
+}
+else if (cmd == "enter" || cmd == "ent" || cmd == "exit")
+{
+int currentPickup = GetPVarInt(player->getId(), "currentpickup");
+Pickup *temp = getPickup(currentPickup);
+int state = GetPlayerState(player->getId());
+if (temp != nullptr && currentPickup != -1 && (state != 2 && GameUtility::IsPlayerClose(player, *temp, 1)) || (state == 2 && GameUtility::IsPlayerClose(player, *temp, 7)))
+{
+int destinationInterior = temp->destinationInterior;
+int destinationPickup = temp->destinationPickup;
+SetPVarFloat(player->getId(), "oldx", temp->x_);
+SetPVarFloat(player->getId(), "oldy", temp->y_);
+SetPVarFloat(player->getId(), "oldz", temp->z_);
+SetPVarInt(player->getId(), "oldworld", GetPlayerVirtualWorld(player->getId()));
+if (destinationPickup != -1)
+{
+Pickup *pickup = getPickup(destinationPickup);
+if(pickup != nullptr)
+gameUtility->playerHandler->TeleportPlayer(player->getId(), WorldPositionObject(pickup->x_, pickup->y_, pickup->z_, getInterior(pickup->interiorId_)));
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: Destination pickup does not exist");
+}
+else if (destinationInterior != -1)
+{
+Interior *interior = getInterior(destinationInterior);
+if(interior !=  nullptr)
+gameUtility->playerHandler->TeleportPlayer(player->getId(), WorldPositionObject(interior->x_, interior->y_, interior->z_, interior));
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Error: Destination interior does not exist");
+}
+}
+return true;
+}
+else if (cmd == "info")
+{
+std::stringstream s;
+s << "Interior: " << GetPVarInt(player->getId(), "currentinterior") << "\nSampInterior: " << GetPlayerInterior(player->getId()) << "\nVirtualWorld: " << GetPlayerVirtualWorld(player->getId());
+SendClientMessage(player->getId(), 0xFFFFFFFF, s.str().c_str());
+return true;
+}
+else if(cmd == "pinfo")
+{
+int currentPickup = GetPVarInt(player->getId(), "currentpickup");
+Pickup *pickup = getPickup(currentPickup);
+if(pickup != nullptr)
+{
+std::stringstream s;
+s << "SampPickupID: " << currentPickup << std::endl << "PickupID: " << sampPickupIdToPickupId->at(currentPickup) << "\nPickupModel: " << pickup->model_ << "\nDestinationInterior: " << pickup->destinationInterior << "\nDestinationPickup: " << pickup->destinationPickup;
+SendClientMessage(player->getId(), 0xFFFFFFFF, s.str().c_str());
+}
+return true;
+}
+return false;
+}*/
 
 Interior* InteriorHandler::getInterior(int interiorId)
 {
@@ -228,7 +225,7 @@ Interior* InteriorHandler::getInterior(int interiorId)
 
 Pickup* InteriorHandler::getPickup(int pickupId)
 {
-	if(pickups->find(pickupId) != pickups->end())
+	if (pickups->find(pickupId) != pickups->end())
 		return pickups->at(pickupId);
 	else
 		sampgdk::logprintf("Tried to get pickup which did not exist.");
@@ -312,21 +309,21 @@ int InteriorHandler::SampinterioridToInterior(int sampinteriorid, float x, float
 	return -1;
 }
 
-void InteriorHandler::Load(GameUtility* gameUtility)
+void InteriorHandler::Load()
 {
 	sql::ResultSet *res = MySQLFunctions::ExecuteQuery("SELECT * FROM interiors");
 	interiors->emplace(-1, new Interior(-1, "Main world", "", 1958.3783f, 1343.1572f, 15.3746f, 0, 0, 0));
 	while (res->next())
 	{
 		interiors->emplace(res->getInt("id"), new Interior(
-			res->getInt("id"), 
-			res->getString("name"), 
-			res->getString("description"), 
-			res->getDouble("x"), 
-			res->getDouble("y"), 
-			res->getDouble("z"), 
-			res->getDouble("facingangle"), 
-			res->getInt("interiorid"), 
+			res->getInt("id"),
+			res->getString("name"),
+			res->getString("description"),
+			res->getDouble("x"),
+			res->getDouble("y"),
+			res->getDouble("z"),
+			res->getDouble("facingangle"),
+			res->getInt("interiorid"),
 			res->getInt("virtualworld")));
 	}
 	delete res;
@@ -336,14 +333,14 @@ void InteriorHandler::Load(GameUtility* gameUtility)
 	while (res->next())
 	{
 		defaultInteriors->emplace(res->getInt("id"), new Interior(
-			res->getInt("id"), 
-			res->getString("name"), 
-			res->getString("description"), 
-			res->getDouble("x"), 
-			res->getDouble("y"), 
-			res->getDouble("z"), 
-			res->getDouble("facingangle"), 
-			res->getInt("interiorid"), 
+			res->getInt("id"),
+			res->getString("name"),
+			res->getString("description"),
+			res->getDouble("x"),
+			res->getDouble("y"),
+			res->getDouble("z"),
+			res->getDouble("facingangle"),
+			res->getInt("interiorid"),
 			res->getInt("virtualworld")));
 	}
 	delete res;
@@ -357,10 +354,10 @@ void InteriorHandler::Load(GameUtility* gameUtility)
 		pickups->emplace(sampId, new Pickup(
 			res->getInt("model"),
 			res->getInt("type"),
-			res->getDouble("x"), 
-			res->getDouble("y"), 
-			res->getDouble("z"), 
-			res->getString("text"), 
+			res->getDouble("x"),
+			res->getDouble("y"),
+			res->getDouble("z"),
+			res->getString("text"),
 			getInterior(res->getInt("interiorid"))));
 		pickups->at(sampId)->destinationInterior = res->getInt("destinationinteriorid");
 		pickups->at(sampId)->destinationPickup = res->getInt("destinationpickupid");
@@ -371,7 +368,7 @@ void InteriorHandler::Load(GameUtility* gameUtility)
 int InteriorHandler::getFreePickupId()
 {
 	std::vector<int> temp = std::vector<int>();
-	for(auto it = sampPickupIdToPickupId->begin(); it != sampPickupIdToPickupId->end(); it++)
+	for (auto it = sampPickupIdToPickupId->begin(); it != sampPickupIdToPickupId->end(); it++)
 	{
 		temp.push_back(it->second);
 	}

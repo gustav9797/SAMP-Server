@@ -10,7 +10,8 @@
 #include "MySQLFunctions.h"
 #include "PlayerObject.h"
 
-ObjectHandler::ObjectHandler(void)
+ObjectHandler::ObjectHandler(GameUtility *gameUtility)
+: Handler(gameUtility)
 {
 	objects = new std::map<int, Object*>();
 }
@@ -20,91 +21,87 @@ ObjectHandler::~ObjectHandler(void)
 {
 }
 
-bool ObjectHandler::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
+/*bool ObjectHandler::OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility)
 {
-	if(cmd == "createobject")
-	{
-		if(args.size() >= 1)
-		{
-			float *x = new float(); float *y = new float(); float *z = new float();
-			player->GetPos(x, y, z);
-			int model = atoi(args[0].c_str());
-			Object *object = this->CreateObject(model, player, gameUtility->interiorHandler->getInterior(GetPVarInt(player->getId(), "currentinterior")), *x, *y, *z, 0, 0, 0, 200);
-			std::stringstream s;
-			s << "Created object with ID " << object->getId();
-			SendClientMessage(player->getId(), 0xFFFFFFFF, s.str().c_str());
-			delete x, y, z;
-		}
-		else
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "Usage: /createobject <model>");
-		return true;
-	}
-	else if(cmd == "selectobject")
-	{
-		if(args.size() == 0)
-			SelectObject(player->getId());
-		else
-		{
-			int id = atoi(args[0].c_str());
-			SetPVarInt(player->getId(), "selectedobject", id);
-			std::stringstream s;
-			s << "Selected object " << id;
-			SendClientMessage(player->getId(), 0xFFFFFFFF, s.str().c_str());
-		}
-		return true;
-	}
-	else if(cmd == "getcloseobjects")
-	{
-		for(auto it = objects->begin(); it != objects->end(); it++)
-		{
-			if(GameUtility::IsPlayerClose(player, it->second->getX(), it->second->getY(), it->second->getZ(), it->second->getInterior(), 5))
-			{
-				std::stringstream s;
-				s << "Object " << it->first << ": Model:" << it->second->getModel() << " DrawDistance:" << it->second->getDrawDistance();
-				SendClientMessage(player->getId(), 0xFFFFFFFF, s.str().c_str());
-			}
-		}
-	}
-	else if(cmd == "editobject")
-	{
-		int selectedObject = GetPVarInt(player->getId(), "selectedobject");
-		if(selectedObject != -1)
-			EditPlayerObject(player->getId(), selectedObject);
-		else
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "You do not have any object selected.");
-		return true;
-	}
-	else if(cmd == "removeobject")
-	{
-		int selectedObject = GetPVarInt(player->getId(), "selectedobject");
-		if(selectedObject != -1)
-		{
-			Object *object = nullptr;
-			for(auto it = objects->begin(); it != objects->end(); it++)
-			{
-				if(it->second->HasObject(selectedObject))
-					object = it->second;
-			}
-			if(object != nullptr)
-			{
-				RemoveObject(object->getId());
-				SendClientMessage(player->getId(), 0xFFFFFFFF, "Object removed");
-			}
-			else
-				SendClientMessage(player->getId(), 0xFFFFFFFF, "Could not remove object. Selected object not found?");
-		}
-		else
-			SendClientMessage(player->getId(), 0xFFFFFFFF, "You do not have any object selected.");
-		return true;
-	}
-	return false;
-}
-
-void ObjectHandler::CheckForHacks()
+if(cmd == "createobject")
 {
+if(args.size() >= 1)
+{
+float *x = new float(); float *y = new float(); float *z = new float();
+player->GetPos(x, y, z);
+int model = atoi(args[0].c_str());
+Object *object = this->CreateObject(model, player, gameUtility->interiorHandler->getInterior(GetPVarInt(player->getId(), "currentinterior")), *x, *y, *z, 0, 0, 0, 200);
+std::stringstream s;
+s << "Created object with ID " << object->getId();
+SendClientMessage(player->getId(), 0xFFFFFFFF, s.str().c_str());
+delete x, y, z;
 }
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Usage: /createobject <model>");
+return true;
+}
+else if(cmd == "selectobject")
+{
+if(args.size() == 0)
+SelectObject(player->getId());
+else
+{
+int id = atoi(args[0].c_str());
+SetPVarInt(player->getId(), "selectedobject", id);
+std::stringstream s;
+s << "Selected object " << id;
+SendClientMessage(player->getId(), 0xFFFFFFFF, s.str().c_str());
+}
+return true;
+}
+else if(cmd == "getcloseobjects")
+{
+for(auto it = objects->begin(); it != objects->end(); it++)
+{
+if(GameUtility::IsPlayerClose(player, it->second->getX(), it->second->getY(), it->second->getZ(), it->second->getInterior(), 5))
+{
+std::stringstream s;
+s << "Object " << it->first << ": Model:" << it->second->getModel() << " DrawDistance:" << it->second->getDrawDistance();
+SendClientMessage(player->getId(), 0xFFFFFFFF, s.str().c_str());
+}
+}
+}
+else if(cmd == "editobject")
+{
+int selectedObject = GetPVarInt(player->getId(), "selectedobject");
+if(selectedObject != -1)
+EditPlayerObject(player->getId(), selectedObject);
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "You do not have any object selected.");
+return true;
+}
+else if(cmd == "removeobject")
+{
+int selectedObject = GetPVarInt(player->getId(), "selectedobject");
+if(selectedObject != -1)
+{
+Object *object = nullptr;
+for(auto it = objects->begin(); it != objects->end(); it++)
+{
+if(it->second->HasObject(selectedObject))
+object = it->second;
+}
+if(object != nullptr)
+{
+RemoveObject(object->getId());
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Object removed");
+}
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "Could not remove object. Selected object not found?");
+}
+else
+SendClientMessage(player->getId(), 0xFFFFFFFF, "You do not have any object selected.");
+return true;
+}
+return false;
+}*/
 
-void ObjectHandler::Load(GameUtility* gameUtility)
+void ObjectHandler::Load()
 {
 	sql::ResultSet *res = MySQLFunctions::ExecuteQuery("SELECT * FROM objects");
 	while (res->next())
@@ -112,13 +109,13 @@ void ObjectHandler::Load(GameUtility* gameUtility)
 		int objectId = res->getInt("id");
 		Object *object = new Object(
 			res->getInt("id"),
-			res->getInt("model"), 
-			gameUtility->interiorHandler->getInterior(res->getInt("interior")), 
-			res->getDouble("x"), 
-			res->getDouble("y"), 
-			res->getDouble("z"), 
-			res->getDouble("rx"), 
-			res->getDouble("ry"), 
+			res->getInt("model"),
+			gameUtility->interiorHandler->getInterior(res->getInt("interior")),
+			res->getDouble("x"),
+			res->getDouble("y"),
+			res->getDouble("z"),
+			res->getDouble("rx"),
+			res->getDouble("ry"),
 			res->getDouble("rz"),
 			res->getDouble("drawdistance"));
 		objects->emplace(object->getId(), object);
@@ -165,9 +162,9 @@ std::vector<Object*> *ObjectHandler::getCloseObjects(float x, float y, float z, 
 int ObjectHandler::getFreeObjectId()
 {
 	int openSlot = -1;
-	for(int i = 0; true; i++)
+	for (int i = 0; true; i++)
 	{
-		if(objects->find(i) == objects->end())
+		if (objects->find(i) == objects->end())
 		{
 			openSlot = i;
 			break;
@@ -178,7 +175,7 @@ int ObjectHandler::getFreeObjectId()
 
 Object *ObjectHandler::getObject(int objectId)
 {
-	if(objects->find(objectId) != objects->end())
+	if (objects->find(objectId) != objects->end())
 	{
 		return objects->at(objectId);
 	}
@@ -188,15 +185,15 @@ Object *ObjectHandler::getObject(int objectId)
 void ObjectHandler::Update(GameUtility *gameUtility)
 {
 	std::map<int, Player*> *players = gameUtility->playerHandler->players;
-	for(auto it = players->begin(); it != players->end(); it++)
+	for (auto it = players->begin(); it != players->end(); it++)
 	{
 		Player *player = it->second;
-		for(auto i = objects->begin(); i != objects->end(); i++)
+		for (auto i = objects->begin(); i != objects->end(); i++)
 		{
 			Object *object = i->second;
-			if(!object->HasPlayerObject(player->getId()))
+			if (!object->HasPlayerObject(player->getId()))
 			{
-				if(GameUtility::IsPlayerClose(player, object->getX(), object->getY(), object->getZ(), object->getInterior(), object->getDrawDistance()))
+				if (GameUtility::IsPlayerClose(player, object->getX(), object->getY(), object->getZ(), object->getInterior(), object->getDrawDistance()))
 				{
 					PlayerObject temp = PlayerObject::Create(player->getId(), object->getModel(), object->getX(), object->getY(), object->getZ(), object->getRotX(), object->getRotY(), object->getRotZ(), object->getDrawDistance());
 					object->AddPlayerObject(player->getId(), temp.GetObjectId());
@@ -206,9 +203,9 @@ void ObjectHandler::Update(GameUtility *gameUtility)
 					SendClientMessage(player->getId(), 0xFFFFFFFF, s.str().c_str());
 				}
 			}
-			else if(!IsPlayerObjectMoving(player->getId(), GetPVarInt(player->getId(), "selectedobject")))
+			else if (!IsPlayerObjectMoving(player->getId(), GetPVarInt(player->getId(), "selectedobject")))
 			{
-				if(!GameUtility::IsPlayerClose(player, object->getX(), object->getY(), object->getZ(), object->getInterior(), object->getDrawDistance()))
+				if (!GameUtility::IsPlayerClose(player, object->getX(), object->getY(), object->getZ(), object->getInterior(), object->getDrawDistance()))
 				{
 					object->RemovePlayerObject(player->getId());
 
@@ -223,7 +220,7 @@ void ObjectHandler::Update(GameUtility *gameUtility)
 
 bool ObjectHandler::OnPlayerSelectObject(Player *player, int type, int objectSampId, int model, float x, float y, float z)
 {
-	if(type == SELECT_OBJECT_PLAYER_OBJECT)
+	if (type == SELECT_OBJECT_PLAYER_OBJECT)
 	{
 		SetPVarInt(player->getId(), "selectedobject", objectSampId);
 		std::stringstream s;
@@ -235,18 +232,18 @@ bool ObjectHandler::OnPlayerSelectObject(Player *player, int type, int objectSam
 
 bool ObjectHandler::OnPlayerEditObject(Player *player, int playerobject, int objectSampId, int response, float xo, float yo, float zo, float xr, float yr, float zr)
 {
-	if(playerobject)
+	if (playerobject)
 	{
-		for(auto it = objects->begin(); it != objects->end(); it++)
+		for (auto it = objects->begin(); it != objects->end(); it++)
 		{
-			if(it->second->HasObject(objectSampId))
+			if (it->second->HasObject(objectSampId))
 			{
-				if(response = EDIT_RESPONSE_FINAL)
+				if (response = EDIT_RESPONSE_FINAL)
 				{
 					it->second->UpdatePosition(false, xo, yo, zo, xr, yr, zr);
 					//std::cout << "Updated after object moved" << std::endl;
 				}
-				else if(response == EDIT_RESPONSE_CANCEL ||response == EDIT_RESPONSE_UPDATE)
+				else if (response == EDIT_RESPONSE_CANCEL || response == EDIT_RESPONSE_UPDATE)
 				{
 					it->second->UpdatePosition(false, it->second->getX(), it->second->getY(), it->second->getZ(), it->second->getRotX(), it->second->getRotY(), it->second->getRotZ());
 					//std::cout << "Updated after cancel/exit" << std::endl;

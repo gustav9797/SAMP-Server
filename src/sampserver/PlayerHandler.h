@@ -7,11 +7,9 @@ class WorldPositionObject;
 class PlayerHandler : public Handler
 {
 public:
-	PlayerHandler();
+	PlayerHandler(GameUtility *gameUtility);
 	~PlayerHandler();
-	virtual bool OnCommand(Player *player, std::string cmd, std::vector<std::string> args, GameUtility *gameUtility);
-	virtual void CheckForHacks();
-	virtual void Load(GameUtility* gameUtility);
+	virtual void Load();
 	bool KickPlayer(int playerid, std::string message, GameUtility* gameUtility);
 	static void SAMPGDK_CALL KickDelayed(int, void * playerId);
 	void TeleportPlayer(int playerid, WorldPositionObject pos);
